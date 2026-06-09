@@ -1,0 +1,5652 @@
+{
+  "items": [
+    {
+      "co_equipped": [
+        {
+          "clears": 100,
+          "name": "Void Salve",
+          "rate": 100,
+          "sims": 100
+        },
+        {
+          "clears": 100,
+          "name": "Titan's Axe",
+          "rate": 100,
+          "sims": 100
+        },
+        {
+          "clears": 100,
+          "name": "Tempered Mail",
+          "rate": 100,
+          "sims": 100
+        },
+        {
+          "clears": 100,
+          "name": "Basher Shield",
+          "rate": 100,
+          "sims": 100
+        },
+        {
+          "clears": 100,
+          "name": "Arcane Bolt",
+          "rate": 100,
+          "sims": 100
+        },
+        {
+          "clears": 100,
+          "name": "Verdant Wreath",
+          "rate": 100,
+          "sims": 100
+        },
+        {
+          "clears": 100,
+          "name": "Aegis Plate",
+          "rate": 100,
+          "sims": 100
+        },
+        {
+          "clears": 100,
+          "name": "Oracle's Staff",
+          "rate": 100,
+          "sims": 100
+        },
+        {
+          "clears": 100,
+          "name": "Storm Hammer",
+          "rate": 100,
+          "sims": 100
+        },
+        {
+          "clears": 100,
+          "name": "Void Burst",
+          "rate": 100,
+          "sims": 100
+        }
+      ],
+      "delta": 11.5,
+      "name": "Supernova Pyre",
+      "overall_rate": 88.5,
+      "tiers": [
+        {
+          "clears": 100,
+          "rate": 100,
+          "sims": 100,
+          "tier": 4
+        }
+      ],
+      "total_clears": 100,
+      "total_sims": 100,
+      "win_rate": 100
+    },
+    {
+      "co_equipped": [
+        {
+          "clears": 100,
+          "name": "Storm Hammer",
+          "rate": 100,
+          "sims": 100
+        },
+        {
+          "clears": 100,
+          "name": "Healing Touch",
+          "rate": 100,
+          "sims": 100
+        },
+        {
+          "clears": 100,
+          "name": "Herbal Mist",
+          "rate": 100,
+          "sims": 100
+        },
+        {
+          "clears": 100,
+          "name": "Crimson Horn",
+          "rate": 100,
+          "sims": 100
+        },
+        {
+          "clears": 200,
+          "name": "Aegis Plate",
+          "rate": 100,
+          "sims": 200
+        },
+        {
+          "clears": 200,
+          "name": "Hydra Lance",
+          "rate": 100,
+          "sims": 200
+        },
+        {
+          "clears": 200,
+          "name": "Iron Thistle",
+          "rate": 100,
+          "sims": 200
+        },
+        {
+          "clears": 100,
+          "name": "Supernova Pyre",
+          "rate": 100,
+          "sims": 100
+        },
+        {
+          "clears": 200,
+          "name": "Cleaving Halberd",
+          "rate": 100,
+          "sims": 200
+        },
+        {
+          "clears": 200,
+          "name": "Void Burst",
+          "rate": 100,
+          "sims": 200
+        }
+      ],
+      "delta": 10.8,
+      "name": "Arcane Bolt",
+      "overall_rate": 88.5,
+      "tiers": [
+        {
+          "clears": 200,
+          "rate": 100,
+          "sims": 200,
+          "tier": 2
+        },
+        {
+          "clears": 98,
+          "rate": 98,
+          "sims": 100,
+          "tier": 3
+        }
+      ],
+      "total_clears": 298,
+      "total_sims": 300,
+      "win_rate": 99.3
+    },
+    {
+      "co_equipped": [
+        {
+          "clears": 99,
+          "name": "Hydra Lance",
+          "rate": 99,
+          "sims": 100
+        },
+        {
+          "clears": 99,
+          "name": "Void Burst",
+          "rate": 99,
+          "sims": 100
+        },
+        {
+          "clears": 99,
+          "name": "Assassin's Mark",
+          "rate": 99,
+          "sims": 100
+        },
+        {
+          "clears": 99,
+          "name": "Deathmark Tome",
+          "rate": 99,
+          "sims": 100
+        },
+        {
+          "clears": 99,
+          "name": "Toxic Trident",
+          "rate": 99,
+          "sims": 100
+        },
+        {
+          "clears": 99,
+          "name": "Basher Shield",
+          "rate": 99,
+          "sims": 100
+        },
+        {
+          "clears": 99,
+          "name": "Aegis Plate",
+          "rate": 99,
+          "sims": 100
+        },
+        {
+          "clears": 99,
+          "name": "Mirror Cloak",
+          "rate": 99,
+          "sims": 100
+        },
+        {
+          "clears": 99,
+          "name": "Malignant Staff",
+          "rate": 99,
+          "sims": 100
+        },
+        {
+          "clears": 99,
+          "name": "Berserker's Gauntlet",
+          "rate": 99,
+          "sims": 100
+        }
+      ],
+      "delta": 10.5,
+      "name": "Tidal Band",
+      "overall_rate": 88.5,
+      "tiers": [
+        {
+          "clears": 99,
+          "rate": 99,
+          "sims": 100,
+          "tier": 4
+        }
+      ],
+      "total_clears": 99,
+      "total_sims": 100,
+      "win_rate": 99
+    },
+    {
+      "co_equipped": [
+        {
+          "clears": 100,
+          "name": "Iron Thistle",
+          "rate": 100,
+          "sims": 100
+        },
+        {
+          "clears": 100,
+          "name": "Void Burst",
+          "rate": 100,
+          "sims": 100
+        },
+        {
+          "clears": 100,
+          "name": "Hydra Lance",
+          "rate": 100,
+          "sims": 100
+        },
+        {
+          "clears": 100,
+          "name": "Arcane Bolt",
+          "rate": 100,
+          "sims": 100
+        },
+        {
+          "clears": 195,
+          "name": "Windrunner Boots",
+          "rate": 97.5,
+          "sims": 200
+        },
+        {
+          "clears": 195,
+          "name": "Aegis Plate",
+          "rate": 97.5,
+          "sims": 200
+        },
+        {
+          "clears": 194,
+          "name": "Holy Pendant",
+          "rate": 97,
+          "sims": 200
+        },
+        {
+          "clears": 194,
+          "name": "Tempered Mail",
+          "rate": 97,
+          "sims": 200
+        },
+        {
+          "clears": 194,
+          "name": "Titan's Axe",
+          "rate": 97,
+          "sims": 200
+        },
+        {
+          "clears": 289,
+          "name": "Toxic Trident",
+          "rate": 96.3,
+          "sims": 300
+        }
+      ],
+      "delta": 7.8,
+      "name": "Crimson Horn",
+      "overall_rate": 88.5,
+      "tiers": [
+        {
+          "clears": 100,
+          "rate": 100,
+          "sims": 100,
+          "tier": 1
+        },
+        {
+          "clears": 95,
+          "rate": 95,
+          "sims": 100,
+          "tier": 2
+        },
+        {
+          "clears": 94,
+          "rate": 94,
+          "sims": 100,
+          "tier": 3
+        }
+      ],
+      "total_clears": 289,
+      "total_sims": 300,
+      "win_rate": 96.3
+    },
+    {
+      "co_equipped": [
+        {
+          "clears": 200,
+          "name": "Storm Hammer",
+          "rate": 100,
+          "sims": 200
+        },
+        {
+          "clears": 200,
+          "name": "Hydra Lance",
+          "rate": 100,
+          "sims": 200
+        },
+        {
+          "clears": 100,
+          "name": "Deathmark Tome",
+          "rate": 100,
+          "sims": 100
+        },
+        {
+          "clears": 300,
+          "name": "Titan's Axe",
+          "rate": 100,
+          "sims": 300
+        },
+        {
+          "clears": 300,
+          "name": "Void Burst",
+          "rate": 100,
+          "sims": 300
+        },
+        {
+          "clears": 100,
+          "name": "Crimson Horn",
+          "rate": 100,
+          "sims": 100
+        },
+        {
+          "clears": 100,
+          "name": "Supernova Pyre",
+          "rate": 100,
+          "sims": 100
+        },
+        {
+          "clears": 100,
+          "name": "Toxic Trident",
+          "rate": 100,
+          "sims": 100
+        },
+        {
+          "clears": 200,
+          "name": "Arcane Bolt",
+          "rate": 100,
+          "sims": 200
+        },
+        {
+          "clears": 298,
+          "name": "Tempered Mail",
+          "rate": 99.3,
+          "sims": 300
+        }
+      ],
+      "delta": 6.3,
+      "name": "Iron Thistle",
+      "overall_rate": 88.5,
+      "tiers": [
+        {
+          "clears": 469,
+          "rate": 93.8,
+          "sims": 500,
+          "tier": 3
+        },
+        {
+          "clears": 100,
+          "rate": 100,
+          "sims": 100,
+          "tier": 4
+        }
+      ],
+      "total_clears": 569,
+      "total_sims": 600,
+      "win_rate": 94.8
+    },
+    {
+      "co_equipped": [
+        {
+          "clears": 198,
+          "name": "Hex Doll",
+          "rate": 99,
+          "sims": 200
+        },
+        {
+          "clears": 787,
+          "name": "Void Salve",
+          "rate": 98.4,
+          "sims": 800
+        },
+        {
+          "clears": 98,
+          "name": "Umbra’s Piercer",
+          "rate": 98,
+          "sims": 100
+        },
+        {
+          "clears": 98,
+          "name": "Arcane Bolt",
+          "rate": 98,
+          "sims": 100
+        },
+        {
+          "clears": 98,
+          "name": "Deathmark Tome",
+          "rate": 98,
+          "sims": 100
+        },
+        {
+          "clears": 776,
+          "name": "Paladin's Helm",
+          "rate": 97,
+          "sims": 800
+        },
+        {
+          "clears": 968,
+          "name": "Berserker's Gauntlet",
+          "rate": 96.8,
+          "sims": 1000
+        },
+        {
+          "clears": 193,
+          "name": "Iron Thistle",
+          "rate": 96.5,
+          "sims": 200
+        },
+        {
+          "clears": 865,
+          "name": "Herbal Mist",
+          "rate": 96.1,
+          "sims": 900
+        },
+        {
+          "clears": 769,
+          "name": "Verdant Wreath",
+          "rate": 96.1,
+          "sims": 800
+        }
+      ],
+      "delta": 5.9,
+      "name": "Noxious Scales",
+      "overall_rate": 88.5,
+      "tiers": [
+        {
+          "clears": 389,
+          "rate": 97.3,
+          "sims": 400,
+          "tier": 2
+        },
+        {
+          "clears": 744,
+          "rate": 93,
+          "sims": 800,
+          "tier": 3
+        },
+        {
+          "clears": 95,
+          "rate": 95,
+          "sims": 100,
+          "tier": 4
+        }
+      ],
+      "total_clears": 1228,
+      "total_sims": 1300,
+      "win_rate": 94.5
+    },
+    {
+      "co_equipped": [
+        {
+          "clears": 200,
+          "name": "Prism Barrier",
+          "rate": 100,
+          "sims": 200
+        },
+        {
+          "clears": 100,
+          "name": "Arcane Bolt",
+          "rate": 100,
+          "sims": 100
+        },
+        {
+          "clears": 198,
+          "name": "Hex Doll",
+          "rate": 99,
+          "sims": 200
+        },
+        {
+          "clears": 691,
+          "name": "Void Salve",
+          "rate": 98.7,
+          "sims": 700
+        },
+        {
+          "clears": 592,
+          "name": "Assassin's Mark",
+          "rate": 98.7,
+          "sims": 600
+        },
+        {
+          "clears": 393,
+          "name": "Iron Thistle",
+          "rate": 98.3,
+          "sims": 400
+        },
+        {
+          "clears": 685,
+          "name": "Toxic Trident",
+          "rate": 97.9,
+          "sims": 700
+        },
+        {
+          "clears": 386,
+          "name": "Malignant Staff",
+          "rate": 96.5,
+          "sims": 400
+        },
+        {
+          "clears": 578,
+          "name": "Virulent Darts",
+          "rate": 96.3,
+          "sims": 600
+        },
+        {
+          "clears": 865,
+          "name": "Noxious Scales",
+          "rate": 96.1,
+          "sims": 900
+        }
+      ],
+      "delta": 4.3,
+      "name": "Herbal Mist",
+      "overall_rate": 88.5,
+      "tiers": [
+        {
+          "clears": 94,
+          "rate": 94,
+          "sims": 100,
+          "tier": 1
+        },
+        {
+          "clears": 565,
+          "rate": 94.2,
+          "sims": 600,
+          "tier": 2
+        },
+        {
+          "clears": 491,
+          "rate": 98.2,
+          "sims": 500,
+          "tier": 3
+        },
+        {
+          "clears": 149,
+          "rate": 74.5,
+          "sims": 200,
+          "tier": 4
+        }
+      ],
+      "total_clears": 1299,
+      "total_sims": 1400,
+      "win_rate": 92.8
+    },
+    {
+      "co_equipped": [
+        {
+          "clears": 100,
+          "name": "Supernova Pyre",
+          "rate": 100,
+          "sims": 100
+        },
+        {
+          "clears": 198,
+          "name": "Arcane Bolt",
+          "rate": 99,
+          "sims": 200
+        },
+        {
+          "clears": 99,
+          "name": "Tidal Band",
+          "rate": 99,
+          "sims": 100
+        },
+        {
+          "clears": 983,
+          "name": "Void Salve",
+          "rate": 98.3,
+          "sims": 1000
+        },
+        {
+          "clears": 785,
+          "name": "Assassin's Mark",
+          "rate": 98.1,
+          "sims": 800
+        },
+        {
+          "clears": 98,
+          "name": "Hex Doll",
+          "rate": 98,
+          "sims": 100
+        },
+        {
+          "clears": 587,
+          "name": "Titan's Axe",
+          "rate": 97.8,
+          "sims": 600
+        },
+        {
+          "clears": 488,
+          "name": "Deathmark Tome",
+          "rate": 97.6,
+          "sims": 500
+        },
+        {
+          "clears": 769,
+          "name": "Noxious Scales",
+          "rate": 96.1,
+          "sims": 800
+        },
+        {
+          "clears": 671,
+          "name": "Toxic Trident",
+          "rate": 95.9,
+          "sims": 700
+        }
+      ],
+      "delta": 3.8,
+      "name": "Verdant Wreath",
+      "overall_rate": 88.5,
+      "tiers": [
+        {
+          "clears": 99,
+          "rate": 99,
+          "sims": 100,
+          "tier": 1
+        },
+        {
+          "clears": 378,
+          "rate": 94.5,
+          "sims": 400,
+          "tier": 2
+        },
+        {
+          "clears": 905,
+          "rate": 90.5,
+          "sims": 1000,
+          "tier": 3
+        },
+        {
+          "clears": 187,
+          "rate": 93.5,
+          "sims": 200,
+          "tier": 4
+        }
+      ],
+      "total_clears": 1569,
+      "total_sims": 1700,
+      "win_rate": 92.3
+    },
+    {
+      "co_equipped": [
+        {
+          "clears": 100,
+          "name": "Prism Barrier",
+          "rate": 100,
+          "sims": 100
+        },
+        {
+          "clears": 99,
+          "name": "Tidal Band",
+          "rate": 99,
+          "sims": 100
+        },
+        {
+          "clears": 295,
+          "name": "Void Burst",
+          "rate": 98.3,
+          "sims": 300
+        },
+        {
+          "clears": 589,
+          "name": "Toxic Trident",
+          "rate": 98.2,
+          "sims": 600
+        },
+        {
+          "clears": 195,
+          "name": "Deathmark Tome",
+          "rate": 97.5,
+          "sims": 200
+        },
+        {
+          "clears": 291,
+          "name": "Malignant Staff",
+          "rate": 97,
+          "sims": 300
+        },
+        {
+          "clears": 968,
+          "name": "Noxious Scales",
+          "rate": 96.8,
+          "sims": 1000
+        },
+        {
+          "clears": 674,
+          "name": "Titan's Axe",
+          "rate": 96.3,
+          "sims": 700
+        },
+        {
+          "clears": 862,
+          "name": "Paladin's Helm",
+          "rate": 95.8,
+          "sims": 900
+        },
+        {
+          "clears": 1234,
+          "name": "Herbal Mist",
+          "rate": 94.9,
+          "sims": 1300
+        }
+      ],
+      "delta": 3.5,
+      "name": "Berserker's Gauntlet",
+      "overall_rate": 88.5,
+      "tiers": [
+        {
+          "clears": 98,
+          "rate": 98,
+          "sims": 100,
+          "tier": 0
+        },
+        {
+          "clears": 271,
+          "rate": 90.3,
+          "sims": 300,
+          "tier": 1
+        },
+        {
+          "clears": 792,
+          "rate": 88,
+          "sims": 900,
+          "tier": 2
+        },
+        {
+          "clears": 295,
+          "rate": 98.3,
+          "sims": 300,
+          "tier": 3
+        },
+        {
+          "clears": 200,
+          "rate": 100,
+          "sims": 200,
+          "tier": 4
+        }
+      ],
+      "total_clears": 1656,
+      "total_sims": 1800,
+      "win_rate": 92
+    },
+    {
+      "co_equipped": [
+        {
+          "clears": 100,
+          "name": "Supernova Pyre",
+          "rate": 100,
+          "sims": 100
+        },
+        {
+          "clears": 300,
+          "name": "Iron Thistle",
+          "rate": 100,
+          "sims": 300
+        },
+        {
+          "clears": 298,
+          "name": "Arcane Bolt",
+          "rate": 99.3,
+          "sims": 300
+        },
+        {
+          "clears": 198,
+          "name": "Umbra’s Piercer",
+          "rate": 99,
+          "sims": 200
+        },
+        {
+          "clears": 395,
+          "name": "Storm Hammer",
+          "rate": 98.8,
+          "sims": 400
+        },
+        {
+          "clears": 294,
+          "name": "Mirror Cloak",
+          "rate": 98,
+          "sims": 300
+        },
+        {
+          "clears": 587,
+          "name": "Verdant Wreath",
+          "rate": 97.8,
+          "sims": 600
+        },
+        {
+          "clears": 679,
+          "name": "Windrunner Boots",
+          "rate": 97,
+          "sims": 700
+        },
+        {
+          "clears": 194,
+          "name": "Crimson Horn",
+          "rate": 97,
+          "sims": 200
+        },
+        {
+          "clears": 579,
+          "name": "Cleaving Halberd",
+          "rate": 96.5,
+          "sims": 600
+        }
+      ],
+      "delta": 2.7,
+      "name": "Titan's Axe",
+      "overall_rate": 88.5,
+      "tiers": [
+        {
+          "clears": 232,
+          "rate": 77.3,
+          "sims": 300,
+          "tier": 2
+        },
+        {
+          "clears": 584,
+          "rate": 97.3,
+          "sims": 600,
+          "tier": 3
+        },
+        {
+          "clears": 96,
+          "rate": 96,
+          "sims": 100,
+          "tier": 4
+        }
+      ],
+      "total_clears": 912,
+      "total_sims": 1000,
+      "win_rate": 91.2
+    },
+    {
+      "co_equipped": [
+        {
+          "clears": 100,
+          "name": "Arcane Bolt",
+          "rate": 100,
+          "sims": 100
+        },
+        {
+          "clears": 100,
+          "name": "Hex Doll",
+          "rate": 100,
+          "sims": 100
+        },
+        {
+          "clears": 200,
+          "name": "Iron Thistle",
+          "rate": 100,
+          "sims": 200
+        },
+        {
+          "clears": 100,
+          "name": "Supernova Pyre",
+          "rate": 100,
+          "sims": 100
+        },
+        {
+          "clears": 594,
+          "name": "Void Salve",
+          "rate": 99,
+          "sims": 600
+        },
+        {
+          "clears": 495,
+          "name": "Assassin's Mark",
+          "rate": 99,
+          "sims": 500
+        },
+        {
+          "clears": 395,
+          "name": "Titan's Axe",
+          "rate": 98.8,
+          "sims": 400
+        },
+        {
+          "clears": 291,
+          "name": "Deathmark Tome",
+          "rate": 97,
+          "sims": 300
+        },
+        {
+          "clears": 479,
+          "name": "Cleaving Halberd",
+          "rate": 95.8,
+          "sims": 500
+        },
+        {
+          "clears": 286,
+          "name": "Noxious Scales",
+          "rate": 95.3,
+          "sims": 300
+        }
+      ],
+      "delta": 2.6,
+      "name": "Storm Hammer",
+      "overall_rate": 88.5,
+      "tiers": [
+        {
+          "clears": 328,
+          "rate": 82,
+          "sims": 400,
+          "tier": 2
+        },
+        {
+          "clears": 483,
+          "rate": 96.6,
+          "sims": 500,
+          "tier": 3
+        },
+        {
+          "clears": 100,
+          "rate": 100,
+          "sims": 100,
+          "tier": 4
+        }
+      ],
+      "total_clears": 911,
+      "total_sims": 1000,
+      "win_rate": 91.1
+    },
+    {
+      "co_equipped": [
+        {
+          "clears": 198,
+          "name": "Hex Doll",
+          "rate": 99,
+          "sims": 200
+        },
+        {
+          "clears": 198,
+          "name": "Arcane Bolt",
+          "rate": 99,
+          "sims": 200
+        },
+        {
+          "clears": 1082,
+          "name": "Void Salve",
+          "rate": 98.4,
+          "sims": 1100
+        },
+        {
+          "clears": 195,
+          "name": "Crimson Horn",
+          "rate": 97.5,
+          "sims": 200
+        },
+        {
+          "clears": 679,
+          "name": "Titan's Axe",
+          "rate": 97,
+          "sims": 700
+        },
+        {
+          "clears": 289,
+          "name": "Deathmark Tome",
+          "rate": 96.3,
+          "sims": 300
+        },
+        {
+          "clears": 1041,
+          "name": "Holy Pendant",
+          "rate": 94.6,
+          "sims": 1100
+        },
+        {
+          "clears": 1416,
+          "name": "Berserker's Gauntlet",
+          "rate": 94.4,
+          "sims": 1500
+        },
+        {
+          "clears": 1132,
+          "name": "Assassin's Mark",
+          "rate": 94.3,
+          "sims": 1200
+        },
+        {
+          "clears": 469,
+          "name": "Iron Thistle",
+          "rate": 93.8,
+          "sims": 500
+        }
+      ],
+      "delta": 2.6,
+      "name": "Windrunner Boots",
+      "overall_rate": 88.5,
+      "tiers": [
+        {
+          "clears": 98,
+          "rate": 98,
+          "sims": 100,
+          "tier": 1
+        },
+        {
+          "clears": 984,
+          "rate": 89.5,
+          "sims": 1100,
+          "tier": 2
+        },
+        {
+          "clears": 740,
+          "rate": 92.5,
+          "sims": 800,
+          "tier": 3
+        }
+      ],
+      "total_clears": 1822,
+      "total_sims": 2000,
+      "win_rate": 91.1
+    },
+    {
+      "co_equipped": [
+        {
+          "clears": 100,
+          "name": "Supernova Pyre",
+          "rate": 100,
+          "sims": 100
+        },
+        {
+          "clears": 200,
+          "name": "Void Burst",
+          "rate": 100,
+          "sims": 200
+        },
+        {
+          "clears": 200,
+          "name": "Arcane Bolt",
+          "rate": 100,
+          "sims": 200
+        },
+        {
+          "clears": 195,
+          "name": "Deathmark Tome",
+          "rate": 97.5,
+          "sims": 200
+        },
+        {
+          "clears": 579,
+          "name": "Titan's Axe",
+          "rate": 96.5,
+          "sims": 600
+        },
+        {
+          "clears": 289,
+          "name": "Crimson Horn",
+          "rate": 96.3,
+          "sims": 300
+        },
+        {
+          "clears": 479,
+          "name": "Storm Hammer",
+          "rate": 95.8,
+          "sims": 500
+        },
+        {
+          "clears": 952,
+          "name": "Herbal Mist",
+          "rate": 95.2,
+          "sims": 1000
+        },
+        {
+          "clears": 942,
+          "name": "Verdant Wreath",
+          "rate": 94.2,
+          "sims": 1000
+        },
+        {
+          "clears": 564,
+          "name": "Paladin's Helm",
+          "rate": 94,
+          "sims": 600
+        }
+      ],
+      "delta": 2,
+      "name": "Cleaving Halberd",
+      "overall_rate": 88.5,
+      "tiers": [
+        {
+          "clears": 297,
+          "rate": 99,
+          "sims": 300,
+          "tier": 1
+        },
+        {
+          "clears": 757,
+          "rate": 84.1,
+          "sims": 900,
+          "tier": 2
+        },
+        {
+          "clears": 394,
+          "rate": 98.5,
+          "sims": 400,
+          "tier": 3
+        }
+      ],
+      "total_clears": 1448,
+      "total_sims": 1600,
+      "win_rate": 90.5
+    },
+    {
+      "co_equipped": [
+        {
+          "clears": 100,
+          "name": "Supernova Pyre",
+          "rate": 100,
+          "sims": 100
+        },
+        {
+          "clears": 200,
+          "name": "Prism Barrier",
+          "rate": 100,
+          "sims": 200
+        },
+        {
+          "clears": 198,
+          "name": "Arcane Bolt",
+          "rate": 99,
+          "sims": 200
+        },
+        {
+          "clears": 198,
+          "name": "Umbra’s Piercer",
+          "rate": 99,
+          "sims": 200
+        },
+        {
+          "clears": 594,
+          "name": "Storm Hammer",
+          "rate": 99,
+          "sims": 600
+        },
+        {
+          "clears": 691,
+          "name": "Herbal Mist",
+          "rate": 98.7,
+          "sims": 700
+        },
+        {
+          "clears": 1082,
+          "name": "Windrunner Boots",
+          "rate": 98.4,
+          "sims": 1100
+        },
+        {
+          "clears": 787,
+          "name": "Noxious Scales",
+          "rate": 98.4,
+          "sims": 800
+        },
+        {
+          "clears": 983,
+          "name": "Verdant Wreath",
+          "rate": 98.3,
+          "sims": 1000
+        },
+        {
+          "clears": 393,
+          "name": "Iron Thistle",
+          "rate": 98.3,
+          "sims": 400
+        }
+      ],
+      "delta": 2,
+      "name": "Void Salve",
+      "overall_rate": 88.5,
+      "tiers": [
+        {
+          "clears": 137,
+          "rate": 68.5,
+          "sims": 200,
+          "tier": 1
+        },
+        {
+          "clears": 538,
+          "rate": 89.7,
+          "sims": 600,
+          "tier": 2
+        },
+        {
+          "clears": 593,
+          "rate": 98.8,
+          "sims": 600,
+          "tier": 3
+        }
+      ],
+      "total_clears": 1268,
+      "total_sims": 1400,
+      "win_rate": 90.6
+    },
+    {
+      "co_equipped": [
+        {
+          "clears": 100,
+          "name": "Iron Thistle",
+          "rate": 100,
+          "sims": 100
+        },
+        {
+          "clears": 198,
+          "name": "Arcane Bolt",
+          "rate": 99,
+          "sims": 200
+        },
+        {
+          "clears": 198,
+          "name": "Hex Doll",
+          "rate": 99,
+          "sims": 200
+        },
+        {
+          "clears": 99,
+          "name": "Tidal Band",
+          "rate": 99,
+          "sims": 100
+        },
+        {
+          "clears": 589,
+          "name": "Berserker's Gauntlet",
+          "rate": 98.2,
+          "sims": 600
+        },
+        {
+          "clears": 98,
+          "name": "Umbra’s Piercer",
+          "rate": 98,
+          "sims": 100
+        },
+        {
+          "clears": 685,
+          "name": "Herbal Mist",
+          "rate": 97.9,
+          "sims": 700
+        },
+        {
+          "clears": 388,
+          "name": "Mirror Cloak",
+          "rate": 97,
+          "sims": 400
+        },
+        {
+          "clears": 289,
+          "name": "Crimson Horn",
+          "rate": 96.3,
+          "sims": 300
+        },
+        {
+          "clears": 671,
+          "name": "Verdant Wreath",
+          "rate": 95.9,
+          "sims": 700
+        }
+      ],
+      "delta": 1.7,
+      "name": "Toxic Trident",
+      "overall_rate": 88.5,
+      "tiers": [
+        {
+          "clears": 94,
+          "rate": 94,
+          "sims": 100,
+          "tier": 1
+        },
+        {
+          "clears": 396,
+          "rate": 99,
+          "sims": 400,
+          "tier": 2
+        },
+        {
+          "clears": 593,
+          "rate": 84.7,
+          "sims": 700,
+          "tier": 3
+        }
+      ],
+      "total_clears": 1083,
+      "total_sims": 1200,
+      "win_rate": 90.3
+    },
+    {
+      "co_equipped": [
+        {
+          "clears": 100,
+          "name": "Berserker's Gauntlet",
+          "rate": 100,
+          "sims": 100
+        },
+        {
+          "clears": 200,
+          "name": "Void Salve",
+          "rate": 100,
+          "sims": 200
+        },
+        {
+          "clears": 100,
+          "name": "Hex Doll",
+          "rate": 100,
+          "sims": 100
+        },
+        {
+          "clears": 200,
+          "name": "Herbal Mist",
+          "rate": 100,
+          "sims": 200
+        },
+        {
+          "clears": 287,
+          "name": "Holy Pendant",
+          "rate": 95.7,
+          "sims": 300
+        },
+        {
+          "clears": 287,
+          "name": "Paladin's Helm",
+          "rate": 95.7,
+          "sims": 300
+        },
+        {
+          "clears": 187,
+          "name": "Tempest Edge",
+          "rate": 93.5,
+          "sims": 200
+        },
+        {
+          "clears": 187,
+          "name": "Storm Hammer",
+          "rate": 93.5,
+          "sims": 200
+        },
+        {
+          "clears": 187,
+          "name": "Verdant Wreath",
+          "rate": 93.5,
+          "sims": 200
+        },
+        {
+          "clears": 361,
+          "name": "Virulent Darts",
+          "rate": 90.3,
+          "sims": 400
+        }
+      ],
+      "delta": 1.7,
+      "name": "Prism Barrier",
+      "overall_rate": 88.5,
+      "tiers": [
+        {
+          "clears": 74,
+          "rate": 74,
+          "sims": 100,
+          "tier": 2
+        },
+        {
+          "clears": 287,
+          "rate": 95.7,
+          "sims": 300,
+          "tier": 3
+        }
+      ],
+      "total_clears": 361,
+      "total_sims": 400,
+      "win_rate": 90.3
+    },
+    {
+      "co_equipped": [
+        {
+          "clears": 99,
+          "name": "Tidal Band",
+          "rate": 99,
+          "sims": 100
+        },
+        {
+          "clears": 495,
+          "name": "Storm Hammer",
+          "rate": 99,
+          "sims": 500
+        },
+        {
+          "clears": 198,
+          "name": "Umbra’s Piercer",
+          "rate": 99,
+          "sims": 200
+        },
+        {
+          "clears": 592,
+          "name": "Herbal Mist",
+          "rate": 98.7,
+          "sims": 600
+        },
+        {
+          "clears": 785,
+          "name": "Verdant Wreath",
+          "rate": 98.1,
+          "sims": 800
+        },
+        {
+          "clears": 98,
+          "name": "Arcane Bolt",
+          "rate": 98,
+          "sims": 100
+        },
+        {
+          "clears": 293,
+          "name": "Iron Thistle",
+          "rate": 97.7,
+          "sims": 300
+        },
+        {
+          "clears": 292,
+          "name": "Void Scythe",
+          "rate": 97.3,
+          "sims": 300
+        },
+        {
+          "clears": 96,
+          "name": "Glare Lantern",
+          "rate": 96,
+          "sims": 100
+        },
+        {
+          "clears": 762,
+          "name": "Noxious Scales",
+          "rate": 95.3,
+          "sims": 800
+        }
+      ],
+      "delta": 0.3,
+      "name": "Assassin's Mark",
+      "overall_rate": 88.5,
+      "tiers": [
+        {
+          "clears": 197,
+          "rate": 98.5,
+          "sims": 200,
+          "tier": 1
+        },
+        {
+          "clears": 467,
+          "rate": 93.4,
+          "sims": 500,
+          "tier": 2
+        },
+        {
+          "clears": 579,
+          "rate": 82.7,
+          "sims": 700,
+          "tier": 3
+        }
+      ],
+      "total_clears": 1243,
+      "total_sims": 1400,
+      "win_rate": 88.8
+    },
+    {
+      "co_equipped": [
+        {
+          "clears": 100,
+          "name": "Supernova Pyre",
+          "rate": 100,
+          "sims": 100
+        },
+        {
+          "clears": 298,
+          "name": "Arcane Bolt",
+          "rate": 99.3,
+          "sims": 300
+        },
+        {
+          "clears": 99,
+          "name": "Tidal Band",
+          "rate": 99,
+          "sims": 100
+        },
+        {
+          "clears": 194,
+          "name": "Crimson Horn",
+          "rate": 97,
+          "sims": 200
+        },
+        {
+          "clears": 961,
+          "name": "Noxious Scales",
+          "rate": 96.1,
+          "sims": 1000
+        },
+        {
+          "clears": 287,
+          "name": "Prism Barrier",
+          "rate": 95.7,
+          "sims": 300
+        },
+        {
+          "clears": 857,
+          "name": "Herbal Mist",
+          "rate": 95.2,
+          "sims": 900
+        },
+        {
+          "clears": 1041,
+          "name": "Windrunner Boots",
+          "rate": 94.6,
+          "sims": 1100
+        },
+        {
+          "clears": 471,
+          "name": "Storm Hammer",
+          "rate": 94.2,
+          "sims": 500
+        },
+        {
+          "clears": 936,
+          "name": "Verdant Wreath",
+          "rate": 93.6,
+          "sims": 1000
+        }
+      ],
+      "delta": 0.1,
+      "name": "Holy Pendant",
+      "overall_rate": 88.5,
+      "tiers": [
+        {
+          "clears": 750,
+          "rate": 93.8,
+          "sims": 800,
+          "tier": 2
+        },
+        {
+          "clears": 657,
+          "rate": 82.1,
+          "sims": 800,
+          "tier": 3
+        },
+        {
+          "clears": 100,
+          "rate": 100,
+          "sims": 100,
+          "tier": 4
+        }
+      ],
+      "total_clears": 1507,
+      "total_sims": 1700,
+      "win_rate": 88.6
+    },
+    {
+      "co_equipped": [
+        {
+          "clears": 100,
+          "name": "Arcane Bolt",
+          "rate": 100,
+          "sims": 100
+        },
+        {
+          "clears": 299,
+          "name": "Void Burst",
+          "rate": 99.7,
+          "sims": 300
+        },
+        {
+          "clears": 99,
+          "name": "Tidal Band",
+          "rate": 99,
+          "sims": 100
+        },
+        {
+          "clears": 294,
+          "name": "Titan's Axe",
+          "rate": 98,
+          "sims": 300
+        },
+        {
+          "clears": 194,
+          "name": "Deathmark Tome",
+          "rate": 97,
+          "sims": 200
+        },
+        {
+          "clears": 388,
+          "name": "Toxic Trident",
+          "rate": 97,
+          "sims": 400
+        },
+        {
+          "clears": 289,
+          "name": "Crimson Horn",
+          "rate": 96.3,
+          "sims": 300
+        },
+        {
+          "clears": 288,
+          "name": "Malignant Staff",
+          "rate": 96,
+          "sims": 300
+        },
+        {
+          "clears": 573,
+          "name": "Herbal Mist",
+          "rate": 95.5,
+          "sims": 600
+        },
+        {
+          "clears": 380,
+          "name": "Storm Hammer",
+          "rate": 95,
+          "sims": 400
+        }
+      ],
+      "delta": -0.1,
+      "name": "Mirror Cloak",
+      "overall_rate": 88.5,
+      "tiers": [
+        {
+          "clears": 378,
+          "rate": 94.5,
+          "sims": 400,
+          "tier": 2
+        },
+        {
+          "clears": 242,
+          "rate": 80.7,
+          "sims": 300,
+          "tier": 3
+        },
+        {
+          "clears": 176,
+          "rate": 88,
+          "sims": 200,
+          "tier": 4
+        }
+      ],
+      "total_clears": 796,
+      "total_sims": 900,
+      "win_rate": 88.4
+    },
+    {
+      "co_equipped": [
+        {
+          "clears": 200,
+          "name": "Arcane Bolt",
+          "rate": 100,
+          "sims": 200
+        },
+        {
+          "clears": 100,
+          "name": "Supernova Pyre",
+          "rate": 100,
+          "sims": 100
+        },
+        {
+          "clears": 99,
+          "name": "Tidal Band",
+          "rate": 99,
+          "sims": 100
+        },
+        {
+          "clears": 493,
+          "name": "Iron Thistle",
+          "rate": 98.6,
+          "sims": 500
+        },
+        {
+          "clears": 195,
+          "name": "Crimson Horn",
+          "rate": 97.5,
+          "sims": 200
+        },
+        {
+          "clears": 937,
+          "name": "Noxious Scales",
+          "rate": 93.7,
+          "sims": 1000
+        },
+        {
+          "clears": 1301,
+          "name": "Verdant Wreath",
+          "rate": 92.9,
+          "sims": 1400
+        },
+        {
+          "clears": 1012,
+          "name": "Herbal Mist",
+          "rate": 92,
+          "sims": 1100
+        },
+        {
+          "clears": 1288,
+          "name": "Berserker's Gauntlet",
+          "rate": 92,
+          "sims": 1400
+        },
+        {
+          "clears": 183,
+          "name": "Glare Lantern",
+          "rate": 91.5,
+          "sims": 200
+        }
+      ],
+      "delta": -0.6,
+      "name": "Aegis Plate",
+      "overall_rate": 88.5,
+      "tiers": [
+        {
+          "clears": 773,
+          "rate": 85.9,
+          "sims": 900,
+          "tier": 2
+        },
+        {
+          "clears": 1074,
+          "rate": 89.5,
+          "sims": 1200,
+          "tier": 3
+        }
+      ],
+      "total_clears": 1847,
+      "total_sims": 2100,
+      "win_rate": 88
+    },
+    {
+      "co_equipped": [
+        {
+          "clears": 198,
+          "name": "Hex Doll",
+          "rate": 99,
+          "sims": 200
+        },
+        {
+          "clears": 98,
+          "name": "Arcane Bolt",
+          "rate": 98,
+          "sims": 100
+        },
+        {
+          "clears": 776,
+          "name": "Noxious Scales",
+          "rate": 97,
+          "sims": 800
+        },
+        {
+          "clears": 862,
+          "name": "Berserker's Gauntlet",
+          "rate": 95.8,
+          "sims": 900
+        },
+        {
+          "clears": 287,
+          "name": "Prism Barrier",
+          "rate": 95.7,
+          "sims": 300
+        },
+        {
+          "clears": 95,
+          "name": "Crimson Horn",
+          "rate": 95,
+          "sims": 100
+        },
+        {
+          "clears": 564,
+          "name": "Cleaving Halberd",
+          "rate": 94,
+          "sims": 600
+        },
+        {
+          "clears": 1105,
+          "name": "Windrunner Boots",
+          "rate": 92.1,
+          "sims": 1200
+        },
+        {
+          "clears": 824,
+          "name": "Void Salve",
+          "rate": 91.6,
+          "sims": 900
+        },
+        {
+          "clears": 641,
+          "name": "Herbal Mist",
+          "rate": 91.6,
+          "sims": 700
+        }
+      ],
+      "delta": -0.6,
+      "name": "Paladin's Helm",
+      "overall_rate": 88.5,
+      "tiers": [
+        {
+          "clears": 134,
+          "rate": 67,
+          "sims": 200,
+          "tier": 1
+        },
+        {
+          "clears": 292,
+          "rate": 97.3,
+          "sims": 300,
+          "tier": 2
+        },
+        {
+          "clears": 622,
+          "rate": 88.9,
+          "sims": 700,
+          "tier": 3
+        },
+        {
+          "clears": 183,
+          "rate": 91.5,
+          "sims": 200,
+          "tier": 4
+        }
+      ],
+      "total_clears": 1231,
+      "total_sims": 1400,
+      "win_rate": 87.9
+    },
+    {
+      "co_equipped": [
+        {
+          "clears": 100,
+          "name": "Iron Thistle",
+          "rate": 100,
+          "sims": 100
+        },
+        {
+          "clears": 100,
+          "name": "Supernova Pyre",
+          "rate": 100,
+          "sims": 100
+        },
+        {
+          "clears": 99,
+          "name": "Tidal Band",
+          "rate": 99,
+          "sims": 100
+        },
+        {
+          "clears": 198,
+          "name": "Arcane Bolt",
+          "rate": 99,
+          "sims": 200
+        },
+        {
+          "clears": 295,
+          "name": "Hydra Lance",
+          "rate": 98.3,
+          "sims": 300
+        },
+        {
+          "clears": 98,
+          "name": "Noxious Scales",
+          "rate": 98,
+          "sims": 100
+        },
+        {
+          "clears": 98,
+          "name": "Umbra’s Piercer",
+          "rate": 98,
+          "sims": 100
+        },
+        {
+          "clears": 488,
+          "name": "Verdant Wreath",
+          "rate": 97.6,
+          "sims": 500
+        },
+        {
+          "clears": 195,
+          "name": "Berserker's Gauntlet",
+          "rate": 97.5,
+          "sims": 200
+        },
+        {
+          "clears": 195,
+          "name": "Cleaving Halberd",
+          "rate": 97.5,
+          "sims": 200
+        }
+      ],
+      "delta": -0.7,
+      "name": "Deathmark Tome",
+      "overall_rate": 88.5,
+      "tiers": [
+        {
+          "clears": 39,
+          "rate": 39,
+          "sims": 100,
+          "tier": 2
+        },
+        {
+          "clears": 388,
+          "rate": 97,
+          "sims": 400,
+          "tier": 3
+        },
+        {
+          "clears": 100,
+          "rate": 100,
+          "sims": 100,
+          "tier": 4
+        }
+      ],
+      "total_clears": 527,
+      "total_sims": 600,
+      "win_rate": 87.8
+    },
+    {
+      "co_equipped": [
+        {
+          "clears": 100,
+          "name": "Supernova Pyre",
+          "rate": 100,
+          "sims": 100
+        },
+        {
+          "clears": 298,
+          "name": "Iron Thistle",
+          "rate": 99.3,
+          "sims": 300
+        },
+        {
+          "clears": 298,
+          "name": "Arcane Bolt",
+          "rate": 99.3,
+          "sims": 300
+        },
+        {
+          "clears": 99,
+          "name": "Tidal Band",
+          "rate": 99,
+          "sims": 100
+        },
+        {
+          "clears": 194,
+          "name": "Crimson Horn",
+          "rate": 97,
+          "sims": 200
+        },
+        {
+          "clears": 96,
+          "name": "Glare Lantern",
+          "rate": 96,
+          "sims": 100
+        },
+        {
+          "clears": 847,
+          "name": "Noxious Scales",
+          "rate": 94.1,
+          "sims": 900
+        },
+        {
+          "clears": 1116,
+          "name": "Verdant Wreath",
+          "rate": 93,
+          "sims": 1200
+        },
+        {
+          "clears": 1286,
+          "name": "Berserker's Gauntlet",
+          "rate": 91.9,
+          "sims": 1400
+        },
+        {
+          "clears": 1004,
+          "name": "Herbal Mist",
+          "rate": 91.3,
+          "sims": 1100
+        }
+      ],
+      "delta": -1.8,
+      "name": "Tempered Mail",
+      "overall_rate": 88.5,
+      "tiers": [
+        {
+          "clears": 925,
+          "rate": 84.1,
+          "sims": 1100,
+          "tier": 2
+        },
+        {
+          "clears": 541,
+          "rate": 90.2,
+          "sims": 600,
+          "tier": 3
+        },
+        {
+          "clears": 96,
+          "rate": 96,
+          "sims": 100,
+          "tier": 4
+        }
+      ],
+      "total_clears": 1562,
+      "total_sims": 1800,
+      "win_rate": 86.8
+    },
+    {
+      "co_equipped": [
+        {
+          "clears": 100,
+          "name": "Arcane Bolt",
+          "rate": 100,
+          "sims": 100
+        },
+        {
+          "clears": 99,
+          "name": "Tidal Band",
+          "rate": 99,
+          "sims": 100
+        },
+        {
+          "clears": 289,
+          "name": "Crimson Horn",
+          "rate": 96.3,
+          "sims": 300
+        },
+        {
+          "clears": 1030,
+          "name": "Noxious Scales",
+          "rate": 93.6,
+          "sims": 1100
+        },
+        {
+          "clears": 1199,
+          "name": "Herbal Mist",
+          "rate": 92.2,
+          "sims": 1300
+        },
+        {
+          "clears": 1732,
+          "name": "Berserker's Gauntlet",
+          "rate": 91.2,
+          "sims": 1900
+        },
+        {
+          "clears": 545,
+          "name": "Iron Thistle",
+          "rate": 90.8,
+          "sims": 600
+        },
+        {
+          "clears": 1447,
+          "name": "Verdant Wreath",
+          "rate": 90.4,
+          "sims": 1600
+        },
+        {
+          "clears": 1700,
+          "name": "Windrunner Boots",
+          "rate": 89.5,
+          "sims": 1900
+        },
+        {
+          "clears": 714,
+          "name": "Titan's Axe",
+          "rate": 89.3,
+          "sims": 800
+        }
+      ],
+      "delta": -1.9,
+      "name": "Healing Touch",
+      "overall_rate": 88.5,
+      "tiers": [
+        {
+          "clears": 76,
+          "rate": 76,
+          "sims": 100,
+          "tier": 1
+        },
+        {
+          "clears": 1112,
+          "rate": 85.5,
+          "sims": 1300,
+          "tier": 2
+        },
+        {
+          "clears": 804,
+          "rate": 89.3,
+          "sims": 900,
+          "tier": 3
+        }
+      ],
+      "total_clears": 1992,
+      "total_sims": 2300,
+      "win_rate": 86.6
+    },
+    {
+      "co_equipped": [
+        {
+          "clears": 100,
+          "name": "Supernova Pyre",
+          "rate": 100,
+          "sims": 100
+        },
+        {
+          "clears": 198,
+          "name": "Arcane Bolt",
+          "rate": 99,
+          "sims": 200
+        },
+        {
+          "clears": 99,
+          "name": "Tidal Band",
+          "rate": 99,
+          "sims": 100
+        },
+        {
+          "clears": 195,
+          "name": "Iron Thistle",
+          "rate": 97.5,
+          "sims": 200
+        },
+        {
+          "clears": 189,
+          "name": "Crimson Horn",
+          "rate": 94.5,
+          "sims": 200
+        },
+        {
+          "clears": 932,
+          "name": "Noxious Scales",
+          "rate": 93.2,
+          "sims": 1000
+        },
+        {
+          "clears": 183,
+          "name": "Glare Lantern",
+          "rate": 91.5,
+          "sims": 200
+        },
+        {
+          "clears": 1097,
+          "name": "Verdant Wreath",
+          "rate": 91.4,
+          "sims": 1200
+        },
+        {
+          "clears": 1184,
+          "name": "Berserker's Gauntlet",
+          "rate": 91.1,
+          "sims": 1300
+        },
+        {
+          "clears": 811,
+          "name": "Storm Hammer",
+          "rate": 90.1,
+          "sims": 900
+        }
+      ],
+      "delta": -2.1,
+      "name": "Oracle's Staff",
+      "overall_rate": 88.5,
+      "tiers": [
+        {
+          "clears": 993,
+          "rate": 82.8,
+          "sims": 1200,
+          "tier": 2
+        },
+        {
+          "clears": 554,
+          "rate": 92.3,
+          "sims": 600,
+          "tier": 3
+        },
+        {
+          "clears": 95,
+          "rate": 95,
+          "sims": 100,
+          "tier": 4
+        }
+      ],
+      "total_clears": 1642,
+      "total_sims": 1900,
+      "win_rate": 86.4
+    },
+    {
+      "co_equipped": [
+        {
+          "clears": 96,
+          "name": "Deathmark Tome",
+          "rate": 96,
+          "sims": 100
+        },
+        {
+          "clears": 96,
+          "name": "Titan's Axe",
+          "rate": 96,
+          "sims": 100
+        },
+        {
+          "clears": 96,
+          "name": "Assassin's Mark",
+          "rate": 96,
+          "sims": 100
+        },
+        {
+          "clears": 96,
+          "name": "Void Burst",
+          "rate": 96,
+          "sims": 100
+        },
+        {
+          "clears": 96,
+          "name": "Tempered Mail",
+          "rate": 96,
+          "sims": 100
+        },
+        {
+          "clears": 183,
+          "name": "Aegis Plate",
+          "rate": 91.5,
+          "sims": 200
+        },
+        {
+          "clears": 183,
+          "name": "Hydra Lance",
+          "rate": 91.5,
+          "sims": 200
+        },
+        {
+          "clears": 183,
+          "name": "Oracle's Staff",
+          "rate": 91.5,
+          "sims": 200
+        },
+        {
+          "clears": 183,
+          "name": "Storm Hammer",
+          "rate": 91.5,
+          "sims": 200
+        },
+        {
+          "clears": 87,
+          "name": "Toxic Trident",
+          "rate": 87,
+          "sims": 100
+        }
+      ],
+      "delta": -2.2,
+      "name": "Glare Lantern",
+      "overall_rate": 88.5,
+      "tiers": [
+        {
+          "clears": 259,
+          "rate": 86.3,
+          "sims": 300,
+          "tier": 3
+        }
+      ],
+      "total_clears": 259,
+      "total_sims": 300,
+      "win_rate": 86.3
+    },
+    {
+      "co_equipped": [
+        {
+          "clears": 286,
+          "name": "Titan's Axe",
+          "rate": 95.3,
+          "sims": 300
+        },
+        {
+          "clears": 663,
+          "name": "Noxious Scales",
+          "rate": 94.7,
+          "sims": 700
+        },
+        {
+          "clears": 185,
+          "name": "Toxic Trident",
+          "rate": 92.5,
+          "sims": 200
+        },
+        {
+          "clears": 185,
+          "name": "Malignant Staff",
+          "rate": 92.5,
+          "sims": 200
+        },
+        {
+          "clears": 369,
+          "name": "Iron Thistle",
+          "rate": 92.3,
+          "sims": 400
+        },
+        {
+          "clears": 736,
+          "name": "Void Salve",
+          "rate": 92,
+          "sims": 800
+        },
+        {
+          "clears": 638,
+          "name": "Assassin's Mark",
+          "rate": 91.1,
+          "sims": 700
+        },
+        {
+          "clears": 986,
+          "name": "Windrunner Boots",
+          "rate": 89.6,
+          "sims": 1100
+        },
+        {
+          "clears": 1069,
+          "name": "Berserker's Gauntlet",
+          "rate": 89.1,
+          "sims": 1200
+        },
+        {
+          "clears": 712,
+          "name": "Herbal Mist",
+          "rate": 89,
+          "sims": 800
+        }
+      ],
+      "delta": -2.4,
+      "name": "Dragon Kris",
+      "overall_rate": 88.5,
+      "tiers": [
+        {
+          "clears": 183,
+          "rate": 91.5,
+          "sims": 200,
+          "tier": 1
+        },
+        {
+          "clears": 651,
+          "rate": 81.4,
+          "sims": 800,
+          "tier": 2
+        },
+        {
+          "clears": 286,
+          "rate": 95.3,
+          "sims": 300,
+          "tier": 3
+        }
+      ],
+      "total_clears": 1120,
+      "total_sims": 1300,
+      "win_rate": 86.2
+    },
+    {
+      "co_equipped": [
+        {
+          "clears": 198,
+          "name": "Hex Doll",
+          "rate": 99,
+          "sims": 200
+        },
+        {
+          "clears": 99,
+          "name": "Tidal Band",
+          "rate": 99,
+          "sims": 100
+        },
+        {
+          "clears": 98,
+          "name": "Umbra’s Piercer",
+          "rate": 98,
+          "sims": 100
+        },
+        {
+          "clears": 98,
+          "name": "Arcane Bolt",
+          "rate": 98,
+          "sims": 100
+        },
+        {
+          "clears": 291,
+          "name": "Berserker's Gauntlet",
+          "rate": 97,
+          "sims": 300
+        },
+        {
+          "clears": 386,
+          "name": "Herbal Mist",
+          "rate": 96.5,
+          "sims": 400
+        },
+        {
+          "clears": 288,
+          "name": "Mirror Cloak",
+          "rate": 96,
+          "sims": 300
+        },
+        {
+          "clears": 571,
+          "name": "Verdant Wreath",
+          "rate": 95.2,
+          "sims": 600
+        },
+        {
+          "clears": 189,
+          "name": "Crimson Horn",
+          "rate": 94.5,
+          "sims": 200
+        },
+        {
+          "clears": 282,
+          "name": "Storm Hammer",
+          "rate": 94,
+          "sims": 300
+        }
+      ],
+      "delta": -2.7,
+      "name": "Malignant Staff",
+      "overall_rate": 88.5,
+      "tiers": [
+        {
+          "clears": 113,
+          "rate": 56.5,
+          "sims": 200,
+          "tier": 1
+        },
+        {
+          "clears": 463,
+          "rate": 92.6,
+          "sims": 500,
+          "tier": 2
+        },
+        {
+          "clears": 282,
+          "rate": 94,
+          "sims": 300,
+          "tier": 3
+        }
+      ],
+      "total_clears": 858,
+      "total_sims": 1000,
+      "win_rate": 85.8
+    },
+    {
+      "co_equipped": [
+        {
+          "clears": 100,
+          "name": "Crimson Horn",
+          "rate": 100,
+          "sims": 100
+        },
+        {
+          "clears": 200,
+          "name": "Arcane Bolt",
+          "rate": 100,
+          "sims": 200
+        },
+        {
+          "clears": 200,
+          "name": "Iron Thistle",
+          "rate": 100,
+          "sims": 200
+        },
+        {
+          "clears": 100,
+          "name": "Supernova Pyre",
+          "rate": 100,
+          "sims": 100
+        },
+        {
+          "clears": 99,
+          "name": "Tidal Band",
+          "rate": 99,
+          "sims": 100
+        },
+        {
+          "clears": 295,
+          "name": "Deathmark Tome",
+          "rate": 98.3,
+          "sims": 300
+        },
+        {
+          "clears": 482,
+          "name": "Titan's Axe",
+          "rate": 96.4,
+          "sims": 500
+        },
+        {
+          "clears": 557,
+          "name": "Toxic Trident",
+          "rate": 92.8,
+          "sims": 600
+        },
+        {
+          "clears": 183,
+          "name": "Glare Lantern",
+          "rate": 91.5,
+          "sims": 200
+        },
+        {
+          "clears": 625,
+          "name": "Berserker's Gauntlet",
+          "rate": 89.3,
+          "sims": 700
+        }
+      ],
+      "delta": -3.4,
+      "name": "Hydra Lance",
+      "overall_rate": 88.5,
+      "tiers": [
+        {
+          "clears": 434,
+          "rate": 86.8,
+          "sims": 500,
+          "tier": 2
+        },
+        {
+          "clears": 406,
+          "rate": 81.2,
+          "sims": 500,
+          "tier": 3
+        },
+        {
+          "clears": 96,
+          "rate": 96,
+          "sims": 100,
+          "tier": 4
+        }
+      ],
+      "total_clears": 936,
+      "total_sims": 1100,
+      "win_rate": 85.1
+    },
+    {
+      "co_equipped": [
+        {
+          "clears": 193,
+          "name": "Iron Thistle",
+          "rate": 96.5,
+          "sims": 200
+        },
+        {
+          "clears": 578,
+          "name": "Herbal Mist",
+          "rate": 96.3,
+          "sims": 600
+        },
+        {
+          "clears": 573,
+          "name": "Verdant Wreath",
+          "rate": 95.5,
+          "sims": 600
+        },
+        {
+          "clears": 95,
+          "name": "Crimson Horn",
+          "rate": 95,
+          "sims": 100
+        },
+        {
+          "clears": 379,
+          "name": "Void Scythe",
+          "rate": 94.8,
+          "sims": 400
+        },
+        {
+          "clears": 282,
+          "name": "Storm Hammer",
+          "rate": 94,
+          "sims": 300
+        },
+        {
+          "clears": 838,
+          "name": "Noxious Scales",
+          "rate": 93.1,
+          "sims": 900
+        },
+        {
+          "clears": 920,
+          "name": "Windrunner Boots",
+          "rate": 92,
+          "sims": 1000
+        },
+        {
+          "clears": 361,
+          "name": "Prism Barrier",
+          "rate": 90.3,
+          "sims": 400
+        },
+        {
+          "clears": 624,
+          "name": "Berserker's Gauntlet",
+          "rate": 89.1,
+          "sims": 700
+        }
+      ],
+      "delta": -3.6,
+      "name": "Virulent Darts",
+      "overall_rate": 88.5,
+      "tiers": [
+        {
+          "clears": 297,
+          "rate": 99,
+          "sims": 300,
+          "tier": 2
+        },
+        {
+          "clears": 722,
+          "rate": 80.2,
+          "sims": 900,
+          "tier": 3
+        }
+      ],
+      "total_clears": 1019,
+      "total_sims": 1200,
+      "win_rate": 84.9
+    },
+    {
+      "co_equipped": [
+        {
+          "clears": 100,
+          "name": "Supernova Pyre",
+          "rate": 100,
+          "sims": 100
+        },
+        {
+          "clears": 99,
+          "name": "Tidal Band",
+          "rate": 99,
+          "sims": 100
+        },
+        {
+          "clears": 198,
+          "name": "Arcane Bolt",
+          "rate": 99,
+          "sims": 200
+        },
+        {
+          "clears": 189,
+          "name": "Crimson Horn",
+          "rate": 94.5,
+          "sims": 200
+        },
+        {
+          "clears": 750,
+          "name": "Noxious Scales",
+          "rate": 93.8,
+          "sims": 800
+        },
+        {
+          "clears": 628,
+          "name": "Storm Hammer",
+          "rate": 89.7,
+          "sims": 700
+        },
+        {
+          "clears": 895,
+          "name": "Verdant Wreath",
+          "rate": 89.5,
+          "sims": 1000
+        },
+        {
+          "clears": 1069,
+          "name": "Berserker's Gauntlet",
+          "rate": 89.1,
+          "sims": 1200
+        },
+        {
+          "clears": 708,
+          "name": "Herbal Mist",
+          "rate": 88.5,
+          "sims": 800
+        },
+        {
+          "clears": 616,
+          "name": "Titan's Axe",
+          "rate": 88,
+          "sims": 700
+        }
+      ],
+      "delta": -3.8,
+      "name": "Basher Shield",
+      "overall_rate": 88.5,
+      "tiers": [
+        {
+          "clears": 724,
+          "rate": 80.4,
+          "sims": 900,
+          "tier": 2
+        },
+        {
+          "clears": 716,
+          "rate": 89.5,
+          "sims": 800,
+          "tier": 3
+        }
+      ],
+      "total_clears": 1440,
+      "total_sims": 1700,
+      "win_rate": 84.7
+    },
+    {
+      "co_equipped": [
+        {
+          "clears": 292,
+          "name": "Assassin's Mark",
+          "rate": 97.3,
+          "sims": 300
+        },
+        {
+          "clears": 292,
+          "name": "Void Salve",
+          "rate": 97.3,
+          "sims": 300
+        },
+        {
+          "clears": 379,
+          "name": "Noxious Scales",
+          "rate": 94.8,
+          "sims": 400
+        },
+        {
+          "clears": 379,
+          "name": "Virulent Darts",
+          "rate": 94.8,
+          "sims": 400
+        },
+        {
+          "clears": 540,
+          "name": "Cleaving Halberd",
+          "rate": 90,
+          "sims": 600
+        },
+        {
+          "clears": 269,
+          "name": "Iron Thistle",
+          "rate": 89.7,
+          "sims": 300
+        },
+        {
+          "clears": 625,
+          "name": "Berserker's Gauntlet",
+          "rate": 89.3,
+          "sims": 700
+        },
+        {
+          "clears": 445,
+          "name": "Holy Pendant",
+          "rate": 89,
+          "sims": 500
+        },
+        {
+          "clears": 87,
+          "name": "Titan's Axe",
+          "rate": 87,
+          "sims": 100
+        },
+        {
+          "clears": 513,
+          "name": "Aegis Plate",
+          "rate": 85.5,
+          "sims": 600
+        }
+      ],
+      "delta": -4.4,
+      "name": "Void Scythe",
+      "overall_rate": 88.5,
+      "tiers": [
+        {
+          "clears": 98,
+          "rate": 98,
+          "sims": 100,
+          "tier": 0
+        },
+        {
+          "clears": 85,
+          "rate": 85,
+          "sims": 100,
+          "tier": 1
+        },
+        {
+          "clears": 194,
+          "rate": 97,
+          "sims": 200,
+          "tier": 2
+        },
+        {
+          "clears": 125,
+          "rate": 62.5,
+          "sims": 200,
+          "tier": 3
+        },
+        {
+          "clears": 87,
+          "rate": 87,
+          "sims": 100,
+          "tier": 4
+        }
+      ],
+      "total_clears": 589,
+      "total_sims": 700,
+      "win_rate": 84.1
+    },
+    {
+      "co_equipped": [
+        {
+          "clears": 100,
+          "name": "Crimson Horn",
+          "rate": 100,
+          "sims": 100
+        },
+        {
+          "clears": 200,
+          "name": "Cleaving Halberd",
+          "rate": 100,
+          "sims": 200
+        },
+        {
+          "clears": 200,
+          "name": "Arcane Bolt",
+          "rate": 100,
+          "sims": 200
+        },
+        {
+          "clears": 300,
+          "name": "Iron Thistle",
+          "rate": 100,
+          "sims": 300
+        },
+        {
+          "clears": 100,
+          "name": "Supernova Pyre",
+          "rate": 100,
+          "sims": 100
+        },
+        {
+          "clears": 299,
+          "name": "Mirror Cloak",
+          "rate": 99.7,
+          "sims": 300
+        },
+        {
+          "clears": 99,
+          "name": "Tidal Band",
+          "rate": 99,
+          "sims": 100
+        },
+        {
+          "clears": 295,
+          "name": "Berserker's Gauntlet",
+          "rate": 98.3,
+          "sims": 300
+        },
+        {
+          "clears": 96,
+          "name": "Glare Lantern",
+          "rate": 96,
+          "sims": 100
+        },
+        {
+          "clears": 444,
+          "name": "Verdant Wreath",
+          "rate": 88.8,
+          "sims": 500
+        }
+      ],
+      "delta": -5.2,
+      "name": "Void Burst",
+      "overall_rate": 88.5,
+      "tiers": [
+        {
+          "clears": 583,
+          "rate": 83.3,
+          "sims": 700,
+          "tier": 3
+        }
+      ],
+      "total_clears": 583,
+      "total_sims": 700,
+      "win_rate": 83.3
+    },
+    {
+      "co_equipped": [
+        {
+          "clears": 100,
+          "name": "Storm Hammer",
+          "rate": 100,
+          "sims": 100
+        },
+        {
+          "clears": 100,
+          "name": "Prism Barrier",
+          "rate": 100,
+          "sims": 100
+        },
+        {
+          "clears": 198,
+          "name": "Herbal Mist",
+          "rate": 99,
+          "sims": 200
+        },
+        {
+          "clears": 198,
+          "name": "Malignant Staff",
+          "rate": 99,
+          "sims": 200
+        },
+        {
+          "clears": 198,
+          "name": "Windrunner Boots",
+          "rate": 99,
+          "sims": 200
+        },
+        {
+          "clears": 198,
+          "name": "Paladin's Helm",
+          "rate": 99,
+          "sims": 200
+        },
+        {
+          "clears": 198,
+          "name": "Toxic Trident",
+          "rate": 99,
+          "sims": 200
+        },
+        {
+          "clears": 198,
+          "name": "Noxious Scales",
+          "rate": 99,
+          "sims": 200
+        },
+        {
+          "clears": 98,
+          "name": "Verdant Wreath",
+          "rate": 98,
+          "sims": 100
+        },
+        {
+          "clears": 245,
+          "name": "Aegis Plate",
+          "rate": 81.7,
+          "sims": 300
+        }
+      ],
+      "delta": -6.9,
+      "name": "Hex Doll",
+      "overall_rate": 88.5,
+      "tiers": [
+        {
+          "clears": 100,
+          "rate": 100,
+          "sims": 100,
+          "tier": 2
+        },
+        {
+          "clears": 145,
+          "rate": 72.5,
+          "sims": 200,
+          "tier": 3
+        }
+      ],
+      "total_clears": 245,
+      "total_sims": 300,
+      "win_rate": 81.7
+    },
+    {
+      "co_equipped": [
+        {
+          "clears": 198,
+          "name": "Titan's Axe",
+          "rate": 99,
+          "sims": 200
+        },
+        {
+          "clears": 198,
+          "name": "Void Salve",
+          "rate": 99,
+          "sims": 200
+        },
+        {
+          "clears": 198,
+          "name": "Assassin's Mark",
+          "rate": 99,
+          "sims": 200
+        },
+        {
+          "clears": 98,
+          "name": "Toxic Trident",
+          "rate": 98,
+          "sims": 100
+        },
+        {
+          "clears": 98,
+          "name": "Deathmark Tome",
+          "rate": 98,
+          "sims": 100
+        },
+        {
+          "clears": 98,
+          "name": "Noxious Scales",
+          "rate": 98,
+          "sims": 100
+        },
+        {
+          "clears": 98,
+          "name": "Arcane Bolt",
+          "rate": 98,
+          "sims": 100
+        },
+        {
+          "clears": 98,
+          "name": "Malignant Staff",
+          "rate": 98,
+          "sims": 100
+        },
+        {
+          "clears": 176,
+          "name": "Berserker's Gauntlet",
+          "rate": 88,
+          "sims": 200
+        },
+        {
+          "clears": 176,
+          "name": "Mirror Cloak",
+          "rate": 88,
+          "sims": 200
+        }
+      ],
+      "delta": -7.8,
+      "name": "Umbra’s Piercer",
+      "overall_rate": 88.5,
+      "tiers": [
+        {
+          "clears": 98,
+          "rate": 98,
+          "sims": 100,
+          "tier": 2
+        },
+        {
+          "clears": 125,
+          "rate": 62.5,
+          "sims": 200,
+          "tier": 3
+        },
+        {
+          "clears": 100,
+          "rate": 100,
+          "sims": 100,
+          "tier": 4
+        }
+      ],
+      "total_clears": 323,
+      "total_sims": 400,
+      "win_rate": 80.8
+    },
+    {
+      "co_equipped": [
+        {
+          "clears": 286,
+          "name": "Noxious Scales",
+          "rate": 95.3,
+          "sims": 300
+        },
+        {
+          "clears": 187,
+          "name": "Prism Barrier",
+          "rate": 93.5,
+          "sims": 200
+        },
+        {
+          "clears": 520,
+          "name": "Windrunner Boots",
+          "rate": 86.7,
+          "sims": 600
+        },
+        {
+          "clears": 518,
+          "name": "Berserker's Gauntlet",
+          "rate": 86.3,
+          "sims": 600
+        },
+        {
+          "clears": 259,
+          "name": "Glare Lantern",
+          "rate": 86.3,
+          "sims": 300
+        },
+        {
+          "clears": 508,
+          "name": "Verdant Wreath",
+          "rate": 84.7,
+          "sims": 600
+        },
+        {
+          "clears": 422,
+          "name": "Cleaving Halberd",
+          "rate": 84.4,
+          "sims": 500
+        },
+        {
+          "clears": 249,
+          "name": "Herbal Mist",
+          "rate": 83,
+          "sims": 300
+        },
+        {
+          "clears": 332,
+          "name": "Storm Hammer",
+          "rate": 83,
+          "sims": 400
+        },
+        {
+          "clears": 546,
+          "name": "Paladin's Helm",
+          "rate": 78,
+          "sims": 700
+        }
+      ],
+      "delta": -11.5,
+      "name": "Tempest Edge",
+      "overall_rate": 88.5,
+      "tiers": [
+        {
+          "clears": 123,
+          "rate": 61.5,
+          "sims": 200,
+          "tier": 2
+        },
+        {
+          "clears": 570,
+          "rate": 81.4,
+          "sims": 700,
+          "tier": 3
+        }
+      ],
+      "total_clears": 693,
+      "total_sims": 900,
+      "win_rate": 77
+    }
+  ],
+  "sims_per_build": 100,
+  "trials": [
+    {
+      "avg_level": 17.4,
+      "avg_tier": 2.5,
+      "builds": [
+        {
+          "avg_level": 20,
+          "avg_tier": 2.9,
+          "clear_rate": 1,
+          "clears": 100,
+          "items": [
+            [
+              {
+                "name": "Aegis Plate",
+                "rarity": "Common",
+                "tier": 3
+              },
+              {
+                "name": "Mirror Cloak",
+                "rarity": "Common",
+                "tier": 4
+              },
+              {
+                "name": "Tempered Mail",
+                "rarity": "Common",
+                "tier": 2
+              },
+              {
+                "name": "Basher Shield",
+                "rarity": "Common",
+                "tier": 3
+              }
+            ],
+            [
+              {
+                "name": "Cleaving Halberd",
+                "rarity": "Common",
+                "tier": 3
+              },
+              {
+                "name": "Storm Hammer",
+                "rarity": "Common",
+                "tier": 3
+              },
+              {
+                "name": "Berserker's Gauntlet",
+                "rarity": "Common",
+                "tier": 4
+              },
+              {
+                "name": "Windrunner Boots",
+                "rarity": "Common",
+                "tier": 2
+              }
+            ],
+            [
+              {
+                "name": "Healing Touch",
+                "rarity": "Common",
+                "tier": 3
+              },
+              {
+                "name": "Oracle's Staff",
+                "rarity": "Common",
+                "tier": 2
+              },
+              {
+                "name": "Verdant Wreath",
+                "rarity": "Common",
+                "tier": 3
+              },
+              {
+                "name": "Herbal Mist",
+                "rarity": "Common",
+                "tier": 4
+              }
+            ],
+            [
+              {
+                "name": "Void Salve",
+                "rarity": "Common",
+                "tier": 2
+              },
+              {
+                "name": "Tempest Edge",
+                "rarity": "Common",
+                "tier": 3
+              },
+              {
+                "name": "Dragon Kris",
+                "rarity": "Common",
+                "tier": 3
+              },
+              {
+                "name": "Assassin's Mark",
+                "rarity": "Common",
+                "tier": 3
+              }
+            ]
+          ],
+          "max_tier": 4,
+          "min_tier": 2
+        },
+        {
+          "avg_level": 15,
+          "avg_tier": 2.8,
+          "clear_rate": 1,
+          "clears": 100,
+          "items": [
+            [
+              {
+                "name": "Toxic Trident",
+                "rarity": "Common",
+                "tier": 2
+              },
+              {
+                "name": "Berserker's Gauntlet",
+                "rarity": "Common",
+                "tier": 3
+              },
+              {
+                "name": "Cleaving Halberd",
+                "rarity": "Common",
+                "tier": 3
+              },
+              {
+                "name": "Windrunner Boots",
+                "rarity": "Common",
+                "tier": 3
+              }
+            ],
+            [
+              {
+                "name": "Aegis Plate",
+                "rarity": "Common",
+                "tier": 2
+              },
+              {
+                "name": "Noxious Scales",
+                "rarity": "Common",
+                "tier": 3
+              },
+              {
+                "name": "Paladin's Helm",
+                "rarity": "Common",
+                "tier": 3
+              },
+              {
+                "name": "Tempered Mail",
+                "rarity": "Common",
+                "tier": 2
+              }
+            ],
+            [
+              {
+                "name": "Verdant Wreath",
+                "rarity": "Common",
+                "tier": 2
+              },
+              {
+                "name": "Prism Barrier",
+                "rarity": "Common",
+                "tier": 3
+              },
+              {
+                "name": "Herbal Mist",
+                "rarity": "Common",
+                "tier": 2
+              },
+              {
+                "name": "Healing Touch",
+                "rarity": "Common",
+                "tier": 3
+              }
+            ],
+            [
+              {
+                "name": "Void Salve",
+                "rarity": "Common",
+                "tier": 3
+              },
+              {
+                "name": "Virulent Darts",
+                "rarity": "Common",
+                "tier": 3
+              },
+              {
+                "name": "Tempest Edge",
+                "rarity": "Common",
+                "tier": 3
+              },
+              {
+                "name": "Holy Pendant",
+                "rarity": "Common",
+                "tier": 4
+              }
+            ]
+          ],
+          "max_tier": 4,
+          "min_tier": 2
+        },
+        {
+          "avg_level": 19,
+          "avg_tier": 3.1,
+          "clear_rate": 1,
+          "clears": 100,
+          "items": [
+            [
+              {
+                "name": "Tempered Mail",
+                "rarity": "Common",
+                "tier": 3
+              },
+              {
+                "name": "Iron Thistle",
+                "rarity": "Common",
+                "tier": 3
+              },
+              {
+                "name": "Aegis Plate",
+                "rarity": "Common",
+                "tier": 3
+              },
+              {
+                "name": "Basher Shield",
+                "rarity": "Common",
+                "tier": 3
+              }
+            ],
+            [
+              {
+                "name": "Storm Hammer",
+                "rarity": "Common",
+                "tier": 3
+              },
+              {
+                "name": "Cleaving Halberd",
+                "rarity": "Common",
+                "tier": 3
+              },
+              {
+                "name": "Titan's Axe",
+                "rarity": "Common",
+                "tier": 3
+              },
+              {
+                "name": "Hydra Lance",
+                "rarity": "Common",
+                "tier": 3
+              }
+            ],
+            [
+              {
+                "name": "Holy Pendant",
+                "rarity": "Common",
+                "tier": 3
+              },
+              {
+                "name": "Verdant Wreath",
+                "rarity": "Common",
+                "tier": 3
+              },
+              {
+                "name": "Oracle's Staff",
+                "rarity": "Common",
+                "tier": 3
+              },
+              {
+                "name": "Void Salve",
+                "rarity": "Common",
+                "tier": 3
+              }
+            ],
+            [
+              {
+                "name": "Arcane Bolt",
+                "rarity": "Common",
+                "tier": 2
+              },
+              {
+                "name": "Deathmark Tome",
+                "rarity": "Common",
+                "tier": 4
+              },
+              {
+                "name": "Void Burst",
+                "rarity": "Common",
+                "tier": 3
+              },
+              {
+                "name": "Supernova Pyre",
+                "rarity": "Common",
+                "tier": 4
+              }
+            ]
+          ],
+          "max_tier": 4,
+          "min_tier": 2
+        },
+        {
+          "avg_level": 19,
+          "avg_tier": 3.2,
+          "clear_rate": 1,
+          "clears": 100,
+          "items": [
+            [
+              {
+                "name": "Windrunner Boots",
+                "rarity": "Common",
+                "tier": 2
+              },
+              {
+                "name": "Assassin's Mark",
+                "rarity": "Common",
+                "tier": 3
+              },
+              {
+                "name": "Berserker's Gauntlet",
+                "rarity": "Common",
+                "tier": 4
+              },
+              {
+                "name": "Void Salve",
+                "rarity": "Common",
+                "tier": 3
+              }
+            ],
+            [
+              {
+                "name": "Umbra’s Piercer",
+                "rarity": "Common",
+                "tier": 4
+              },
+              {
+                "name": "Titan's Axe",
+                "rarity": "Common",
+                "tier": 3
+              },
+              {
+                "name": "Dragon Kris",
+                "rarity": "Common",
+                "tier": 2
+              },
+              {
+                "name": "Storm Hammer",
+                "rarity": "Common",
+                "tier": 4
+              }
+            ],
+            [
+              {
+                "name": "Void Burst",
+                "rarity": "Common",
+                "tier": 3
+              },
+              {
+                "name": "Herbal Mist",
+                "rarity": "Common",
+                "tier": 3
+              },
+              {
+                "name": "Healing Touch",
+                "rarity": "Common",
+                "tier": 3
+              },
+              {
+                "name": "Verdant Wreath",
+                "rarity": "Common",
+                "tier": 4
+              }
+            ],
+            [
+              {
+                "name": "Paladin's Helm",
+                "rarity": "Common",
+                "tier": 3
+              },
+              {
+                "name": "Mirror Cloak",
+                "rarity": "Common",
+                "tier": 3
+              },
+              {
+                "name": "Aegis Plate",
+                "rarity": "Common",
+                "tier": 3
+              },
+              {
+                "name": "Iron Thistle",
+                "rarity": "Common",
+                "tier": 4
+              }
+            ]
+          ],
+          "max_tier": 4,
+          "min_tier": 2
+        },
+        {
+          "avg_level": 17,
+          "avg_tier": 2.7,
+          "clear_rate": 1,
+          "clears": 100,
+          "items": [
+            [
+              {
+                "name": "Holy Pendant",
+                "rarity": "Common",
+                "tier": 3
+              },
+              {
+                "name": "Oracle's Staff",
+                "rarity": "Common",
+                "tier": 3
+              },
+              {
+                "name": "Herbal Mist",
+                "rarity": "Common",
+                "tier": 2
+              },
+              {
+                "name": "Malignant Staff",
+                "rarity": "Common",
+                "tier": 3
+              }
+            ],
+            [
+              {
+                "name": "Hex Doll",
+                "rarity": "Common",
+                "tier": 2
+              },
+              {
+                "name": "Virulent Darts",
+                "rarity": "Common",
+                "tier": 2
+              },
+              {
+                "name": "Void Salve",
+                "rarity": "Common",
+                "tier": 3
+              },
+              {
+                "name": "Windrunner Boots",
+                "rarity": "Common",
+                "tier": 3
+              }
+            ],
+            [
+              {
+                "name": "Toxic Trident",
+                "rarity": "Common",
+                "tier": 2
+              },
+              {
+                "name": "Assassin's Mark",
+                "rarity": "Common",
+                "tier": 2
+              },
+              {
+                "name": "Storm Hammer",
+                "rarity": "Common",
+                "tier": 3
+              },
+              {
+                "name": "Prism Barrier",
+                "rarity": "Common",
+                "tier": 3
+              }
+            ],
+            [
+              {
+                "name": "Noxious Scales",
+                "rarity": "Common",
+                "tier": 3
+              },
+              {
+                "name": "Basher Shield",
+                "rarity": "Common",
+                "tier": 3
+              },
+              {
+                "name": "Paladin's Helm",
+                "rarity": "Common",
+                "tier": 3
+              },
+              {
+                "name": "Aegis Plate",
+                "rarity": "Common",
+                "tier": 3
+              }
+            ]
+          ],
+          "max_tier": 3,
+          "min_tier": 2
+        },
+        {
+          "avg_level": 26,
+          "avg_tier": 2.4,
+          "clear_rate": 1,
+          "clears": 100,
+          "items": [
+            [
+              {
+                "name": "Mirror Cloak",
+                "rarity": "Common",
+                "tier": 2
+              },
+              {
+                "name": "Iron Thistle",
+                "rarity": "Common",
+                "tier": 3
+              },
+              {
+                "name": "Aegis Plate",
+                "rarity": "Common",
+                "tier": 3
+              }
+            ],
+            [
+              {
+                "name": "Holy Pendant",
+                "rarity": "Common",
+                "tier": 2
+              },
+              {
+                "name": "Herbal Mist",
+                "rarity": "Common",
+                "tier": 3
+              },
+              {
+                "name": "Windrunner Boots",
+                "rarity": "Common",
+                "tier": 3
+              },
+              {
+                "name": "Void Burst",
+                "rarity": "Common",
+                "tier": 3
+              }
+            ],
+            [
+              {
+                "name": "Cleaving Halberd",
+                "rarity": "Common",
+                "tier": 2
+              },
+              {
+                "name": "Hydra Lance",
+                "rarity": "Common",
+                "tier": 2
+              },
+              {
+                "name": "Titan's Axe",
+                "rarity": "Common",
+                "tier": 3
+              },
+              {
+                "name": "Toxic Trident",
+                "rarity": "Common",
+                "tier": 3
+              }
+            ],
+            [
+              {
+                "name": "Healing Touch",
+                "rarity": "Common",
+                "tier": 2
+              },
+              {
+                "name": "Crimson Horn",
+                "rarity": "Common",
+                "tier": 1
+              },
+              {
+                "name": "Tempered Mail",
+                "rarity": "Common",
+                "tier": 2
+              },
+              {
+                "name": "Arcane Bolt",
+                "rarity": "Common",
+                "tier": 2
+              }
+            ]
+          ],
+          "max_tier": 3,
+          "min_tier": 1
+        },
+        {
+          "avg_level": 16,
+          "avg_tier": 2.1,
+          "clear_rate": 0.99,
+          "clears": 99,
+          "items": [
+            [
+              {
+                "name": "Tempered Mail",
+                "rarity": "Common",
+                "tier": 2
+              },
+              {
+                "name": "Aegis Plate",
+                "rarity": "Common",
+                "tier": 2
+              },
+              {
+                "name": "Basher Shield",
+                "rarity": "Common",
+                "tier": 2
+              },
+              {
+                "name": "Noxious Scales",
+                "rarity": "Common",
+                "tier": 3
+              }
+            ],
+            [
+              {
+                "name": "Verdant Wreath",
+                "rarity": "Common",
+                "tier": 1
+              },
+              {
+                "name": "Holy Pendant",
+                "rarity": "Common",
+                "tier": 2
+              },
+              {
+                "name": "Healing Touch",
+                "rarity": "Common",
+                "tier": 2
+              },
+              {
+                "name": "Void Salve",
+                "rarity": "Common",
+                "tier": 2
+              }
+            ],
+            [
+              {
+                "name": "Cleaving Halberd",
+                "rarity": "Common",
+                "tier": 1
+              },
+              {
+                "name": "Titan's Axe",
+                "rarity": "Common",
+                "tier": 2
+              },
+              {
+                "name": "Assassin's Mark",
+                "rarity": "Common",
+                "tier": 3
+              },
+              {
+                "name": "Berserker's Gauntlet",
+                "rarity": "Common",
+                "tier": 3
+              }
+            ],
+            [
+              {
+                "name": "Storm Hammer",
+                "rarity": "Common",
+                "tier": 2
+              },
+              {
+                "name": "Dragon Kris",
+                "rarity": "Common",
+                "tier": 2
+              },
+              {
+                "name": "Windrunner Boots",
+                "rarity": "Common",
+                "tier": 2
+              },
+              {
+                "name": "Oracle's Staff",
+                "rarity": "Common",
+                "tier": 2
+              }
+            ]
+          ],
+          "max_tier": 3,
+          "min_tier": 1
+        },
+        {
+          "avg_level": 17,
+          "avg_tier": 2.5,
+          "clear_rate": 0.99,
+          "clears": 99,
+          "items": [
+            [
+              {
+                "name": "Malignant Staff",
+                "rarity": "Common",
+                "tier": 2
+              },
+              {
+                "name": "Deathmark Tome",
+                "rarity": "Common",
+                "tier": 3
+              },
+              {
+                "name": "Void Burst",
+                "rarity": "Common",
+                "tier": 3
+              },
+              {
+                "name": "Tidal Band",
+                "rarity": "Common",
+                "tier": 4
+              }
+            ],
+            [
+              {
+                "name": "Holy Pendant",
+                "rarity": "Common",
+                "tier": 2
+              },
+              {
+                "name": "Healing Touch",
+                "rarity": "Common",
+                "tier": 3
+              },
+              {
+                "name": "Verdant Wreath",
+                "rarity": "Common",
+                "tier": 3
+              },
+              {
+                "name": "Oracle's Staff",
+                "rarity": "Common",
+                "tier": 3
+              }
+            ],
+            [
+              {
+                "name": "Berserker's Gauntlet",
+                "rarity": "Common",
+                "tier": 2
+              },
+              {
+                "name": "Assassin's Mark",
+                "rarity": "Common",
+                "tier": 1
+              },
+              {
+                "name": "Hydra Lance",
+                "rarity": "Common",
+                "tier": 2
+              },
+              {
+                "name": "Toxic Trident",
+                "rarity": "Common",
+                "tier": 3
+              }
+            ],
+            [
+              {
+                "name": "Aegis Plate",
+                "rarity": "Common",
+                "tier": 2
+              },
+              {
+                "name": "Tempered Mail",
+                "rarity": "Common",
+                "tier": 3
+              },
+              {
+                "name": "Basher Shield",
+                "rarity": "Common",
+                "tier": 2
+              },
+              {
+                "name": "Mirror Cloak",
+                "rarity": "Common",
+                "tier": 2
+              }
+            ]
+          ],
+          "max_tier": 4,
+          "min_tier": 1
+        },
+        {
+          "avg_level": 17,
+          "avg_tier": 2.2,
+          "clear_rate": 0.99,
+          "clears": 99,
+          "items": [
+            [
+              {
+                "name": "Berserker's Gauntlet",
+                "rarity": "Common",
+                "tier": 2
+              },
+              {
+                "name": "Windrunner Boots",
+                "rarity": "Common",
+                "tier": 2
+              },
+              {
+                "name": "Void Scythe",
+                "rarity": "Common",
+                "tier": 2
+              },
+              {
+                "name": "Cleaving Halberd",
+                "rarity": "Common",
+                "tier": 1
+              }
+            ],
+            [
+              {
+                "name": "Healing Touch",
+                "rarity": "Common",
+                "tier": 3
+              },
+              {
+                "name": "Oracle's Staff",
+                "rarity": "Common",
+                "tier": 2
+              },
+              {
+                "name": "Holy Pendant",
+                "rarity": "Common",
+                "tier": 2
+              },
+              {
+                "name": "Tempest Edge",
+                "rarity": "Common",
+                "tier": 3
+              }
+            ],
+            [
+              {
+                "name": "Aegis Plate",
+                "rarity": "Common",
+                "tier": 2
+              },
+              {
+                "name": "Paladin's Helm",
+                "rarity": "Common",
+                "tier": 2
+              },
+              {
+                "name": "Noxious Scales",
+                "rarity": "Common",
+                "tier": 3
+              },
+              {
+                "name": "Basher Shield",
+                "rarity": "Common",
+                "tier": 2
+              }
+            ],
+            [
+              {
+                "name": "Dragon Kris",
+                "rarity": "Common",
+                "tier": 3
+              },
+              {
+                "name": "Assassin's Mark",
+                "rarity": "Common",
+                "tier": 2
+              },
+              {
+                "name": "Virulent Darts",
+                "rarity": "Common",
+                "tier": 2
+              },
+              {
+                "name": "Void Salve",
+                "rarity": "Common",
+                "tier": 2
+              }
+            ]
+          ],
+          "max_tier": 3,
+          "min_tier": 1
+        },
+        {
+          "avg_level": 17,
+          "avg_tier": 2.3,
+          "clear_rate": 0.99,
+          "clears": 99,
+          "items": [
+            [
+              {
+                "name": "Basher Shield",
+                "rarity": "Common",
+                "tier": 2
+              },
+              {
+                "name": "Tempered Mail",
+                "rarity": "Common",
+                "tier": 3
+              },
+              {
+                "name": "Paladin's Helm",
+                "rarity": "Common",
+                "tier": 3
+              },
+              {
+                "name": "Noxious Scales",
+                "rarity": "Common",
+                "tier": 2
+              }
+            ],
+            [
+              {
+                "name": "Oracle's Staff",
+                "rarity": "Common",
+                "tier": 2
+              },
+              {
+                "name": "Herbal Mist",
+                "rarity": "Common",
+                "tier": 2
+              },
+              {
+                "name": "Healing Touch",
+                "rarity": "Common",
+                "tier": 2
+              },
+              {
+                "name": "Holy Pendant",
+                "rarity": "Common",
+                "tier": 3
+              }
+            ],
+            [
+              {
+                "name": "Cleaving Halberd",
+                "rarity": "Common",
+                "tier": 1
+              },
+              {
+                "name": "Berserker's Gauntlet",
+                "rarity": "Common",
+                "tier": 2
+              },
+              {
+                "name": "Toxic Trident",
+                "rarity": "Common",
+                "tier": 3
+              },
+              {
+                "name": "Windrunner Boots",
+                "rarity": "Common",
+                "tier": 3
+              }
+            ],
+            [
+              {
+                "name": "Titan's Axe",
+                "rarity": "Common",
+                "tier": 3
+              },
+              {
+                "name": "Hydra Lance",
+                "rarity": "Common",
+                "tier": 2
+              },
+              {
+                "name": "Berserker's Gauntlet",
+                "rarity": "Common",
+                "tier": 1
+              },
+              {
+                "name": "Assassin's Mark",
+                "rarity": "Common",
+                "tier": 2
+              }
+            ]
+          ],
+          "max_tier": 3,
+          "min_tier": 1
+        },
+        {
+          "avg_level": 17,
+          "avg_tier": 2.3,
+          "clear_rate": 0.98,
+          "clears": 98,
+          "items": [
+            [
+              {
+                "name": "Assassin's Mark",
+                "rarity": "Common",
+                "tier": 1
+              },
+              {
+                "name": "Umbra’s Piercer",
+                "rarity": "Common",
+                "tier": 2
+              },
+              {
+                "name": "Titan's Axe",
+                "rarity": "Common",
+                "tier": 3
+              },
+              {
+                "name": "Toxic Trident",
+                "rarity": "Common",
+                "tier": 2
+              }
+            ],
+            [
+              {
+                "name": "Malignant Staff",
+                "rarity": "Common",
+                "tier": 2
+              },
+              {
+                "name": "Arcane Bolt",
+                "rarity": "Common",
+                "tier": 3
+              },
+              {
+                "name": "Deathmark Tome",
+                "rarity": "Common",
+                "tier": 3
+              },
+              {
+                "name": "Windrunner Boots",
+                "rarity": "Common",
+                "tier": 3
+              }
+            ],
+            [
+              {
+                "name": "Holy Pendant",
+                "rarity": "Common",
+                "tier": 2
+              },
+              {
+                "name": "Void Salve",
+                "rarity": "Common",
+                "tier": 3
+              },
+              {
+                "name": "Oracle's Staff",
+                "rarity": "Common",
+                "tier": 2
+              },
+              {
+                "name": "Verdant Wreath",
+                "rarity": "Common",
+                "tier": 2
+              }
+            ],
+            [
+              {
+                "name": "Paladin's Helm",
+                "rarity": "Common",
+                "tier": 2
+              },
+              {
+                "name": "Noxious Scales",
+                "rarity": "Common",
+                "tier": 2
+              },
+              {
+                "name": "Tempered Mail",
+                "rarity": "Common",
+                "tier": 2
+              },
+              {
+                "name": "Basher Shield",
+                "rarity": "Common",
+                "tier": 2
+              }
+            ]
+          ],
+          "max_tier": 3,
+          "min_tier": 1
+        },
+        {
+          "avg_level": 16,
+          "avg_tier": 2.1,
+          "clear_rate": 0.98,
+          "clears": 98,
+          "items": [
+            [
+              {
+                "name": "Assassin's Mark",
+                "rarity": "Common",
+                "tier": 3
+              },
+              {
+                "name": "Void Salve",
+                "rarity": "Common",
+                "tier": 1
+              },
+              {
+                "name": "Virulent Darts",
+                "rarity": "Common",
+                "tier": 2
+              },
+              {
+                "name": "Dragon Kris",
+                "rarity": "Common",
+                "tier": 1
+              }
+            ],
+            [
+              {
+                "name": "Herbal Mist",
+                "rarity": "Common",
+                "tier": 3
+              },
+              {
+                "name": "Holy Pendant",
+                "rarity": "Common",
+                "tier": 3
+              },
+              {
+                "name": "Healing Touch",
+                "rarity": "Common",
+                "tier": 2
+              },
+              {
+                "name": "Verdant Wreath",
+                "rarity": "Common",
+                "tier": 3
+              }
+            ],
+            [
+              {
+                "name": "Aegis Plate",
+                "rarity": "Common",
+                "tier": 2
+              },
+              {
+                "name": "Iron Thistle",
+                "rarity": "Common",
+                "tier": 3
+              },
+              {
+                "name": "Noxious Scales",
+                "rarity": "Common",
+                "tier": 2
+              },
+              {
+                "name": "Tempered Mail",
+                "rarity": "Common",
+                "tier": 3
+              }
+            ],
+            [
+              {
+                "name": "Berserker's Gauntlet",
+                "rarity": "Common",
+                "tier": 2
+              },
+              {
+                "name": "Void Scythe",
+                "rarity": "Common",
+                "tier": 0
+              },
+              {
+                "name": "Windrunner Boots",
+                "rarity": "Common",
+                "tier": 1
+              },
+              {
+                "name": "Cleaving Halberd",
+                "rarity": "Common",
+                "tier": 2
+              }
+            ]
+          ],
+          "max_tier": 3,
+          "min_tier": 0
+        },
+        {
+          "avg_level": 17,
+          "avg_tier": 2.5,
+          "clear_rate": 0.98,
+          "clears": 98,
+          "items": [
+            [
+              {
+                "name": "Hex Doll",
+                "rarity": "Common",
+                "tier": 3
+              },
+              {
+                "name": "Void Salve",
+                "rarity": "Common",
+                "tier": 2
+              },
+              {
+                "name": "Dragon Kris",
+                "rarity": "Common",
+                "tier": 2
+              },
+              {
+                "name": "Virulent Darts",
+                "rarity": "Common",
+                "tier": 3
+              }
+            ],
+            [
+              {
+                "name": "Malignant Staff",
+                "rarity": "Common",
+                "tier": 2
+              },
+              {
+                "name": "Verdant Wreath",
+                "rarity": "Common",
+                "tier": 3
+              },
+              {
+                "name": "Healing Touch",
+                "rarity": "Common",
+                "tier": 2
+              },
+              {
+                "name": "Herbal Mist",
+                "rarity": "Common",
+                "tier": 3
+              }
+            ],
+            [
+              {
+                "name": "Berserker's Gauntlet",
+                "rarity": "Common",
+                "tier": 0
+              },
+              {
+                "name": "Toxic Trident",
+                "rarity": "Common",
+                "tier": 2
+              },
+              {
+                "name": "Hydra Lance",
+                "rarity": "Common",
+                "tier": 3
+              },
+              {
+                "name": "Windrunner Boots",
+                "rarity": "Common",
+                "tier": 3
+              }
+            ],
+            [
+              {
+                "name": "Aegis Plate",
+                "rarity": "Common",
+                "tier": 3
+              },
+              {
+                "name": "Paladin's Helm",
+                "rarity": "Common",
+                "tier": 3
+              },
+              {
+                "name": "Noxious Scales",
+                "rarity": "Common",
+                "tier": 3
+              },
+              {
+                "name": "Tempered Mail",
+                "rarity": "Common",
+                "tier": 3
+              }
+            ]
+          ],
+          "max_tier": 3,
+          "min_tier": 0
+        },
+        {
+          "avg_level": 20,
+          "avg_tier": 3.3,
+          "clear_rate": 0.96,
+          "clears": 96,
+          "items": [
+            [
+              {
+                "name": "Windrunner Boots",
+                "rarity": "Common",
+                "tier": 3
+              },
+              {
+                "name": "Berserker's Gauntlet",
+                "rarity": "Common",
+                "tier": 3
+              },
+              {
+                "name": "Assassin's Mark",
+                "rarity": "Common",
+                "tier": 3
+              },
+              {
+                "name": "Hydra Lance",
+                "rarity": "Common",
+                "tier": 4
+              }
+            ],
+            [
+              {
+                "name": "Tempest Edge",
+                "rarity": "Common",
+                "tier": 3
+              },
+              {
+                "name": "Void Burst",
+                "rarity": "Common",
+                "tier": 3
+              },
+              {
+                "name": "Deathmark Tome",
+                "rarity": "Common",
+                "tier": 3
+              },
+              {
+                "name": "Glare Lantern",
+                "rarity": "Common",
+                "tier": 3
+              }
+            ],
+            [
+              {
+                "name": "Storm Hammer",
+                "rarity": "Common",
+                "tier": 3
+              },
+              {
+                "name": "Aegis Plate",
+                "rarity": "Common",
+                "tier": 3
+              },
+              {
+                "name": "Titan's Axe",
+                "rarity": "Common",
+                "tier": 4
+              },
+              {
+                "name": "Tempered Mail",
+                "rarity": "Common",
+                "tier": 4
+              }
+            ],
+            [
+              {
+                "name": "Verdant Wreath",
+                "rarity": "Common",
+                "tier": 3
+              },
+              {
+                "name": "Oracle's Staff",
+                "rarity": "Common",
+                "tier": 3
+              },
+              {
+                "name": "Paladin's Helm",
+                "rarity": "Common",
+                "tier": 4
+              },
+              {
+                "name": "Healing Touch",
+                "rarity": "Common",
+                "tier": 3
+              }
+            ]
+          ],
+          "max_tier": 4,
+          "min_tier": 3
+        },
+        {
+          "avg_level": 17,
+          "avg_tier": 2.6,
+          "clear_rate": 0.95,
+          "clears": 95,
+          "items": [
+            [
+              {
+                "name": "Healing Touch",
+                "rarity": "Common",
+                "tier": 2
+              },
+              {
+                "name": "Virulent Darts",
+                "rarity": "Common",
+                "tier": 3
+              },
+              {
+                "name": "Crimson Horn",
+                "rarity": "Common",
+                "tier": 2
+              },
+              {
+                "name": "Malignant Staff",
+                "rarity": "Common",
+                "tier": 3
+              }
+            ],
+            [
+              {
+                "name": "Windrunner Boots",
+                "rarity": "Common",
+                "tier": 2
+              },
+              {
+                "name": "Void Salve",
+                "rarity": "Common",
+                "tier": 3
+              },
+              {
+                "name": "Oracle's Staff",
+                "rarity": "Common",
+                "tier": 4
+              },
+              {
+                "name": "Verdant Wreath",
+                "rarity": "Common",
+                "tier": 3
+              }
+            ],
+            [
+              {
+                "name": "Storm Hammer",
+                "rarity": "Common",
+                "tier": 2
+              },
+              {
+                "name": "Deathmark Tome",
+                "rarity": "Common",
+                "tier": 3
+              },
+              {
+                "name": "Toxic Trident",
+                "rarity": "Common",
+                "tier": 3
+              },
+              {
+                "name": "Cleaving Halberd",
+                "rarity": "Common",
+                "tier": 2
+              }
+            ],
+            [
+              {
+                "name": "Paladin's Helm",
+                "rarity": "Common",
+                "tier": 1
+              },
+              {
+                "name": "Basher Shield",
+                "rarity": "Common",
+                "tier": 2
+              },
+              {
+                "name": "Aegis Plate",
+                "rarity": "Common",
+                "tier": 3
+              },
+              {
+                "name": "Mirror Cloak",
+                "rarity": "Common",
+                "tier": 3
+              }
+            ]
+          ],
+          "max_tier": 4,
+          "min_tier": 1
+        },
+        {
+          "avg_level": 16,
+          "avg_tier": 2.3,
+          "clear_rate": 0.95,
+          "clears": 95,
+          "items": [
+            [
+              {
+                "name": "Oracle's Staff",
+                "rarity": "Common",
+                "tier": 2
+              },
+              {
+                "name": "Healing Touch",
+                "rarity": "Common",
+                "tier": 2
+              },
+              {
+                "name": "Herbal Mist",
+                "rarity": "Common",
+                "tier": 3
+              },
+              {
+                "name": "Verdant Wreath",
+                "rarity": "Common",
+                "tier": 2
+              }
+            ],
+            [
+              {
+                "name": "Assassin's Mark",
+                "rarity": "Common",
+                "tier": 2
+              },
+              {
+                "name": "Void Salve",
+                "rarity": "Common",
+                "tier": 2
+              },
+              {
+                "name": "Dragon Kris",
+                "rarity": "Common",
+                "tier": 2
+              },
+              {
+                "name": "Virulent Darts",
+                "rarity": "Common",
+                "tier": 3
+              }
+            ],
+            [
+              {
+                "name": "Aegis Plate",
+                "rarity": "Common",
+                "tier": 2
+              },
+              {
+                "name": "Iron Thistle",
+                "rarity": "Common",
+                "tier": 3
+              },
+              {
+                "name": "Paladin's Helm",
+                "rarity": "Common",
+                "tier": 2
+              },
+              {
+                "name": "Noxious Scales",
+                "rarity": "Common",
+                "tier": 4
+              }
+            ],
+            [
+              {
+                "name": "Berserker's Gauntlet",
+                "rarity": "Common",
+                "tier": 2
+              },
+              {
+                "name": "Void Scythe",
+                "rarity": "Common",
+                "tier": 2
+              },
+              {
+                "name": "Cleaving Halberd",
+                "rarity": "Common",
+                "tier": 2
+              },
+              {
+                "name": "Windrunner Boots",
+                "rarity": "Common",
+                "tier": 2
+              }
+            ]
+          ],
+          "max_tier": 4,
+          "min_tier": 2
+        },
+        {
+          "avg_level": 15,
+          "avg_tier": 2.1,
+          "clear_rate": 0.94,
+          "clears": 94,
+          "items": [
+            [
+              {
+                "name": "Toxic Trident",
+                "rarity": "Common",
+                "tier": 1
+              },
+              {
+                "name": "Cleaving Halberd",
+                "rarity": "Common",
+                "tier": 3
+              },
+              {
+                "name": "Titan's Axe",
+                "rarity": "Common",
+                "tier": 2
+              },
+              {
+                "name": "Berserker's Gauntlet",
+                "rarity": "Common",
+                "tier": 2
+              }
+            ],
+            [
+              {
+                "name": "Herbal Mist",
+                "rarity": "Common",
+                "tier": 2
+              },
+              {
+                "name": "Healing Touch",
+                "rarity": "Common",
+                "tier": 2
+              },
+              {
+                "name": "Holy Pendant",
+                "rarity": "Common",
+                "tier": 2
+              },
+              {
+                "name": "Verdant Wreath",
+                "rarity": "Common",
+                "tier": 3
+              }
+            ],
+            [
+              {
+                "name": "Mirror Cloak",
+                "rarity": "Common",
+                "tier": 2
+              },
+              {
+                "name": "Tempered Mail",
+                "rarity": "Common",
+                "tier": 2
+              },
+              {
+                "name": "Noxious Scales",
+                "rarity": "Common",
+                "tier": 2
+              },
+              {
+                "name": "Basher Shield",
+                "rarity": "Common",
+                "tier": 3
+              }
+            ],
+            [
+              {
+                "name": "Oracle's Staff",
+                "rarity": "Common",
+                "tier": 2
+              },
+              {
+                "name": "Malignant Staff",
+                "rarity": "Common",
+                "tier": 2
+              },
+              {
+                "name": "Crimson Horn",
+                "rarity": "Common",
+                "tier": 3
+              },
+              {
+                "name": "Herbal Mist",
+                "rarity": "Common",
+                "tier": 1
+              }
+            ]
+          ],
+          "max_tier": 3,
+          "min_tier": 1
+        },
+        {
+          "avg_level": 18,
+          "avg_tier": 2.9,
+          "clear_rate": 0.87,
+          "clears": 87,
+          "items": [
+            [
+              {
+                "name": "Tempest Edge",
+                "rarity": "Common",
+                "tier": 3
+              },
+              {
+                "name": "Storm Hammer",
+                "rarity": "Common",
+                "tier": 3
+              },
+              {
+                "name": "Dragon Kris",
+                "rarity": "Common",
+                "tier": 3
+              },
+              {
+                "name": "Hydra Lance",
+                "rarity": "Common",
+                "tier": 2
+              }
+            ],
+            [
+              {
+                "name": "Aegis Plate",
+                "rarity": "Common",
+                "tier": 3
+              },
+              {
+                "name": "Noxious Scales",
+                "rarity": "Common",
+                "tier": 3
+              },
+              {
+                "name": "Prism Barrier",
+                "rarity": "Common",
+                "tier": 3
+              },
+              {
+                "name": "Paladin's Helm",
+                "rarity": "Common",
+                "tier": 4
+              }
+            ],
+            [
+              {
+                "name": "Healing Touch",
+                "rarity": "Common",
+                "tier": 2
+              },
+              {
+                "name": "Verdant Wreath",
+                "rarity": "Common",
+                "tier": 4
+              },
+              {
+                "name": "Holy Pendant",
+                "rarity": "Common",
+                "tier": 3
+              },
+              {
+                "name": "Oracle's Staff",
+                "rarity": "Common",
+                "tier": 2
+              }
+            ],
+            [
+              {
+                "name": "Virulent Darts",
+                "rarity": "Common",
+                "tier": 3
+              },
+              {
+                "name": "Glare Lantern",
+                "rarity": "Common",
+                "tier": 3
+              },
+              {
+                "name": "Toxic Trident",
+                "rarity": "Common",
+                "tier": 3
+              },
+              {
+                "name": "Malignant Staff",
+                "rarity": "Common",
+                "tier": 3
+              }
+            ]
+          ],
+          "max_tier": 4,
+          "min_tier": 2
+        },
+        {
+          "avg_level": 17,
+          "avg_tier": 2.5,
+          "clear_rate": 0.87,
+          "clears": 87,
+          "items": [
+            [
+              {
+                "name": "Cleaving Halberd",
+                "rarity": "Common",
+                "tier": 2
+              },
+              {
+                "name": "Berserker's Gauntlet",
+                "rarity": "Common",
+                "tier": 1
+              },
+              {
+                "name": "Hydra Lance",
+                "rarity": "Common",
+                "tier": 3
+              },
+              {
+                "name": "Titan's Axe",
+                "rarity": "Common",
+                "tier": 3
+              }
+            ],
+            [
+              {
+                "name": "Aegis Plate",
+                "rarity": "Common",
+                "tier": 2
+              },
+              {
+                "name": "Tempered Mail",
+                "rarity": "Common",
+                "tier": 2
+              },
+              {
+                "name": "Basher Shield",
+                "rarity": "Common",
+                "tier": 3
+              },
+              {
+                "name": "Noxious Scales",
+                "rarity": "Common",
+                "tier": 3
+              }
+            ],
+            [
+              {
+                "name": "Dragon Kris",
+                "rarity": "Common",
+                "tier": 2
+              },
+              {
+                "name": "Herbal Mist",
+                "rarity": "Common",
+                "tier": 2
+              },
+              {
+                "name": "Virulent Darts",
+                "rarity": "Common",
+                "tier": 3
+              },
+              {
+                "name": "Void Scythe",
+                "rarity": "Common",
+                "tier": 4
+              }
+            ],
+            [
+              {
+                "name": "Oracle's Staff",
+                "rarity": "Common",
+                "tier": 2
+              },
+              {
+                "name": "Windrunner Boots",
+                "rarity": "Common",
+                "tier": 2
+              },
+              {
+                "name": "Holy Pendant",
+                "rarity": "Common",
+                "tier": 3
+              },
+              {
+                "name": "Healing Touch",
+                "rarity": "Common",
+                "tier": 3
+              }
+            ]
+          ],
+          "max_tier": 4,
+          "min_tier": 1
+        },
+        {
+          "avg_level": 16,
+          "avg_tier": 2,
+          "clear_rate": 0.85,
+          "clears": 85,
+          "items": [
+            [
+              {
+                "name": "Storm Hammer",
+                "rarity": "Common",
+                "tier": 2
+              },
+              {
+                "name": "Dragon Kris",
+                "rarity": "Common",
+                "tier": 1
+              },
+              {
+                "name": "Herbal Mist",
+                "rarity": "Common",
+                "tier": 2
+              },
+              {
+                "name": "Berserker's Gauntlet",
+                "rarity": "Common",
+                "tier": 1
+              }
+            ],
+            [
+              {
+                "name": "Verdant Wreath",
+                "rarity": "Common",
+                "tier": 2
+              },
+              {
+                "name": "Healing Touch",
+                "rarity": "Common",
+                "tier": 2
+              },
+              {
+                "name": "Oracle's Staff",
+                "rarity": "Common",
+                "tier": 3
+              },
+              {
+                "name": "Holy Pendant",
+                "rarity": "Common",
+                "tier": 2
+              }
+            ],
+            [
+              {
+                "name": "Tempered Mail",
+                "rarity": "Common",
+                "tier": 2
+              },
+              {
+                "name": "Basher Shield",
+                "rarity": "Common",
+                "tier": 3
+              },
+              {
+                "name": "Mirror Cloak",
+                "rarity": "Common",
+                "tier": 2
+              },
+              {
+                "name": "Aegis Plate",
+                "rarity": "Common",
+                "tier": 3
+              }
+            ],
+            [
+              {
+                "name": "Berserker's Gauntlet",
+                "rarity": "Common",
+                "tier": 2
+              },
+              {
+                "name": "Cleaving Halberd",
+                "rarity": "Common",
+                "tier": 2
+              },
+              {
+                "name": "Void Scythe",
+                "rarity": "Common",
+                "tier": 1
+              },
+              {
+                "name": "Windrunner Boots",
+                "rarity": "Common",
+                "tier": 2
+              }
+            ]
+          ],
+          "max_tier": 3,
+          "min_tier": 1
+        },
+        {
+          "avg_level": 16,
+          "avg_tier": 2.5,
+          "clear_rate": 0.76,
+          "clears": 76,
+          "items": [
+            [
+              {
+                "name": "Iron Thistle",
+                "rarity": "Common",
+                "tier": 3
+              },
+              {
+                "name": "Paladin's Helm",
+                "rarity": "Common",
+                "tier": 3
+              },
+              {
+                "name": "Basher Shield",
+                "rarity": "Common",
+                "tier": 3
+              },
+              {
+                "name": "Mirror Cloak",
+                "rarity": "Common",
+                "tier": 4
+              }
+            ],
+            [
+              {
+                "name": "Windrunner Boots",
+                "rarity": "Common",
+                "tier": 2
+              },
+              {
+                "name": "Glare Lantern",
+                "rarity": "Common",
+                "tier": 3
+              },
+              {
+                "name": "Void Scythe",
+                "rarity": "Common",
+                "tier": 3
+              },
+              {
+                "name": "Healing Touch",
+                "rarity": "Common",
+                "tier": 1
+              }
+            ],
+            [
+              {
+                "name": "Tempest Edge",
+                "rarity": "Common",
+                "tier": 2
+              },
+              {
+                "name": "Healing Touch",
+                "rarity": "Common",
+                "tier": 2
+              },
+              {
+                "name": "Holy Pendant",
+                "rarity": "Common",
+                "tier": 2
+              },
+              {
+                "name": "Verdant Wreath",
+                "rarity": "Common",
+                "tier": 3
+              }
+            ],
+            [
+              {
+                "name": "Dragon Kris",
+                "rarity": "Common",
+                "tier": 2
+              },
+              {
+                "name": "Umbra’s Piercer",
+                "rarity": "Common",
+                "tier": 3
+              },
+              {
+                "name": "Berserker's Gauntlet",
+                "rarity": "Common",
+                "tier": 2
+              },
+              {
+                "name": "Cleaving Halberd",
+                "rarity": "Common",
+                "tier": 2
+              }
+            ]
+          ],
+          "max_tier": 4,
+          "min_tier": 1
+        },
+        {
+          "avg_level": 16,
+          "avg_tier": 2.4,
+          "clear_rate": 0.74,
+          "clears": 74,
+          "items": [
+            [
+              {
+                "name": "Tempered Mail",
+                "rarity": "Common",
+                "tier": 2
+              },
+              {
+                "name": "Aegis Plate",
+                "rarity": "Common",
+                "tier": 3
+              },
+              {
+                "name": "Noxious Scales",
+                "rarity": "Common",
+                "tier": 3
+              },
+              {
+                "name": "Basher Shield",
+                "rarity": "Common",
+                "tier": 3
+              }
+            ],
+            [
+              {
+                "name": "Toxic Trident",
+                "rarity": "Common",
+                "tier": 3
+              },
+              {
+                "name": "Hydra Lance",
+                "rarity": "Common",
+                "tier": 3
+              },
+              {
+                "name": "Assassin's Mark",
+                "rarity": "Common",
+                "tier": 2
+              },
+              {
+                "name": "Cleaving Halberd",
+                "rarity": "Common",
+                "tier": 2
+              }
+            ],
+            [
+              {
+                "name": "Prism Barrier",
+                "rarity": "Common",
+                "tier": 2
+              },
+              {
+                "name": "Virulent Darts",
+                "rarity": "Common",
+                "tier": 3
+              },
+              {
+                "name": "Windrunner Boots",
+                "rarity": "Common",
+                "tier": 2
+              },
+              {
+                "name": "Malignant Staff",
+                "rarity": "Common",
+                "tier": 2
+              }
+            ],
+            [
+              {
+                "name": "Healing Touch",
+                "rarity": "Common",
+                "tier": 3
+              },
+              {
+                "name": "Windrunner Boots",
+                "rarity": "Common",
+                "tier": 2
+              },
+              {
+                "name": "Oracle's Staff",
+                "rarity": "Common",
+                "tier": 3
+              },
+              {
+                "name": "Malignant Staff",
+                "rarity": "Common",
+                "tier": 1
+              }
+            ]
+          ],
+          "max_tier": 3,
+          "min_tier": 1
+        },
+        {
+          "avg_level": 17,
+          "avg_tier": 2.6,
+          "clear_rate": 0.49,
+          "clears": 49,
+          "items": [
+            [
+              {
+                "name": "Basher Shield",
+                "rarity": "Common",
+                "tier": 2
+              },
+              {
+                "name": "Tempered Mail",
+                "rarity": "Common",
+                "tier": 2
+              },
+              {
+                "name": "Aegis Plate",
+                "rarity": "Common",
+                "tier": 2
+              },
+              {
+                "name": "Paladin's Helm",
+                "rarity": "Common",
+                "tier": 3
+              }
+            ],
+            [
+              {
+                "name": "Storm Hammer",
+                "rarity": "Common",
+                "tier": 2
+              },
+              {
+                "name": "Hydra Lance",
+                "rarity": "Common",
+                "tier": 2
+              },
+              {
+                "name": "Umbra’s Piercer",
+                "rarity": "Common",
+                "tier": 3
+              },
+              {
+                "name": "Windrunner Boots",
+                "rarity": "Common",
+                "tier": 3
+              }
+            ],
+            [
+              {
+                "name": "Healing Touch",
+                "rarity": "Common",
+                "tier": 3
+              },
+              {
+                "name": "Verdant Wreath",
+                "rarity": "Common",
+                "tier": 3
+              },
+              {
+                "name": "Oracle's Staff",
+                "rarity": "Common",
+                "tier": 2
+              },
+              {
+                "name": "Herbal Mist",
+                "rarity": "Common",
+                "tier": 4
+              }
+            ],
+            [
+              {
+                "name": "Tempest Edge",
+                "rarity": "Common",
+                "tier": 3
+              },
+              {
+                "name": "Void Burst",
+                "rarity": "Common",
+                "tier": 3
+              },
+              {
+                "name": "Void Scythe",
+                "rarity": "Common",
+                "tier": 3
+              },
+              {
+                "name": "Dragon Kris",
+                "rarity": "Common",
+                "tier": 2
+              }
+            ]
+          ],
+          "max_tier": 4,
+          "min_tier": 2
+        },
+        {
+          "avg_level": 17,
+          "avg_tier": 2.4,
+          "clear_rate": 0.47,
+          "clears": 47,
+          "items": [
+            [
+              {
+                "name": "Basher Shield",
+                "rarity": "Common",
+                "tier": 2
+              },
+              {
+                "name": "Tempered Mail",
+                "rarity": "Common",
+                "tier": 3
+              },
+              {
+                "name": "Aegis Plate",
+                "rarity": "Common",
+                "tier": 2
+              },
+              {
+                "name": "Mirror Cloak",
+                "rarity": "Common",
+                "tier": 3
+              }
+            ],
+            [
+              {
+                "name": "Healing Touch",
+                "rarity": "Common",
+                "tier": 2
+              },
+              {
+                "name": "Oracle's Staff",
+                "rarity": "Common",
+                "tier": 2
+              },
+              {
+                "name": "Holy Pendant",
+                "rarity": "Common",
+                "tier": 3
+              },
+              {
+                "name": "Tempest Edge",
+                "rarity": "Common",
+                "tier": 2
+              }
+            ],
+            [
+              {
+                "name": "Berserker's Gauntlet",
+                "rarity": "Common",
+                "tier": 2
+              },
+              {
+                "name": "Cleaving Halberd",
+                "rarity": "Common",
+                "tier": 2
+              },
+              {
+                "name": "Assassin's Mark",
+                "rarity": "Common",
+                "tier": 3
+              },
+              {
+                "name": "Hydra Lance",
+                "rarity": "Common",
+                "tier": 3
+              }
+            ],
+            [
+              {
+                "name": "Hex Doll",
+                "rarity": "Common",
+                "tier": 3
+              },
+              {
+                "name": "Dragon Kris",
+                "rarity": "Common",
+                "tier": 2
+              },
+              {
+                "name": "Virulent Darts",
+                "rarity": "Common",
+                "tier": 3
+              },
+              {
+                "name": "Void Salve",
+                "rarity": "Common",
+                "tier": 2
+              }
+            ]
+          ],
+          "max_tier": 3,
+          "min_tier": 2
+        },
+        {
+          "avg_level": 16,
+          "avg_tier": 2.3,
+          "clear_rate": 0.39,
+          "clears": 39,
+          "items": [
+            [
+              {
+                "name": "Titan's Axe",
+                "rarity": "Common",
+                "tier": 2
+              },
+              {
+                "name": "Tempest Edge",
+                "rarity": "Common",
+                "tier": 3
+              },
+              {
+                "name": "Assassin's Mark",
+                "rarity": "Common",
+                "tier": 3
+              },
+              {
+                "name": "Toxic Trident",
+                "rarity": "Common",
+                "tier": 3
+              }
+            ],
+            [
+              {
+                "name": "Paladin's Helm",
+                "rarity": "Common",
+                "tier": 1
+              },
+              {
+                "name": "Basher Shield",
+                "rarity": "Common",
+                "tier": 2
+              },
+              {
+                "name": "Tempered Mail",
+                "rarity": "Common",
+                "tier": 2
+              },
+              {
+                "name": "Aegis Plate",
+                "rarity": "Common",
+                "tier": 3
+              }
+            ],
+            [
+              {
+                "name": "Deathmark Tome",
+                "rarity": "Common",
+                "tier": 2
+              },
+              {
+                "name": "Virulent Darts",
+                "rarity": "Common",
+                "tier": 3
+              },
+              {
+                "name": "Malignant Staff",
+                "rarity": "Common",
+                "tier": 1
+              },
+              {
+                "name": "Void Burst",
+                "rarity": "Common",
+                "tier": 3
+              }
+            ],
+            [
+              {
+                "name": "Oracle's Staff",
+                "rarity": "Common",
+                "tier": 2
+              },
+              {
+                "name": "Void Salve",
+                "rarity": "Common",
+                "tier": 1
+              },
+              {
+                "name": "Healing Touch",
+                "rarity": "Common",
+                "tier": 2
+              },
+              {
+                "name": "Holy Pendant",
+                "rarity": "Common",
+                "tier": 3
+              }
+            ]
+          ],
+          "max_tier": 3,
+          "min_tier": 1
+        }
+      ],
+      "clear_rate": 0.8856,
+      "max_tier": 4,
+      "min_tier": 0,
+      "total_clears": 2214,
+      "total_sims": 2500,
+      "trial_id": 28,
+      "unique_builds": 25
+    }
+  ],
+  "trials_version": "current"
+}
