@@ -8,7 +8,7 @@ export default function SingleItemTrials() {
     const {json, file_name, item_name} = location.state || {};
     const ItemData = json?.items_by_trial || [];
     const winrates = {};
-
+    const itemTiersPerFloor = {};
     Object.values(ItemData).forEach(array => {
         array.forEach(item => {
             if (!winrates[item.name]) {
@@ -18,12 +18,40 @@ export default function SingleItemTrials() {
             winrates[item.name].push(item.win_rate);
         });
     });
-    const temp = winrates[item_name]
-    const itemWinRates = temp.map((winrate, index) => ({
+
+    Object.values(ItemData).forEach(array => {
+        array.forEach(item => {
+            if (!itemTiersPerFloor[item.name]) {
+                itemTiersPerFloor[item.name] = [];
+            }
+
+            itemTiersPerFloor[item.name].push(item.tiers);
+        });
+    });
+    const temp1 = itemTiersPerFloor[item_name];
+    const tierData = {};
+
+    Object.entries(temp1).forEach(([floor, tiers]) => {
+        tiers.forEach(tierInfo => {
+            const tier = tierInfo.tier;
+
+            if (!tierData[tier]) {
+                tierData[tier] = [];
+            }
+
+            tierData[tier].push({
+                floor: Number(floor),
+                rate: tierInfo.rate
+            });
+        });
+    });
+    console.log(tierData)
+    const temp2 = winrates[item_name];
+    const itemWinRates = temp2.map((winrate, index) => ({
         trial: index + 1,
         winrate
-    }))
-    console.log(itemWinRates);
+    }));
+    const Length = itemWinRates.length;
     const [onClick] = useState(0);
     const handleClick = (data) => {
         navigate('/', {
@@ -44,16 +72,21 @@ export default function SingleItemTrials() {
             <h2 style={{textAlign: 'center', marginBottom: 10, marginTop: 10}}>
                 Trial win rates for {item_name}
             </h2>
-            <ResponsiveContainer>
-                <BarChart data={itemWinRates}>
-                    <XAxis dataKey="trial"/>
-                    <YAxis domain = {[0, 100]}/>
-                    <Tooltip/>
-                    <Bar
-                        dataKey="winrate" fill="#8884d8"
-                        onClick={(data) => handleClick(data.payload)}/>
-                </BarChart>
-            </ResponsiveContainer>
+            {Object.entries(tierData).map(([tier, data]) => (
+                <div key={tier} style={{ width: "100%", height: 300 }}>
+                    <h3>Tier {tier}</h3>
+
+                    <ResponsiveContainer>
+                        <BarChart data={data}>
+                            <XAxis dataKey="floor" domain = {[1,Length]}/>
+                            <YAxis domain={[0, 100]} />
+                            <Tooltip />
+                            <Bar dataKey="rate" fill="#8884d8"/>
+                        </BarChart>
+                    </ResponsiveContainer>
+                </div>
+            ))}
         </div>
+
     );
 }
