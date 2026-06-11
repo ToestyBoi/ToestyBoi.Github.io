@@ -8,11 +8,17 @@ export default function TrialChart() {
     const {trial_id, json, file_name} = location.state || {};
     const [onClick] = useState(0);
 
-    const trialData = json?.items_by_trial?.[trial_id-1] || [];
-    console.log(json?.items_by_trial[trial_id-1] || []);
+    const trialData = json?.items_by_trial?.[trial_id] || [];
     const handleClick = (data) => {
-        navigate('/', {
-            state: {}
+        console.log(data)
+        navigate('/TrialItemChart', {
+            state: {
+                json: json,
+                file_name: file_name,
+                trial_id: trial_id,
+                item_name: data.name,
+                co_equipped: data.co_equipped
+            }
         });
     }
         return (
@@ -32,7 +38,7 @@ export default function TrialChart() {
                 <ResponsiveContainer>
                     <BarChart data={trialData}>
                         <XAxis dataKey="name"/>
-                        <YAxis/>
+                        <YAxis domain = {[0, 100]}/>
                         <Tooltip/>
                         <Bar
                             dataKey="win_rate" fill="#8884d8"

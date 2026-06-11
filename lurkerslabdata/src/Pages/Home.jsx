@@ -33,7 +33,6 @@ export function Home() {
                 accept=".json,application/json"
                 onChange={handleUpload}
             />
-            <h1>Home Page</h1>
         </div>
     );
 }
