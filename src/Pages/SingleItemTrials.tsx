@@ -1,14 +1,19 @@
 import {useLocation, useNavigate} from 'react-router-dom';
 import {Bar, BarChart, ResponsiveContainer, Tooltip, XAxis, YAxis} from "recharts";
-import {useState} from "react";
+import type {NavState, TierStat} from "../types";
+
+interface FloorRate {
+    floor: number;
+    rate: number;
+}
 
 export default function SingleItemTrials() {
     const navigate = useNavigate();
     const location = useLocation();
-    const {json, file_name, item_name} = location.state || {};
-    const ItemData = json?.items_by_trial || [];
-    const winrates = {};
-    const itemTiersPerFloor = {};
+    const {json, file_name, item_name} = (location.state as NavState) || {};
+    const ItemData = json?.items_by_trial ?? {};
+    const winrates: Record<string, number[]> = {};
+    const itemTiersPerFloor: Record<string, TierStat[][]> = {};
     Object.values(ItemData).forEach(array => {
         array.forEach(item => {
             if (!winrates[item.name]) {
@@ -28,8 +33,8 @@ export default function SingleItemTrials() {
             itemTiersPerFloor[item.name].push(item.tiers);
         });
     });
-    const temp1 = itemTiersPerFloor[item_name];
-    const tierData = {};
+    const temp1 = itemTiersPerFloor[item_name ?? ""] ?? [];
+    const tierData: Record<number, FloorRate[]> = {};
 
     Object.entries(temp1).forEach(([floor, tiers]) => {
         tiers.forEach(tierInfo => {
@@ -46,27 +51,21 @@ export default function SingleItemTrials() {
         });
     });
     console.log(tierData)
-    const temp2 = winrates[item_name];
+    const temp2 = winrates[item_name ?? ""] ?? [];
     const itemWinRates = temp2.map((winrate, index) => ({
         trial: index + 1,
         winrate
     }));
     const Length = itemWinRates.length;
-    const [onClick] = useState(0);
-    const handleClick = (data) => {
-        navigate('/', {
-            state: {}
-        });
-    }
     return (
         <div style={{width: '100%', height: 400}}>
-            <button onClick={() => onClick(
-                navigate('/allTrialsChart', {
+            <button onClick={() =>
+                navigate('/AllTrialsChart', {
                     state: {
                         json: json,
                         file_name: file_name
                     }
-                }))}>
+                })}>
                 Back
             </button>
             <h2 style={{textAlign: 'center', marginBottom: 10, marginTop: 10}}>
