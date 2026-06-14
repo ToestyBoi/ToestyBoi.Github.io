@@ -1,5 +1,6 @@
 import {useLocation, useNavigate} from 'react-router-dom';
-import {Bar, BarChart, Cell, ResponsiveContainer, Tooltip, XAxis, YAxis} from "recharts";
+import {Bar, BarChart, Rectangle, ResponsiveContainer, Tooltip, XAxis, YAxis} from "recharts";
+import type {BarShapeProps} from "recharts";
 import type {Item, NavState} from "../types";
 
 const ITEM_CATEGORY_COLORS: Record<string, string> = {
@@ -104,6 +105,10 @@ interface XAxisTickProps {
     payload?: { value: string };
 }
 
+const renderItemBar = ({x, y, width, height, payload}: BarShapeProps) => (
+    <Rectangle x={x} y={y} width={width} height={height} fill={getItemColor((payload as Item).name)}/>
+);
+
 const XAxisTick = ({x, y, payload}: XAxisTickProps) => (
     <g transform={`translate(${x},${y})`}>
         <text
@@ -195,11 +200,8 @@ export default function TrialChart() {
                     <Tooltip formatter={(value) => `${value}%`}/>
                     <Bar
                         dataKey="win_rate"
-                    >
-                        {trialData.map((item) => (
-                            <Cell key={item.name} fill={getItemColor(item.name)}/>
-                        ))}
-                    </Bar>
+                        shape={renderItemBar}
+                    />
                 </BarChart>
             </ResponsiveContainer>
         </div>

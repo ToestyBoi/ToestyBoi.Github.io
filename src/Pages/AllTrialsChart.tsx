@@ -1,4 +1,5 @@
-import {Bar, BarChart, Cell, ResponsiveContainer, Tooltip, XAxis, YAxis} from "recharts";
+import {Bar, BarChart, Rectangle, ResponsiveContainer, Tooltip, XAxis, YAxis} from "recharts";
+import type {BarShapeProps} from "recharts";
 import {useLocation, useNavigate} from 'react-router-dom';
 import {useState} from "react";
 import type {ClearRateData, NavState, Trial} from "../types";
@@ -11,6 +12,10 @@ const getBarColor = (value: number) => {
 
     return `rgb(${red}, ${green}, 0)`;
 };
+
+const renderTrialBar = ({x, y, width, height, payload}: BarShapeProps) => (
+    <Rectangle x={x} y={y} width={width} height={height} fill={getBarColor((payload as Trial).clear_rate)}/>
+);
 
 export default function AllTrialsChart() {
     const navigate = useNavigate();
@@ -86,12 +91,9 @@ export default function AllTrialsChart() {
                     />
                     <Bar
                         dataKey="clear_rate"
+                        shape={renderTrialBar}
                         onClick={(data) => handleClick(data.payload)}
-                    >
-                        {trialData.map((trial) => (
-                            <Cell key={trial.trial_id} fill={getBarColor(trial.clear_rate)}/>
-                        ))}
-                    </Bar>
+                    />
                 </BarChart>
             </ResponsiveContainer>
         </div>
