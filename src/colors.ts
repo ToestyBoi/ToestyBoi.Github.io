@@ -1,5 +1,13 @@
 // Shared item/class coloring lookups used across chart pages.
 
+export const getRgbBarColor = (value: number) => {
+    const normalizedValue = Math.max(0, Math.min(1, Number(value) || 0));
+    const red = Math.round(255 * (1 - normalizedValue));
+    const green = Math.round(180 * normalizedValue);
+
+    return `rgb(${red}, ${green}, 0)`;
+};
+
 export const ITEM_CATEGORY_COLORS: Record<string, string> = {
     poison: "#4CAF50",
     aoe: "#FF9800",

@@ -4,17 +4,10 @@ import {useLocation, useNavigate} from 'react-router-dom';
 import {useState} from "react";
 import type {ClearRateData, NavState, Trial} from "../types";
 import {handleFileUpload} from "./HandleFileUpload.tsx";
-
-const getBarColor = (value: number) => {
-    const normalizedValue = Math.max(0, Math.min(1, Number(value) || 0));
-    const red = Math.round(255 * (1 - normalizedValue));
-    const green = Math.round(180 * normalizedValue);
-
-    return `rgb(${red}, ${green}, 0)`;
-};
+import {getRgbBarColor} from "../colors";
 
 const renderTrialBar = ({x, y, width, height, payload}: BarShapeProps) => (
-    <Rectangle x={x} y={y} width={width} height={height} fill={getBarColor((payload as Trial).clear_rate)}/>
+    <Rectangle x={x} y={y} width={width} height={height} fill={getRgbBarColor((payload as Trial).clear_rate)}/>
 );
 
 export default function AllTrialsChart() {

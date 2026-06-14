@@ -2,7 +2,7 @@ import {useLocation, useNavigate} from 'react-router-dom';
 import {Bar, BarChart, Rectangle, ResponsiveContainer, Tooltip, XAxis, YAxis} from "recharts";
 import type {BarShapeProps} from "recharts";
 import type {Item, NavState} from "../types";
-import {getItemColor, getClassColor} from "../itemColors";
+import {getItemColor, getClassColor} from "../colors";
 
 interface XAxisTickProps {
     x?: number;
