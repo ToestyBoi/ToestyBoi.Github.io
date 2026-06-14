@@ -1,108 +1,18 @@
 import {useLocation, useNavigate} from 'react-router-dom';
-import {Bar, BarChart, Cell, ResponsiveContainer, Tooltip, XAxis, YAxis} from "recharts";
+import {Bar, BarChart, Rectangle, ResponsiveContainer, Tooltip, XAxis, YAxis} from "recharts";
+import type {BarShapeProps} from "recharts";
 import type {Item, NavState} from "../types";
-
-const ITEM_CATEGORY_COLORS: Record<string, string> = {
-    poison: "#4CAF50",
-    aoe: "#FF9800",
-};
-
-const ITEM_CATEGORIES: Record<string, string[]> = {
-    poison: [
-        "Virulent Darts",
-        "Malignant Staff",
-        "Toxic Trident",
-        "Noxious Scales",
-        "Dragon Kris"
-    ],
-    aoe: [
-        "Reaver Halberd", "Cleaving Halberd",
-        "Void Scythe",
-        "Tidal Band",
-        "Arcane Bolt"
-    ],
-};
-
-const CLASS_COLORS: Record<string, string> = {
-    attack: "#FC6238",
-    tank: "#00A5E3",
-    support: "#00CDAC",
-    spell: "#0065A2",
-    utility: "#FF60A8"
-}
-
-const CLASS_CATEGORIES: Record<string, string[]> = {
-    attack: [
-        "Berserker's Gauntlet",
-        "Crescendo Blades",
-        "Hydra Lance",
-        "Reaver Halberd", "Cleaving Halberd",
-        "Titan's Axe",
-        "Toxic Trident",
-        "Umbra’s Piercer",
-        "Void Scythe"
-    ],
-    tank: [
-        "Aegis Plate",
-        "Basher Shield",
-        "Mirror Cloak",
-        "Noxious Scales",
-        "Paladin's Helm",
-        "Tempered Mail",
-        "Void Bastion"
-    ],
-    support: [
-        "Ancient Rootheart",
-        "Healing Touch",
-        "Herbal Mist",
-        "Holy Pendant",
-        "Oracle's Staff",
-        "Verdant Wreath",
-        "Void Nectar", "Void Salve"
-    ],
-    spell: [
-        "Arcane Bolt",
-        "Deathmark Tome",
-        "Dragon Kris",
-        "Malignant Staff",
-        "Prism Barrier",
-        "Supernova Pyre",
-        "Tidal Band",
-        "Void Burst"
-    ],
-    utility: [
-        "Assassin's Mark",
-        "Crimson Horn",
-        "Glare Lantern",
-        "Hex Doll",
-        "Tempest Edge",
-        "Virulent Darts",
-        "Void Caster",
-        "Windrunner Boots"
-    ]
-}
-
-const getItemColor = (itemName: string) => {
-    const category = Object.entries(ITEM_CATEGORIES).find(([, itemNames]) =>
-        itemNames.includes(itemName)
-    )?.[0];
-
-    return (category && ITEM_CATEGORY_COLORS[category]) || "#8884d8";
-};
-
-const getXAxisColor = (itemName: string) => {
-    const category = Object.entries(CLASS_CATEGORIES).find(([, itemNames]) =>
-        itemNames.includes(itemName)
-    )?.[0];
-
-    return (category && CLASS_COLORS[category]) || "#666";
-};
+import {getItemColor, getClassColor} from "../colors";
 
 interface XAxisTickProps {
     x?: number;
     y?: number;
     payload?: { value: string };
 }
+
+const renderItemBar = ({x, y, width, height, payload}: BarShapeProps) => (
+    <Rectangle x={x} y={y} width={width} height={height} fill={getItemColor((payload as Item).name)}/>
+);
 
 const XAxisTick = ({x, y, payload}: XAxisTickProps) => (
     <g transform={`translate(${x},${y})`}>
@@ -111,7 +21,7 @@ const XAxisTick = ({x, y, payload}: XAxisTickProps) => (
             y={0}
             dy={16}
             textAnchor="end"
-            fill={getXAxisColor(payload?.value ?? "")}
+            fill={getClassColor(payload?.value ?? "")}
             transform="rotate(-45)"
         >
             {payload?.value}
@@ -144,18 +54,17 @@ export default function TrialChart() {
         });
     };
 
-    const handleClick = (data: Item) => {
-        console.log(data)
-        navigate('/TrialItemChart', {
+    const handleItemClick = (item: Item) => {
+        navigate('/SingleItemTrials', {
             state: {
                 json: json,
                 file_name: file_name,
                 trial_id: trial_id,
-                item_name: data.name,
-                co_equipped: data.co_equipped
+                item_name: item.name
             }
         });
-    }
+    };
+
     return (
         <div style={{width: '100%', height: 400}}>
             <button onClick={() =>
@@ -207,12 +116,9 @@ export default function TrialChart() {
                     <Tooltip formatter={(value) => `${value}%`}/>
                     <Bar
                         dataKey="win_rate"
-                        onClick={(data) => handleClick(data.payload)}
-                    >
-                        {trialData.map((item) => (
-                            <Cell key={item.name} fill={getItemColor(item.name)}/>
-                        ))}
-                    </Bar>
+                        shape={renderItemBar}
+                        onClick={(data) => handleItemClick(data.payload)}
+                    />
                 </BarChart>
             </ResponsiveContainer>
         </div>
