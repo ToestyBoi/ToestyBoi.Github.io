@@ -103,3 +103,13 @@ export const getClassColor = (itemName: string) => {
 
     return (category && CLASS_COLORS[category]) || "#666";
 };
+
+export const RARITY_COLORS: Record<string, string> = {
+    Common: "#B0B0B0",
+    Uncommon: "#4CAF50",
+    Rare: "#2196F3",
+    Epic: "#9C27B0",
+    Legendary: "#FF9800",
+};
+
+export const getRarityColor = (rarity: string) => RARITY_COLORS[rarity] || "#8884d8";

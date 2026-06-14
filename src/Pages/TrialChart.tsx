@@ -54,6 +54,17 @@ export default function TrialChart() {
         });
     };
 
+    const handleItemClick = (item: Item) => {
+        navigate('/SingleItemTrials', {
+            state: {
+                json: json,
+                file_name: file_name,
+                trial_id: trial_id,
+                item_name: item.name
+            }
+        });
+    };
+
     return (
         <div style={{width: '100%', height: 400}}>
             <button onClick={() =>
@@ -106,6 +117,7 @@ export default function TrialChart() {
                     <Bar
                         dataKey="win_rate"
                         shape={renderItemBar}
+                        onClick={(data) => handleItemClick(data.payload)}
                     />
                 </BarChart>
             </ResponsiveContainer>
