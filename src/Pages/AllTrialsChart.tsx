@@ -1,16 +1,14 @@
-import {Bar, BarChart, Cell, ResponsiveContainer, Tooltip, XAxis, YAxis} from "recharts";
+import {Bar, BarChart, Rectangle, ResponsiveContainer, Tooltip, XAxis, YAxis} from "recharts";
+import type {BarShapeProps} from "recharts";
 import {useLocation, useNavigate} from 'react-router-dom';
 import {useState} from "react";
 import type {ClearRateData, NavState, Trial} from "../types";
 import {handleFileUpload} from "./HandleFileUpload.tsx";
+import {getRgbBarColor} from "../colors";
 
-const getBarColor = (value: number) => {
-    const normalizedValue = Math.max(0, Math.min(1, Number(value) || 0));
-    const red = Math.round(255 * (1 - normalizedValue));
-    const green = Math.round(180 * normalizedValue);
-
-    return `rgb(${red}, ${green}, 0)`;
-};
+const renderTrialBar = ({x, y, width, height, payload}: BarShapeProps) => (
+    <Rectangle x={x} y={y} width={width} height={height} fill={getRgbBarColor((payload as Trial).clear_rate)}/>
+);
 
 export default function AllTrialsChart() {
     const navigate = useNavigate();
@@ -18,11 +16,6 @@ export default function AllTrialsChart() {
     const {json, file_name} = (location.state as NavState) || {};
     const [, setData] = useState<ClearRateData | null>(null);
     const [search, setSearch] = useState("");
-    const ItemData = json?.items || [];
-    const items = ItemData.map(item => item.name);
-    const filteredOptions = items.filter(item =>
-        item.toLowerCase().includes(search.toLowerCase())
-    );
 
     const trialData = json?.trials || [];
     const handleUpload = handleFileUpload(setData, navigate);
@@ -64,26 +57,6 @@ export default function AllTrialsChart() {
                         overflowY: "auto"
                     }}
                 >
-                    {filteredOptions.map(option => (
-                        <li
-                            key={option}
-                            onClick={() => {
-                                navigate('/SingleItemTrials', {
-                                    state: {
-                                        json: json,
-                                        file_name: file_name,
-                                        item_name: option
-                                    }
-                                });
-                            }}
-                            style={{
-                                padding: "8px",
-                                cursor: "pointer"
-                            }}
-                        >
-                            {option}
-                        </li>
-                    ))}
                 </ul>
             )}
             <h2 style={{textAlign: 'center', marginBottom: 10, marginTop: 10}}>
@@ -111,12 +84,9 @@ export default function AllTrialsChart() {
                     />
                     <Bar
                         dataKey="clear_rate"
+                        shape={renderTrialBar}
                         onClick={(data) => handleClick(data.payload)}
-                    >
-                        {trialData.map((trial) => (
-                            <Cell key={trial.trial_id} fill={getBarColor(trial.clear_rate)}/>
-                        ))}
-                    </Bar>
+                    />
                 </BarChart>
             </ResponsiveContainer>
         </div>

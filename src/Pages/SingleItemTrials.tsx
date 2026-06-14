@@ -1,91 +1,120 @@
 import {useLocation, useNavigate} from 'react-router-dom';
-import {Bar, BarChart, ResponsiveContainer, Tooltip, XAxis, YAxis} from "recharts";
-import type {NavState, TierStat} from "../types";
+import {useState} from "react";
+import {Bar, BarChart, Rectangle, ResponsiveContainer, Tooltip, XAxis, YAxis} from "recharts";
+import type {BarShapeProps} from "recharts";
+import type {NavState} from "../types";
+import {getRarityColor, RARITY_COLORS} from "../colors";
 
-interface FloorRate {
-    floor: number;
-    rate: number;
+interface TrialRow {
+    trial: number;
+    [rarity: string]: number | undefined;
 }
+
+const RARITY_ORDER = Object.keys(RARITY_COLORS);
+
+const renderRarityBar = (rarity: string) => ({x, y, width, height}: BarShapeProps) => (
+    <Rectangle x={x} y={y} width={width} height={height} fill={getRarityColor(rarity)}/>
+);
 
 export default function SingleItemTrials() {
     const navigate = useNavigate();
     const location = useLocation();
-    const {json, file_name, item_name} = (location.state as NavState) || {};
-    const ItemData = json?.items_by_trial ?? {};
-    const winrates: Record<string, number[]> = {};
-    const itemTiersPerFloor: Record<string, TierStat[][]> = {};
-    Object.values(ItemData).forEach(array => {
-        array.forEach(item => {
-            if (!winrates[item.name]) {
-                winrates[item.name] = [];
-            }
+    const {json, file_name, item_name, trial_id} = (location.state as NavState) || {};
 
-            winrates[item.name].push(item.win_rate);
-        });
+    const trials = json?.trials ?? [];
+    const itemsByTrial = json?.items_by_trial ?? {};
+
+    const rarities = new Set<string>();
+    const chartData: TrialRow[] = trials.map((trial) => {
+        const row: TrialRow = {trial: trial.trial_id};
+        const trialItem = itemsByTrial[String(trial.trial_id)]?.find((i) => i.name === item_name);
+
+        const totalsByRarity = new Map<string, { clears: number; sims: number }>();
+        for (const tier of trialItem?.tiers ?? []) {
+            if (!tier.rarity) continue;
+            const totals = totalsByRarity.get(tier.rarity) ?? {clears: 0, sims: 0};
+            totals.clears += tier.clears ?? 0;
+            totals.sims += tier.sims ?? 0;
+            totalsByRarity.set(tier.rarity, totals);
+        }
+
+        for (const [rarity, {clears, sims}] of totalsByRarity) {
+            rarities.add(rarity);
+            row[rarity] = sims > 0 ? (clears / sims) * 100 : undefined;
+        }
+
+        return row;
     });
 
-    Object.values(ItemData).forEach(array => {
-        array.forEach(item => {
-            if (!itemTiersPerFloor[item.name]) {
-                itemTiersPerFloor[item.name] = [];
-            }
-
-            itemTiersPerFloor[item.name].push(item.tiers);
-        });
+    const sortedRarities = Array.from(rarities).sort((a, b) => {
+        const orderA = RARITY_ORDER.indexOf(a);
+        const orderB = RARITY_ORDER.indexOf(b);
+        if (orderA === -1 && orderB === -1) return a.localeCompare(b);
+        if (orderA === -1) return 1;
+        if (orderB === -1) return -1;
+        return orderA - orderB;
     });
-    const temp1 = itemTiersPerFloor[item_name ?? ""] ?? [];
-    const tierData: Record<number, FloorRate[]> = {};
 
-    Object.entries(temp1).forEach(([floor, tiers]) => {
-        tiers.forEach(tierInfo => {
-            const tier = tierInfo.tier;
+    const [hiddenRarities, setHiddenRarities] = useState<Set<string>>(new Set());
 
-            if (!tierData[tier]) {
-                tierData[tier] = [];
+    const toggleRarity = (rarity: string) => {
+        setHiddenRarities((prev) => {
+            const next = new Set(prev);
+            if (next.has(rarity)) {
+                next.delete(rarity);
+            } else {
+                next.add(rarity);
             }
-
-            tierData[tier].push({
-                floor: Number(floor),
-                rate: tierInfo.rate
-            });
+            return next;
         });
-    });
-    console.log(tierData)
-    const temp2 = winrates[item_name ?? ""] ?? [];
-    const itemWinRates = temp2.map((winrate, index) => ({
-        trial: index + 1,
-        winrate
-    }));
-    const Length = itemWinRates.length;
+    };
+
     return (
         <div style={{width: '100%', height: 400}}>
             <button onClick={() =>
-                navigate('/AllTrialsChart', {
+                navigate('/TrialChart', {
                     state: {
                         json: json,
-                        file_name: file_name
+                        file_name: file_name,
+                        trial_id: trial_id
                     }
                 })}>
                 Back
             </button>
             <h2 style={{textAlign: 'center', marginBottom: 10, marginTop: 10}}>
-                Trial win rates for {item_name}
+                {item_name}
             </h2>
-            {Object.entries(tierData).map(([tier, data]) => (
-                <div key={tier} style={{ width: "100%", height: 300 }}>
-                    <h3>Tier {tier}</h3>
-
-                    <ResponsiveContainer>
-                        <BarChart data={data}>
-                            <XAxis dataKey="floor" domain = {[1,Length]}/>
-                            <YAxis domain={[0, 100]} />
-                            <Tooltip />
-                            <Bar dataKey="rate" fill="#8884d8"/>
-                        </BarChart>
-                    </ResponsiveContainer>
-                </div>
-            ))}
+            <div style={{textAlign: 'center', marginBottom: 10}}>
+                {sortedRarities.map((rarity) => (
+                    <label key={rarity} style={{marginRight: 12, color: getRarityColor(rarity)}}>
+                        <input
+                            type="checkbox"
+                            checked={!hiddenRarities.has(rarity)}
+                            onChange={() => toggleRarity(rarity)}
+                        />
+                        {rarity}
+                    </label>
+                ))}
+            </div>
+            <ResponsiveContainer>
+                <BarChart
+                    data={chartData}
+                    margin={{top: 5, right: 30, left: 20, bottom: 20}}
+                >
+                    <XAxis dataKey="trial"/>
+                    <YAxis domain={[0, 100]} tickFormatter={(value) => `${value}%`}/>
+                    <Tooltip formatter={(value) => `${value}%`}/>
+                    {sortedRarities.map((rarity) => (
+                        <Bar
+                            key={rarity}
+                            dataKey={rarity}
+                            name={rarity}
+                            hide={hiddenRarities.has(rarity)}
+                            shape={renderRarityBar(rarity)}
+                        />
+                    ))}
+                </BarChart>
+            </ResponsiveContainer>
         </div>
-
     );
 }
