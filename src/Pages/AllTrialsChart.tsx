@@ -18,11 +18,6 @@ export default function AllTrialsChart() {
     const {json, file_name} = (location.state as NavState) || {};
     const [, setData] = useState<ClearRateData | null>(null);
     const [search, setSearch] = useState("");
-    const ItemData = json?.items || [];
-    const items = ItemData.map(item => item.name);
-    const filteredOptions = items.filter(item =>
-        item.toLowerCase().includes(search.toLowerCase())
-    );
 
     const trialData = json?.trials || [];
     const handleUpload = handleFileUpload(setData, navigate);
@@ -64,26 +59,6 @@ export default function AllTrialsChart() {
                         overflowY: "auto"
                     }}
                 >
-                    {filteredOptions.map(option => (
-                        <li
-                            key={option}
-                            onClick={() => {
-                                navigate('/SingleItemTrials', {
-                                    state: {
-                                        json: json,
-                                        file_name: file_name,
-                                        item_name: option
-                                    }
-                                });
-                            }}
-                            style={{
-                                padding: "8px",
-                                cursor: "pointer"
-                            }}
-                        >
-                            {option}
-                        </li>
-                    ))}
                 </ul>
             )}
             <h2 style={{textAlign: 'center', marginBottom: 10, marginTop: 10}}>

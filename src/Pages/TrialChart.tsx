@@ -144,18 +144,6 @@ export default function TrialChart() {
         });
     };
 
-    const handleClick = (data: Item) => {
-        console.log(data)
-        navigate('/TrialItemChart', {
-            state: {
-                json: json,
-                file_name: file_name,
-                trial_id: trial_id,
-                item_name: data.name,
-                co_equipped: data.co_equipped
-            }
-        });
-    }
     return (
         <div style={{width: '100%', height: 400}}>
             <button onClick={() =>
@@ -207,7 +195,6 @@ export default function TrialChart() {
                     <Tooltip formatter={(value) => `${value}%`}/>
                     <Bar
                         dataKey="win_rate"
-                        onClick={(data) => handleClick(data.payload)}
                     >
                         {trialData.map((item) => (
                             <Cell key={item.name} fill={getItemColor(item.name)}/>
