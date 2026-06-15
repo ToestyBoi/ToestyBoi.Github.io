@@ -1,12 +1,13 @@
 import {useLocation, useNavigate} from 'react-router-dom';
 import {useState} from "react";
-import {Bar, BarChart, Rectangle, ResponsiveContainer, Tooltip, XAxis, YAxis} from "recharts";
+import {Bar, ComposedChart, Line, Rectangle, ResponsiveContainer, Tooltip, XAxis, YAxis} from "recharts";
 import type {BarShapeProps} from "recharts";
 import type {NavState} from "../types";
 import {getRarityColor, RARITY_COLORS} from "../colors";
 
 interface TrialRow {
     trial: number;
+    clear_rate?: number;
     [rarity: string]: number | undefined;
 }
 
@@ -42,6 +43,8 @@ export default function SingleItemTrials() {
             rarities.add(rarity);
             row[rarity] = sims > 0 ? (clears / sims) * 100 : undefined;
         }
+
+        row.clear_rate = trial.clear_rate * 100;
 
         return row;
     });
@@ -97,13 +100,13 @@ export default function SingleItemTrials() {
                 ))}
             </div>
             <ResponsiveContainer>
-                <BarChart
+                <ComposedChart
                     data={chartData}
                     margin={{top: 5, right: 30, left: 20, bottom: 20}}
                 >
                     <XAxis dataKey="trial"/>
                     <YAxis domain={[0, 100]} tickFormatter={(value) => `${value}%`}/>
-                    <Tooltip formatter={(value) => `${value}%`}/>
+                    <Tooltip formatter={(value) => `${Number(value).toFixed(2)}%`}/>
                     {sortedRarities.map((rarity) => (
                         <Bar
                             key={rarity}
@@ -113,7 +116,14 @@ export default function SingleItemTrials() {
                             shape={renderRarityBar(rarity)}
                         />
                     ))}
-                </BarChart>
+                    <Line
+                        dataKey="clear_rate"
+                        name="Clear Rate"
+                        stroke="none"
+                        dot={{fill: "#FFC000", stroke: "none"}}
+                        isAnimationActive={false}
+                    />
+                </ComposedChart>
             </ResponsiveContainer>
         </div>
     );
