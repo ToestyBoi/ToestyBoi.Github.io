@@ -5,12 +5,10 @@ import {useData} from '../context/DataContext';
 export default function NavBar() {
     const navigate = useNavigate();
     const location = useLocation();
-    const {file_name, setJson, setFileName} = useData();
+    const {file_name} = useData();
     const {trial_id, item_name} = (location.state as NavState) || {};
 
     const reset = () => {
-        setJson(null);
-        setFileName(null);
         navigate('/');
     };
 
@@ -24,6 +22,12 @@ export default function NavBar() {
     }
     if (location.pathname === '/ItemScatter') {
         crumbs.push({label: 'Item Scatter', onClick: () => {}});
+    } else if (location.pathname === '/ItemHeatmap') {
+        crumbs.push({label: 'Item Heatmap', onClick: () => {}});
+    } else if (location.pathname === '/BuildDiversity') {
+        crumbs.push({label: 'Build Diversity', onClick: () => {}});
+    } else if (location.pathname === '/ItemTierScaling') {
+        crumbs.push({label: 'Item Tier Scaling', onClick: () => {}});
     } else {
         if (trial_id != null) {
             crumbs.push({
