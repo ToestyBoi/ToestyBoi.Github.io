@@ -169,6 +169,12 @@ export default function AllTrialsChart() {
                 <input type="file" accept=".json,application/json" onChange={handleUpload}/>
                 <div style={{marginLeft: 'auto', display: 'flex', gap: 6}}>
                     <button
+                        onClick={() => navigate('/BuildDiversity')}
+                        style={{fontSize: 12, padding: '3px 10px', cursor: 'pointer'}}
+                    >
+                        Build Diversity →
+                    </button>
+                    <button
                         onClick={() => navigate('/ItemHeatmap')}
                         style={{fontSize: 12, padding: '3px 10px', cursor: 'pointer'}}
                     >
