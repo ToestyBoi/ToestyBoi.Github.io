@@ -88,12 +88,12 @@ export const CLASS_CATEGORIES: Record<string, string[]> = {
     ]
 }
 
-export const getItemColor = (itemName: string) => {
+// Returns the category color for items that belong to a named category, null otherwise.
+export const getItemCategoryColor = (itemName: string): string | null => {
     const category = Object.entries(ITEM_CATEGORIES).find(([, itemNames]) =>
         itemNames.includes(itemName)
     )?.[0];
-
-    return (category && ITEM_CATEGORY_COLORS[category]) || "#8884d8";
+    return (category && ITEM_CATEGORY_COLORS[category]) ?? null;
 };
 
 export const getClassColor = (itemName: string) => {
@@ -109,7 +109,6 @@ export const RARITY_COLORS: Record<string, string> = {
     Uncommon: "#4CAF50",
     Rare: "#2196F3",
     Epic: "#9C27B0",
-    Legendary: "#FF9800",
 };
 
 export const getRarityColor = (rarity: string) => RARITY_COLORS[rarity] || "#8884d8";

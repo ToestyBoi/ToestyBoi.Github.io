@@ -3,12 +3,12 @@ import { Home } from './Pages/Home';
 import TrialChart from './Pages/TrialChart';
 import AllTrialsChart from './Pages/AllTrialsChart';
 import SingleItemTrials from './Pages/SingleItemTrials';
+import NavBar from './components/NavBar';
 
 function App() {
     return (
-        <div style={{ width: '100%', height: 400 }}>
-
-            {/* Pages */}
+        <div style={{ width: '100%' }}>
+            <NavBar />
             <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/TrialChart" element={<TrialChart />} />
