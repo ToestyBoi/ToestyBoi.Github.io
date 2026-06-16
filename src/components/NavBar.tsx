@@ -22,18 +22,21 @@ export default function NavBar() {
             onClick: () => navigate('/AllTrialsChart'),
         });
     }
-    if (trial_id != null) {
-        crumbs.push({
-            label: `Trial ${trial_id}`,
-            onClick: () => navigate('/TrialChart', {state: {trial_id}}),
-        });
-    }
-    if (item_name) {
-        crumbs.push({
-            label: item_name,
-            onClick: () => {
-            },
-        });
+    if (location.pathname === '/ItemScatter') {
+        crumbs.push({label: 'Item Scatter', onClick: () => {}});
+    } else {
+        if (trial_id != null) {
+            crumbs.push({
+                label: `Trial ${trial_id}`,
+                onClick: () => navigate('/TrialChart', {state: {trial_id}}),
+            });
+        }
+        if (item_name) {
+            crumbs.push({
+                label: item_name,
+                onClick: () => {},
+            });
+        }
     }
 
     return (
