@@ -1,7 +1,7 @@
 import {useLocation, useNavigate} from 'react-router-dom';
 import {Bar, BarChart, Rectangle, ResponsiveContainer, Tooltip, XAxis, YAxis} from "recharts";
 import type {BarShapeProps} from "recharts";
-import type {Item, NavState, Trial} from "../types";
+import type {Item, NavState, TierStat, Trial} from "../types";
 import {CLASS_COLORS, ITEM_CATEGORY_COLORS, getClassColor, getItemCategoryColor} from "../colors";
 import {useData} from "../context/DataContext";
 
@@ -52,6 +52,14 @@ const Legend = () => (
     </div>
 );
 
+const RARITY_SORT_ORDER = ['Common', 'Uncommon', 'Rare', 'Epic'];
+
+const sortTierStats = (tiers: TierStat[]) =>
+    [...tiers].sort((a, b) => {
+        if (a.tier !== b.tier) return a.tier - b.tier;
+        return RARITY_SORT_ORDER.indexOf(a.rarity ?? '') - RARITY_SORT_ORDER.indexOf(b.rarity ?? '');
+    });
+
 interface ItemTooltipProps {
     active?: boolean;
     payload?: Array<{payload: Item}>;
@@ -65,8 +73,9 @@ const ItemTooltip = ({active, payload}: ItemTooltipProps) => {
     const categoryName = categoryColor
         ? Object.entries(ITEM_CATEGORY_COLORS).find(([, c]) => c === categoryColor)?.[0]
         : null;
+    const sortedTiers = item.tiers && item.tiers.length > 1 ? sortTierStats(item.tiers) : null;
     return (
-        <div style={{background: "#fff", border: "1px solid #ccc", padding: "8px 12px", fontSize: 13, borderRadius: 4, maxWidth: 240}}>
+        <div style={{background: "#fff", border: "1px solid #ccc", padding: "8px 12px", fontSize: 13, borderRadius: 4, maxWidth: 260}}>
             <div style={{fontWeight: "bold", marginBottom: 4, color: getClassColor(item.name)}}>
                 {item.name}
                 {categoryName && <span style={{color: categoryColor ?? undefined, fontWeight: "normal", marginLeft: 6, fontSize: 11}}>▬ {categoryName}</span>}
@@ -80,6 +89,16 @@ const ItemTooltip = ({active, payload}: ItemTooltipProps) => {
             <div style={{color: lowSample ? "#e57373" : "#888", marginTop: 2}}>
                 Sims: {item.total_sims?.toLocaleString() ?? "—"}{lowSample ? " ⚠ low sample" : ""}
             </div>
+            {sortedTiers && (
+                <div style={{marginTop: 6, paddingTop: 6, borderTop: "1px solid #eee"}}>
+                    {sortedTiers.map((t, i) => (
+                        <div key={i} style={{fontSize: 11, color: "#555", display: "flex", justifyContent: "space-between", gap: 8}}>
+                            <span>T{t.tier} {t.rarity}: {(t.rate ?? 0).toFixed(1)}%</span>
+                            <span style={{color: "#aaa"}}>{(t.sims ?? 0).toLocaleString()}</span>
+                        </div>
+                    ))}
+                </div>
+            )}
         </div>
     );
 };
@@ -93,7 +112,6 @@ export default function TrialChart() {
     const rawItems: Item[] = (trial_id != null && json?.items_by_trial?.[trial_id]) || [];
     const trialData = [...rawItems].sort((a, b) => b.win_rate - a.win_rate);
     const trialSummary: Trial | undefined = json?.trials?.find((t) => t.trial_id === trial_id);
-
 
     const trials = json?.trials ?? [];
     const currentIndex = trials.findIndex((t) => t.trial_id === trial_id);

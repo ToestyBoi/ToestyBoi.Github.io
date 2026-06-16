@@ -3,6 +3,7 @@ import { Home } from './Pages/Home';
 import TrialChart from './Pages/TrialChart';
 import AllTrialsChart from './Pages/AllTrialsChart';
 import SingleItemTrials from './Pages/SingleItemTrials';
+import ItemScatterPlot from './Pages/ItemScatterPlot';
 import NavBar from './components/NavBar';
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
                 <Route path="/TrialChart" element={<TrialChart />} />
                 <Route path="/AllTrialsChart" element={<AllTrialsChart />} />
                 <Route path="/SingleItemTrials" element={<SingleItemTrials />} />
+                <Route path="/ItemScatter" element={<ItemScatterPlot />} />
             </Routes>
         </div>
     );
