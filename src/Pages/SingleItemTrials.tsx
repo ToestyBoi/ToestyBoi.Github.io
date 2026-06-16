@@ -4,6 +4,7 @@ import {Bar, ComposedChart, Line, Rectangle, ResponsiveContainer, Tooltip, XAxis
 import type {BarShapeProps} from "recharts";
 import type {NavState} from "../types";
 import {getRarityColor, RARITY_COLORS} from "../colors";
+import {useData} from "../context/DataContext";
 
 interface TrialRow {
     trial: number;
@@ -20,7 +21,8 @@ const renderRarityBar = (rarity: string) => ({x, y, width, height}: BarShapeProp
 export default function SingleItemTrials() {
     const navigate = useNavigate();
     const location = useLocation();
-    const {json, file_name, item_name, trial_id} = (location.state as NavState) || {};
+    const {json} = useData();
+    const {item_name, trial_id} = (location.state as NavState) || {};
 
     const trials = json?.trials ?? [];
     const itemsByTrial = json?.items_by_trial ?? {};
@@ -73,15 +75,8 @@ export default function SingleItemTrials() {
     };
 
     return (
-        <div style={{width: '100%', height: 400}}>
-            <button onClick={() =>
-                navigate('/TrialChart', {
-                    state: {
-                        json: json,
-                        file_name: file_name,
-                        trial_id: trial_id
-                    }
-                })}>
+        <div style={{width: '100%'}}>
+            <button onClick={() => navigate('/TrialChart', {state: {trial_id}})}>
                 Back
             </button>
             <h2 style={{textAlign: 'center', marginBottom: 10, marginTop: 10}}>
@@ -99,7 +94,7 @@ export default function SingleItemTrials() {
                     </label>
                 ))}
             </div>
-            <ResponsiveContainer>
+            <ResponsiveContainer height={500}>
                 <ComposedChart
                     data={chartData}
                     margin={{top: 5, right: 30, left: 20, bottom: 20}}

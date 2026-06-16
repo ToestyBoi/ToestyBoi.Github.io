@@ -3,6 +3,7 @@ import {Bar, BarChart, Rectangle, ResponsiveContainer, Tooltip, XAxis, YAxis} fr
 import type {BarShapeProps} from "recharts";
 import type {Item, NavState} from "../types";
 import {getItemColor, getClassColor} from "../colors";
+import {useData} from "../context/DataContext";
 
 interface XAxisTickProps {
     x?: number;
@@ -32,7 +33,8 @@ const XAxisTick = ({x, y, payload}: XAxisTickProps) => (
 export default function TrialChart() {
     const navigate = useNavigate();
     const location = useLocation();
-    const {trial_id, json, file_name} = (location.state as NavState) || {};
+    const {json, file_name} = useData();
+    const {trial_id} = (location.state as NavState) || {};
 
     const trialData: Item[] = (trial_id != null && json?.items_by_trial?.[trial_id]) || [];
     const trialSummary = json?.trials?.find((trial) => trial.trial_id === trial_id);
@@ -45,35 +47,18 @@ export default function TrialChart() {
         : undefined;
 
     const goToTrial = (id: number) => {
-        navigate('/TrialChart', {
-            state: {
-                json: json,
-                file_name: file_name,
-                trial_id: id
-            }
-        });
+        navigate('/TrialChart', {state: {trial_id: id}});
     };
 
     const handleItemClick = (item: Item) => {
         navigate('/SingleItemTrials', {
-            state: {
-                json: json,
-                file_name: file_name,
-                trial_id: trial_id,
-                item_name: item.name
-            }
+            state: {trial_id, item_name: item.name}
         });
     };
 
     return (
-        <div style={{width: '100%', height: 400}}>
-            <button onClick={() =>
-                navigate('/AllTrialsChart', {
-                    state: {
-                        json: json,
-                        file_name: file_name
-                    }
-                })}>
+        <div style={{width: '100%'}}>
+            <button onClick={() => navigate('/AllTrialsChart')}>
                 Back
             </button>
             <button
@@ -91,7 +76,7 @@ export default function TrialChart() {
                 Next
             </button>
             <h2 style={{textAlign: 'center', marginBottom: 10, marginTop: 10}}>
-                Trial {trial_id}
+                {file_name} — Trial {trial_id}
             </h2>
             <h4 style={{textAlign: 'center', marginBottom: 10, marginTop: 10}}>
                 {trialSummary && `Clear Rate: ${Math.trunc(trialSummary.clear_rate * 100)}%, Total Clears: ${trialSummary.total_clears}, Total Sims: ${trialSummary.total_sims}`}
@@ -99,7 +84,7 @@ export default function TrialChart() {
             <h4 style={{textAlign: 'center', marginBottom: 10, marginTop: 10}}>
                 {trialSummary && `Avg. Level: ${trialSummary.avg_level}, Avg. Tier: ${trialSummary.avg_tier}, Unique Builds: ${trialSummary.unique_builds}`}
             </h4>
-            <ResponsiveContainer>
+            <ResponsiveContainer height={500}>
                 <BarChart
                     data={trialData}
                     margin={{top: 5, right: 30, left: 20, bottom: 100}}

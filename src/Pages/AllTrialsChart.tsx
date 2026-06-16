@@ -1,10 +1,11 @@
 import {Bar, BarChart, Rectangle, ResponsiveContainer, Tooltip, XAxis, YAxis} from "recharts";
 import type {BarShapeProps} from "recharts";
-import {useLocation, useNavigate} from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 import {useState} from "react";
-import type {ClearRateData, NavState, Trial} from "../types";
-import {handleFileUpload} from "./HandleFileUpload.tsx";
+import type {Trial} from "../types";
+import {useFileUpload} from "./HandleFileUpload.tsx";
 import {getRgbBarColor} from "../colors";
+import {useData} from "../context/DataContext";
 
 const renderTrialBar = ({x, y, width, height, payload}: BarShapeProps) => (
     <Rectangle x={x} y={y} width={width} height={height} fill={getRgbBarColor((payload as Trial).clear_rate)}/>
@@ -12,25 +13,20 @@ const renderTrialBar = ({x, y, width, height, payload}: BarShapeProps) => (
 
 export default function AllTrialsChart() {
     const navigate = useNavigate();
-    const location = useLocation();
-    const {json, file_name} = (location.state as NavState) || {};
-    const [, setData] = useState<ClearRateData | null>(null);
+    const {json, file_name} = useData();
+    const handleUpload = useFileUpload();
     const [search, setSearch] = useState("");
 
     const trialData = json?.trials || [];
-    const handleUpload = handleFileUpload(setData, navigate);
 
     const handleClick = (data: Trial) => {
         navigate('/TrialChart', {
-            state: {
-                trial_id: data.trial_id,
-                json: json,
-                file_name: file_name
-            }
+            state: {trial_id: data.trial_id}
         });
     };
+
     return (
-        <div style={{position: "relative", width: '100%', height: 400}}>
+        <div style={{position: "relative", width: '100%'}}>
             <input
                 type="file"
                 accept=".json,application/json"
@@ -62,7 +58,7 @@ export default function AllTrialsChart() {
             <h2 style={{textAlign: 'center', marginBottom: 10, marginTop: 10}}>
                 {file_name}
             </h2>
-            <ResponsiveContainer>
+            <ResponsiveContainer height={500}>
                 <BarChart
                     data={trialData}
                     margin={{top: 5, right: 30, left: 20, bottom: 100}}

@@ -45,10 +45,8 @@ export interface ClearRateData {
 }
 
 // Shape of the `state` object passed between pages via react-router navigation.
+// Dataset (json, file_name) lives in DataContext — only page-specific params go here.
 export interface NavState {
-    json?: ClearRateData;
-    file_name?: string;
     trial_id?: number;
     item_name?: string;
-    co_equipped?: CoEquipped[];
 }
