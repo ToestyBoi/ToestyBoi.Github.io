@@ -188,7 +188,7 @@ export default function SingleItemTrials() {
 
     return (
         <div style={{width: '100%'}}>
-            <button onClick={() => navigate('/TrialChart', {state: {trial_id}})}>Back</button>
+            <button onClick={() => trial_id != null ? navigate('/TrialChart', {state: {trial_id}}) : navigate('/ItemScatter')}>Back</button>
             <h2 style={{textAlign: 'center', marginBottom: 4, marginTop: 10}}>{item_name}</h2>
             {globalItem && (
                 <p style={{textAlign: 'center', margin: '0 0 8px', fontSize: 13, color: '#555'}}>
