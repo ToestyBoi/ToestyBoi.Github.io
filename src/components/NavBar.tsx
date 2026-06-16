@@ -24,6 +24,8 @@ export default function NavBar() {
     }
     if (location.pathname === '/ItemScatter') {
         crumbs.push({label: 'Item Scatter', onClick: () => {}});
+    } else if (location.pathname === '/ItemHeatmap') {
+        crumbs.push({label: 'Item Heatmap', onClick: () => {}});
     } else {
         if (trial_id != null) {
             crumbs.push({

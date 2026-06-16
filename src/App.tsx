@@ -5,6 +5,7 @@ import AllTrialsChart from './Pages/AllTrialsChart';
 import SingleItemTrials from './Pages/SingleItemTrials';
 import ItemScatterPlot from './Pages/ItemScatterPlot';
 import ItemTierScaling from './Pages/ItemTierScaling';
+import ItemHeatmap from './Pages/ItemHeatmap';
 import NavBar from './components/NavBar';
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
                 <Route path="/SingleItemTrials" element={<SingleItemTrials />} />
                 <Route path="/ItemScatter" element={<ItemScatterPlot />} />
                 <Route path="/ItemTierScaling" element={<ItemTierScaling />} />
+                <Route path="/ItemHeatmap" element={<ItemHeatmap />} />
             </Routes>
         </div>
     );
