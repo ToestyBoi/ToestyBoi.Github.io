@@ -1,3 +1,4 @@
+import {useState} from 'react';
 import {useLocation, useNavigate} from 'react-router-dom';
 import {ComposedChart, Line, ReferenceLine, ResponsiveContainer, Tooltip, XAxis, YAxis} from 'recharts';
 import type {NavState} from '../types';
@@ -60,7 +61,11 @@ export default function ItemTierScaling() {
     const navigate = useNavigate();
     const location = useLocation();
     const {json} = useData();
-    const {item_name, trial_id} = (location.state as NavState) || {};
+    const {item_name: stateItemName, trial_id} = (location.state as NavState) || {};
+
+    const allItems = (json?.items ?? []).slice().sort((a, b) => a.name.localeCompare(b.name));
+    const [selectedName, setSelectedName] = useState<string>(stateItemName ?? allItems[0]?.name ?? '');
+    const item_name = selectedName || stateItemName;
 
     const globalItem = json?.items?.find(i => i.name === item_name);
 
@@ -93,8 +98,21 @@ export default function ItemTierScaling() {
 
     return (
         <div style={{width: '100%'}}>
-            <button onClick={() => navigate('/SingleItemTrials', {state: {item_name, trial_id}})}>Back</button>
-            <h2 style={{textAlign: 'center', marginBottom: 4, marginTop: 10}}>{item_name} — Tier Scaling</h2>
+            {trial_id != null && (
+                <button onClick={() => navigate('/SingleItemTrials', {state: {item_name, trial_id}})}>Back</button>
+            )}
+            <div style={{display: 'flex', justifyContent: 'center', margin: '12px 0 4px'}}>
+                <select
+                    value={selectedName}
+                    onChange={e => setSelectedName(e.target.value)}
+                    style={{fontSize: 15, padding: '4px 8px', minWidth: 200}}
+                >
+                    {allItems.map(item => (
+                        <option key={item.name} value={item.name}>{item.name}</option>
+                    ))}
+                </select>
+            </div>
+            <h2 style={{textAlign: 'center', marginBottom: 4, marginTop: 6}}>{item_name} — Tier Scaling</h2>
             {overallRate != null && (
                 <p style={{textAlign: 'center', margin: '0 0 4px', fontSize: 13, color: '#555'}}>
                     Overall win rate: {overallRate.toFixed(1)}%

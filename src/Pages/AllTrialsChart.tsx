@@ -186,6 +186,12 @@ export default function AllTrialsChart() {
                     >
                         Item Scatter →
                     </button>
+                    <button
+                        onClick={() => navigate('/ItemTierScaling')}
+                        style={{fontSize: 12, padding: '3px 10px', cursor: 'pointer'}}
+                    >
+                        Item Tier Scaling →
+                    </button>
                 </div>
             </div>
             <h2 style={{textAlign: 'center', marginBottom: 4, marginTop: 10}}>{file_name}</h2>
