@@ -1,4 +1,4 @@
-import {Bar, ComposedChart, ReferenceArea, Rectangle, ResponsiveContainer, Tooltip, XAxis, YAxis} from "recharts";
+import {Bar, ComposedChart, Line, ReferenceArea, Rectangle, ResponsiveContainer, Tooltip, XAxis, YAxis} from "recharts";
 import type {BarShapeProps} from "recharts";
 import {useNavigate} from 'react-router-dom';
 import type {Trial} from "../types";
@@ -54,6 +54,7 @@ const CustomTooltip = ({active, payload}: CustomTooltipProps) => {
                 Trial {trial.trial_id}{isBossTrial(trial.trial_id) ? " ★ Boss" : ""}
             </div>
             <div>Clear rate: {(trial.clear_rate * 100).toFixed(1)}%</div>
+            <div>Avg tier: {(trial.avg_tier as number)?.toFixed(1)}</div>
             <div>Clears: {trial.total_clears.toLocaleString()} / {trial.total_sims.toLocaleString()} sims</div>
             <div style={{color: lowSample ? "#e57373" : "#888", marginTop: 2}}>
                 Players: {playerCount}{lowSample ? " ⚠ low sample" : ""}
@@ -87,10 +88,11 @@ export default function AllTrialsChart() {
             <input type="file" accept=".json,application/json" onChange={handleUpload}/>
             <h2 style={{textAlign: 'center', marginBottom: 4, marginTop: 10}}>{file_name}</h2>
             <p style={{textAlign: 'center', margin: '0 0 10px', color: '#888', fontSize: 13}}>
-                ★ Boss trials (every 5th) — shaded bands group every 5 trials
+                ★ Boss trials (every 5th) · shaded bands group every 5 trials ·{' '}
+                <span style={{color: '#9b59b6'}}>— avg player tier (right axis)</span>
             </p>
             <ResponsiveContainer height={500}>
-                <ComposedChart data={trialData} margin={{top: 5, right: 30, left: 20, bottom: 100}}>
+                <ComposedChart data={trialData} margin={{top: 5, right: 50, left: 20, bottom: 100}}>
                     {groupBands.map(({x1, x2}) => (
                         <ReferenceArea key={x1} x1={x1} x2={x2} fill="#888" fillOpacity={0.08} stroke="none"/>
                     ))}
@@ -102,12 +104,31 @@ export default function AllTrialsChart() {
                         height={100}
                         tick={<XAxisTick/>}
                     />
-                    <YAxis tickFormatter={(value) => `${Math.round(value * 100)}%`}/>
+                    <YAxis yAxisId="left" tickFormatter={(value) => `${Math.round(value * 100)}%`}/>
+                    <YAxis
+                        yAxisId="right"
+                        orientation="right"
+                        domain={[0, 3]}
+                        tickCount={4}
+                        tickFormatter={(v) => `T${v}`}
+                        tick={{fill: '#9b59b6', fontSize: 11}}
+                    />
                     <Tooltip content={<CustomTooltip/>}/>
                     <Bar
+                        yAxisId="left"
                         dataKey="clear_rate"
                         shape={renderTrialBar}
                         onClick={(data) => handleClick(data.payload)}
+                    />
+                    <Line
+                        yAxisId="right"
+                        dataKey="avg_tier"
+                        name="Avg Tier"
+                        stroke="#9b59b6"
+                        strokeWidth={2}
+                        strokeDasharray="5 3"
+                        dot={false}
+                        isAnimationActive={false}
                     />
                 </ComposedChart>
             </ResponsiveContainer>
