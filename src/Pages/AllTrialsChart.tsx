@@ -131,6 +131,7 @@ export default function AllTrialsChart() {
     const handleUpload = useFileUpload();
     const [showExpected, setShowExpected] = useState(true);
     const [showDeviation, setShowDeviation] = useState(false);
+    const [showAvgTier, setShowAvgTier] = useState(true);
 
     const trialData: EnrichedTrial[] = (json?.trials ?? []).map(t => ({
         ...t,
@@ -164,8 +165,8 @@ export default function AllTrialsChart() {
             </div>
             <h2 style={{textAlign: 'center', marginBottom: 4, marginTop: 10}}>{file_name}</h2>
             <p style={{textAlign: 'center', margin: '0 0 6px', color: '#888', fontSize: 13}}>
-                ★ Boss trials (every 5th) · shaded bands group every 5 trials ·{' '}
-                <span style={{color: '#9b59b6'}}>— avg player tier (right axis)</span>
+                ★ Boss trials (every 5th) · shaded bands group every 5 trials
+                {showAvgTier && <> · <span style={{color: '#9b59b6'}}>— avg player tier (right axis)</span></>}
                 {showExpected && <> · <span style={{color: '#FFA500'}}>--- expected curve</span></>}
             </p>
             <div style={{textAlign: 'center', marginBottom: 8}}>
@@ -174,6 +175,9 @@ export default function AllTrialsChart() {
                 </button>
                 <button style={btnStyle(showDeviation)} onClick={() => setShowDeviation(v => !v)}>
                     {showDeviation ? 'Hide' : 'Show'} Deviation
+                </button>
+                <button style={btnStyle(showAvgTier)} onClick={() => setShowAvgTier(v => !v)}>
+                    {showAvgTier ? 'Hide' : 'Show'} Avg Tier
                 </button>
             </div>
             <ResponsiveContainer height={500}>
@@ -217,16 +221,18 @@ export default function AllTrialsChart() {
                             isAnimationActive={false}
                         />
                     )}
-                    <Line
-                        yAxisId="right"
-                        dataKey="avg_tier"
-                        name="Avg Tier"
-                        stroke="#9b59b6"
-                        strokeWidth={2}
-                        strokeDasharray="5 3"
-                        dot={false}
-                        isAnimationActive={false}
-                    />
+                    {showAvgTier && (
+                        <Line
+                            yAxisId="right"
+                            dataKey="avg_tier"
+                            name="Avg Tier"
+                            stroke="#9b59b6"
+                            strokeWidth={2}
+                            strokeDasharray="5 3"
+                            dot={false}
+                            isAnimationActive={false}
+                        />
+                    )}
                 </ComposedChart>
             </ResponsiveContainer>
             {showDeviation && (
