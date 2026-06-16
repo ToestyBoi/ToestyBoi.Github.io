@@ -4,6 +4,7 @@ import TrialChart from './Pages/TrialChart';
 import AllTrialsChart from './Pages/AllTrialsChart';
 import SingleItemTrials from './Pages/SingleItemTrials';
 import ItemScatterPlot from './Pages/ItemScatterPlot';
+import ItemTierScaling from './Pages/ItemTierScaling';
 import NavBar from './components/NavBar';
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
                 <Route path="/AllTrialsChart" element={<AllTrialsChart />} />
                 <Route path="/SingleItemTrials" element={<SingleItemTrials />} />
                 <Route path="/ItemScatter" element={<ItemScatterPlot />} />
+                <Route path="/ItemTierScaling" element={<ItemTierScaling />} />
             </Routes>
         </div>
     );
