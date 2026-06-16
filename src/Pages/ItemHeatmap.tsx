@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useData } from '../context/DataContext';
-import { getClassColor, getRgbBarColor } from '../colors';
+import { getClassColor, getRarityColor, getRgbBarColor, RARITY_COLORS } from '../colors';
 import type { Item } from '../types';
 
 interface CellData {
@@ -25,10 +25,45 @@ const CELL_H = 24;
 const LABEL_W = 172;
 const HEADER_H = 54;
 
+const ALL_RARITIES = Object.keys(RARITY_COLORS);
+
+// Returns the win rate and sims for an item filtered to the selected rarities.
+// Returns null if the item has no data for those rarities.
+function computeCellRate(item: Item, selected: Set<string>): { rate: number; sims: number | undefined } | null {
+    if (selected.size === 0) return null;
+    if (selected.size === ALL_RARITIES.length) {
+        return { rate: item.win_rate, sims: item.total_sims };
+    }
+
+    const matching = item.tiers.filter(t => t.rarity && selected.has(t.rarity));
+    if (matching.length === 0) return null;
+
+    const totalSims = matching.reduce((sum, t) => sum + (t.sims ?? 0), 0);
+    const totalClears = matching.reduce((sum, t) => sum + (t.clears ?? 0), 0);
+
+    if (totalSims > 0) {
+        return { rate: (totalClears / totalSims) * 100, sims: totalSims };
+    }
+    // No sims data — fall back to simple average of rates
+    return { rate: matching.reduce((s, t) => s + t.rate, 0) / matching.length, sims: undefined };
+}
+
+const btnStyle = (active: boolean, color?: string): React.CSSProperties => ({
+    padding: '3px 10px',
+    fontSize: 12,
+    border: `1px solid ${color ?? '#ccc'}`,
+    borderRadius: 3,
+    cursor: 'pointer',
+    background: active ? (color ?? '#444') : 'transparent',
+    color: active ? '#fff' : (color ?? '#555'),
+    fontWeight: active ? 600 : 400,
+});
+
 export default function ItemHeatmap() {
     const navigate = useNavigate();
     const { json } = useData();
     const [tooltip, setTooltip] = useState<TooltipState | null>(null);
+    const [selectedRarities, setSelectedRarities] = useState<Set<string>>(new Set(ALL_RARITIES));
 
     const itemsByTrial = json?.items_by_trial ?? {};
     const globalItems: Item[] = json?.items ?? [];
@@ -49,6 +84,18 @@ export default function ItemHeatmap() {
         }
         lookup.set(trialId, map);
     }
+
+    const toggleRarity = (rarity: string) => {
+        setSelectedRarities(prev => {
+            const next = new Set(prev);
+            if (next.has(rarity)) {
+                next.delete(rarity);
+            } else {
+                next.add(rarity);
+            }
+            return next;
+        });
+    };
 
     const handleCellClick = (trialId: number) => {
         navigate('/TrialChart', { state: { trial_id: trialId } });
@@ -78,6 +125,19 @@ export default function ItemHeatmap() {
                 · click cell → trial · click name → item detail
             </p>
 
+            {/* Rarity filter */}
+            <div style={{ display: 'flex', justifyContent: 'center', gap: 6, marginBottom: 12 }}>
+                {ALL_RARITIES.map(rarity => (
+                    <button
+                        key={rarity}
+                        style={btnStyle(selectedRarities.has(rarity), getRarityColor(rarity))}
+                        onClick={() => toggleRarity(rarity)}
+                    >
+                        {rarity}
+                    </button>
+                ))}
+            </div>
+
             {/* Color scale legend */}
             <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: 8, marginBottom: 14, fontSize: 12, color: '#666' }}>
                 <span>0%</span>
@@ -90,7 +150,7 @@ export default function ItemHeatmap() {
                 }} />
                 <span>100%</span>
                 <span style={{ marginLeft: 16, color: '#444' }}>■</span>
-                <span style={{ color: '#444' }}>not in trial</span>
+                <span style={{ color: '#444' }}>not in trial / no data for rarity</span>
             </div>
 
             <div style={{ overflowX: 'auto' }}>
@@ -101,8 +161,8 @@ export default function ItemHeatmap() {
                         width: LABEL_W + trialIds.length * CELL_W,
                     }}
                 >
-                    {/* Corner cell */}
-                    <div style={{ height: HEADER_H }} />
+                    {/* Corner cell — sticky so it stays put when scrolling */}
+                    <div style={{ height: HEADER_H, position: 'sticky', left: 0, zIndex: 2, background: 'var(--bg, #fff)' }} />
 
                     {/* Trial ID column headers */}
                     {trialIds.map(id => (
@@ -147,6 +207,10 @@ export default function ItemHeatmap() {
                                         textOverflow: 'ellipsis',
                                         justifyContent: 'flex-end',
                                         cursor: 'pointer',
+                                        position: 'sticky',
+                                        left: 0,
+                                        zIndex: 1,
+                                        background: 'var(--bg, #fff)',
                                     }}
                                 >
                                     {item.name}
@@ -155,9 +219,10 @@ export default function ItemHeatmap() {
                                 {/* Trial cells */}
                                 {trialIds.map(trialId => {
                                     const trialItem = lookup.get(trialId)?.get(item.name);
-                                    const hasData = trialItem != null;
-                                    const winRate = trialItem?.win_rate ?? 0;
-                                    const sims = trialItem?.total_sims;
+                                    const computed = trialItem ? computeCellRate(trialItem, selectedRarities) : null;
+                                    const hasData = computed !== null;
+                                    const winRate = computed?.rate ?? 0;
+                                    const sims = computed?.sims;
                                     const lowSample = hasData && (sims ?? 999) < LOW_SIMS;
                                     return (
                                         <div
@@ -223,7 +288,7 @@ export default function ItemHeatmap() {
                             )}
                         </>
                     ) : (
-                        <div style={{ color: '#888', fontSize: 12 }}>Not available in this trial</div>
+                        <div style={{ color: '#888', fontSize: 12 }}>Not available in this trial / rarity</div>
                     )}
                 </div>
             )}
