@@ -1,5 +1,16 @@
 import {useState} from 'react';
-import {Bar, ComposedChart, Line, ReferenceArea, ReferenceLine, Rectangle, ResponsiveContainer, Tooltip, XAxis, YAxis} from "recharts";
+import {
+    Bar,
+    ComposedChart,
+    Line,
+    ReferenceArea,
+    ReferenceLine,
+    Rectangle,
+    ResponsiveContainer,
+    Tooltip,
+    XAxis,
+    YAxis
+} from "recharts";
 import type {BarShapeProps} from "recharts";
 import {useNavigate} from 'react-router-dom';
 import type {Trial} from "../types";
@@ -26,7 +37,7 @@ const computeExpectedRate = (trialId: number): number => {
     return Math.max(0, base - 0.40);
 };
 
-type EnrichedTrial = Trial & {expected_rate: number; deviation: number};
+type EnrichedTrial = Trial & { expected_rate: number; deviation: number };
 
 const renderTrialBar = ({x, y, width, height, payload}: BarShapeProps) => (
     <Rectangle x={x} y={y} width={width} height={height} fill={getRgbBarColor((payload as Trial).clear_rate)}/>
@@ -40,7 +51,7 @@ const renderDeviationBar = ({x, y, width, height, payload}: BarShapeProps) => {
 interface XAxisTickProps {
     x?: number;
     y?: number;
-    payload?: {value: number};
+    payload?: { value: number };
 }
 
 const XAxisTick = ({x, y, payload}: XAxisTickProps) => {
@@ -65,7 +76,7 @@ const XAxisTick = ({x, y, payload}: XAxisTickProps) => {
 
 interface CustomTooltipProps {
     active?: boolean;
-    payload?: Array<{payload: EnrichedTrial}>;
+    payload?: Array<{ payload: EnrichedTrial }>;
 }
 
 const CustomTooltip = ({active, payload}: CustomTooltipProps) => {
@@ -94,7 +105,7 @@ const CustomTooltip = ({active, payload}: CustomTooltipProps) => {
 
 interface DeviationTooltipProps {
     active?: boolean;
-    payload?: Array<{payload: EnrichedTrial}>;
+    payload?: Array<{ payload: EnrichedTrial }>;
 }
 
 const DeviationTooltip = ({active, payload}: DeviationTooltipProps) => {
@@ -131,6 +142,7 @@ export default function AllTrialsChart() {
     const handleUpload = useFileUpload();
     const [showExpected, setShowExpected] = useState(true);
     const [showDeviation, setShowDeviation] = useState(false);
+    const [showAvgTier, setShowAvgTier] = useState(true);
 
     const trialData: EnrichedTrial[] = (json?.trials ?? []).map(t => ({
         ...t,
@@ -155,17 +167,37 @@ export default function AllTrialsChart() {
         <div style={{position: "relative", width: '100%'}}>
             <div style={{display: 'flex', alignItems: 'center', gap: 8, padding: '4px 0'}}>
                 <input type="file" accept=".json,application/json" onChange={handleUpload}/>
-                <button
-                    onClick={() => navigate('/ItemScatter')}
-                    style={{marginLeft: 'auto', fontSize: 12, padding: '3px 10px', cursor: 'pointer'}}
-                >
-                    Item Scatter →
-                </button>
+                <div style={{marginLeft: 'auto', display: 'flex', gap: 6}}>
+                    <button
+                        onClick={() => navigate('/BuildDiversity')}
+                        style={{fontSize: 12, padding: '3px 10px', cursor: 'pointer'}}
+                    >
+                        Build Diversity →
+                    </button>
+                    <button
+                        onClick={() => navigate('/ItemHeatmap')}
+                        style={{fontSize: 12, padding: '3px 10px', cursor: 'pointer'}}
+                    >
+                        Item Heatmap →
+                    </button>
+                    <button
+                        onClick={() => navigate('/ItemScatter')}
+                        style={{fontSize: 12, padding: '3px 10px', cursor: 'pointer'}}
+                    >
+                        Item Scatter →
+                    </button>
+                    <button
+                        onClick={() => navigate('/ItemTierScaling')}
+                        style={{fontSize: 12, padding: '3px 10px', cursor: 'pointer'}}
+                    >
+                        Item Tier Scaling →
+                    </button>
+                </div>
             </div>
             <h2 style={{textAlign: 'center', marginBottom: 4, marginTop: 10}}>{file_name}</h2>
             <p style={{textAlign: 'center', margin: '0 0 6px', color: '#888', fontSize: 13}}>
-                ★ Boss trials (every 5th) · shaded bands group every 5 trials ·{' '}
-                <span style={{color: '#9b59b6'}}>— avg player tier (right axis)</span>
+                ★ Boss trials (every 5th) · shaded bands group every 5 trials
+                {showAvgTier && <> · <span style={{color: '#9b59b6'}}>— avg player tier (right axis)</span></>}
                 {showExpected && <> · <span style={{color: '#FFA500'}}>--- expected curve</span></>}
             </p>
             <div style={{textAlign: 'center', marginBottom: 8}}>
@@ -174,6 +206,9 @@ export default function AllTrialsChart() {
                 </button>
                 <button style={btnStyle(showDeviation)} onClick={() => setShowDeviation(v => !v)}>
                     {showDeviation ? 'Hide' : 'Show'} Deviation
+                </button>
+                <button style={btnStyle(showAvgTier)} onClick={() => setShowAvgTier(v => !v)}>
+                    {showAvgTier ? 'Hide' : 'Show'} Avg Tier
                 </button>
             </div>
             <ResponsiveContainer height={500}>
@@ -217,16 +252,18 @@ export default function AllTrialsChart() {
                             isAnimationActive={false}
                         />
                     )}
-                    <Line
-                        yAxisId="right"
-                        dataKey="avg_tier"
-                        name="Avg Tier"
-                        stroke="#9b59b6"
-                        strokeWidth={2}
-                        strokeDasharray="5 3"
-                        dot={false}
-                        isAnimationActive={false}
-                    />
+                    {showAvgTier && (
+                        <Line
+                            yAxisId="right"
+                            dataKey="avg_tier"
+                            name="Avg Tier"
+                            stroke="#9b59b6"
+                            strokeWidth={2}
+                            strokeDasharray="5 3"
+                            dot={false}
+                            isAnimationActive={false}
+                        />
+                    )}
                 </ComposedChart>
             </ResponsiveContainer>
             {showDeviation && (

@@ -1,7 +1,6 @@
 import {useLocation, useNavigate} from 'react-router-dom';
-import {useState} from "react";
-import {Bar, ComposedChart, Line, Rectangle, ResponsiveContainer, Tooltip, XAxis, YAxis} from "recharts";
-import type {BarShapeProps} from "recharts";
+import React, {useState} from "react";
+import {ComposedChart, Line, ResponsiveContainer, Tooltip, XAxis, YAxis} from "recharts";
 import type {NavState} from "../types";
 import {getRarityColor, RARITY_COLORS} from "../colors";
 import {useData} from "../context/DataContext";
@@ -18,16 +17,14 @@ type ViewMode = 'rarity' | 'tier';
 const RARITY_ORDER = Object.keys(RARITY_COLORS);
 const LOW_SAMPLE_SIMS = 200;
 
-// T0 = gray (raw), then a blue ramp, then purple for high tiers
-const TIER_COLORS = ['#868e96', '#74c0fc', '#4dabf7', '#339af0', '#1971c2', '#7950f2', '#cc5de8'];
-const getTierColor = (tier: number) => TIER_COLORS[tier] ?? '#888';
-const getTierLabel = (tier: number) => `T${tier}`;
-
-const renderBarWithOpacity = (key: string, color: string) => ({x, y, width, height, payload}: BarShapeProps) => {
-    const row = payload as TrialRow;
-    const sims = row[key + '_sims'] ?? 0;
-    const opacity = sims >= 500 ? 1 : sims >= LOW_SAMPLE_SIMS ? 0.65 : sims > 0 ? 0.4 : 1;
-    return <Rectangle x={x} y={y} width={width} height={height} fill={color} fillOpacity={opacity}/>;
+const renderDot = (key: string, color: string) => (props: {cx?: number; cy?: number; payload?: TrialRow}) => {
+    const {cx, cy, payload} = props;
+    if (cx == null || cy == null || !payload) return null;
+    const sims = payload[key + '_sims'] ?? 0;
+    if (!sims) return null;
+    const r = sims >= 500 ? 4 : sims >= LOW_SAMPLE_SIMS ? 3 : 2;
+    const opacity = sims >= 500 ? 1 : sims >= LOW_SAMPLE_SIMS ? 0.65 : 0.35;
+    return <circle cx={cx} cy={cy} r={r} fill={color} fillOpacity={opacity} stroke={color} strokeOpacity={opacity * 0.5} strokeWidth={1}/>;
 };
 
 interface DataSeries {
@@ -102,6 +99,7 @@ export default function SingleItemTrials() {
 
     const rarities = new Set<string>();
     const tierNums = new Set<number>();
+    const tierRarityPairs = new Set<string>(); // "tier_N_Rarity"
 
     const chartData: TrialRow[] = trials.map((trial) => {
         const row: TrialRow = {
@@ -139,10 +137,10 @@ export default function SingleItemTrials() {
             row[`tier_${tier}_sims`] = sims;
         }
 
-        // Store per-tier-per-rarity sub-keys for tooltip detail in tier mode
         for (const t of trialItem?.tiers ?? []) {
             if (!t.rarity || !(t.sims ?? 0)) continue;
             const subKey = `tier_${t.tier}_${t.rarity}`;
+            tierRarityPairs.add(subKey);
             row[subKey] = (t.clears ?? 0) / t.sims! * 100;
             row[subKey + '_sims'] = t.sims!;
         }
@@ -158,7 +156,6 @@ export default function SingleItemTrials() {
         if (iB === -1) return -1;
         return iA - iB;
     });
-    const sortedTiers = Array.from(tierNums).sort((a, b) => a - b);
 
     const [viewMode, setViewMode] = useState<ViewMode>('rarity');
     const [hidden, setHidden] = useState<Set<string>>(new Set());
@@ -166,13 +163,24 @@ export default function SingleItemTrials() {
     const toggleHidden = (key: string) => {
         setHidden(prev => {
             const next = new Set(prev);
-            next.has(key) ? next.delete(key) : next.add(key);
+            if (next.has(key)) next.delete(key); else next.add(key);
             return next;
         });
     };
 
     const raritySeries: DataSeries[] = sortedRarities.map(r => ({key: r, label: r, color: getRarityColor(r)}));
-    const tierSeries: DataSeries[] = sortedTiers.map(t => ({key: `tier_${t}`, label: getTierLabel(t), color: getTierColor(t)}));
+    const tierSeries: DataSeries[] = Array.from(tierRarityPairs)
+        .sort((a, b) => {
+            const [, aTierStr, aRarity] = a.split('_');
+            const [, bTierStr, bRarity] = b.split('_');
+            const rarityDiff = RARITY_ORDER.indexOf(aRarity) - RARITY_ORDER.indexOf(bRarity);
+            if (rarityDiff !== 0) return rarityDiff;
+            return Number(aTierStr) - Number(bTierStr);
+        })
+        .map(key => {
+            const [, tierStr, rarity] = key.split('_');
+            return {key, label: `T${tierStr} ${rarity}`, color: getRarityColor(rarity)};
+        });
     const activeSeries = viewMode === 'rarity' ? raritySeries : tierSeries;
 
     const toggleButtonStyle = (active: boolean): React.CSSProperties => ({
@@ -188,7 +196,15 @@ export default function SingleItemTrials() {
 
     return (
         <div style={{width: '100%'}}>
-            <button onClick={() => trial_id != null ? navigate('/TrialChart', {state: {trial_id}}) : navigate('/ItemScatter')}>Back</button>
+            <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
+                <button onClick={() => trial_id != null ? navigate('/TrialChart', {state: {trial_id}}) : navigate('/ItemScatter')}>Back</button>
+                <button
+                    onClick={() => navigate('/ItemTierScaling', {state: {item_name, trial_id}})}
+                    style={{fontSize: 12, padding: '3px 10px', cursor: 'pointer'}}
+                >
+                    Tier Scaling →
+                </button>
+            </div>
             <h2 style={{textAlign: 'center', marginBottom: 4, marginTop: 10}}>{item_name}</h2>
             {globalItem && (
                 <p style={{textAlign: 'center', margin: '0 0 8px', fontSize: 13, color: '#555'}}>
@@ -222,7 +238,7 @@ export default function SingleItemTrials() {
                         </label>
                     ))}
                 </span>
-                <span style={{color: '#888', marginLeft: 8, fontSize: 11}}>bar opacity ∝ sample size</span>
+                <span style={{color: '#888', marginLeft: 8, fontSize: 11}}>dot size ∝ sample size</span>
             </div>
             <ResponsiveContainer height={500}>
                 <ComposedChart data={chartData} margin={{top: 5, right: 30, left: 20, bottom: 20}}>
@@ -237,22 +253,30 @@ export default function SingleItemTrials() {
                             allRarities={sortedRarities}
                         />
                     )}/>
+                    <Line
+                        dataKey="clear_rate"
+                        name="Trial Clear Rate"
+                        stroke="#FFC000"
+                        strokeWidth={1.5}
+                        strokeDasharray="5 4"
+                        dot={{fill: "#FFC000", r: 3, stroke: "none"}}
+                        activeDot={{r: 4}}
+                        isAnimationActive={false}
+                    />
                     {activeSeries.map(({key, label, color}) => (
-                        <Bar
+                        <Line
                             key={key}
                             dataKey={key}
                             name={label}
+                            stroke={color}
+                            strokeWidth={2}
                             hide={hidden.has(key)}
-                            shape={renderBarWithOpacity(key, color)}
+                            dot={renderDot(key, color)}
+                            activeDot={{r: 5}}
+                            connectNulls={false}
+                            isAnimationActive={false}
                         />
                     ))}
-                    <Line
-                        dataKey="clear_rate"
-                        name="Clear Rate"
-                        stroke="none"
-                        dot={{fill: "#FFC000", stroke: "none"}}
-                        isAnimationActive={false}
-                    />
                 </ComposedChart>
             </ResponsiveContainer>
         </div>
