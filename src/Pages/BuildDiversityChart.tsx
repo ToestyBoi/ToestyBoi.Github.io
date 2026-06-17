@@ -102,10 +102,16 @@ export default function BuildDiversityChart() {
 
     const trialData: EnrichedTrial[] = (json?.trials ?? []).map(t => {
         const approx_players = Math.max(1, Math.round(t.total_sims / 100));
+        const unique_builds = t.builds
+            ? new Set(t.builds.map(b =>
+                b.items.flatMap(slot => slot.map(i => i.name)).sort().join('|')
+              )).size
+            : t.unique_builds;
         return {
             ...t,
+            unique_builds,
             approx_players,
-            diversity_ratio: t.unique_builds / approx_players,
+            diversity_ratio: unique_builds / approx_players,
         };
     });
 

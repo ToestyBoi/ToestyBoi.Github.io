@@ -98,9 +98,11 @@ export default function ItemTierScaling() {
 
     return (
         <div style={{width: '100%'}}>
-            {trial_id != null && (
-                <button onClick={() => navigate('/SingleItemTrials', {state: {item_name, trial_id}})}>Back</button>
-            )}
+            <div style={{display: 'flex', alignItems: 'center', gap: 8, padding: '6px 0 10px'}}>
+                {trial_id != null && (
+                    <button onClick={() => navigate('/SingleItemTrials', {state: {item_name, trial_id}})}>← Back</button>
+                )}
+            </div>
             <div style={{display: 'flex', justifyContent: 'center', margin: '12px 0 4px'}}>
                 <select
                     value={selectedName}

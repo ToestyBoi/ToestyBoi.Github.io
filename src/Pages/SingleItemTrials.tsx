@@ -196,11 +196,11 @@ export default function SingleItemTrials() {
 
     return (
         <div style={{width: '100%'}}>
-            <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
-                <button onClick={() => trial_id != null ? navigate('/TrialChart', {state: {trial_id}}) : navigate('/ItemScatter')}>Back</button>
+            <div style={{display: 'flex', alignItems: 'center', gap: 8, padding: '6px 0 10px'}}>
+                <button onClick={() => trial_id != null ? navigate('/TrialChart', {state: {trial_id}}) : navigate('/ItemScatter')}>← Back</button>
                 <button
                     onClick={() => navigate('/ItemTierScaling', {state: {item_name, trial_id}})}
-                    style={{fontSize: 12, padding: '3px 10px', cursor: 'pointer'}}
+                    style={{marginLeft: 'auto', fontSize: 12, padding: '3px 10px', cursor: 'pointer'}}
                 >
                     Tier Scaling →
                 </button>
