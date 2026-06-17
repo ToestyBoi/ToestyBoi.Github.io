@@ -6,9 +6,9 @@ import type { Build } from '../types';
 type Mode = 'character' | 'team';
 type SortBy = 'class' | 'frequency';
 
-const CELL = 16;
-const LABEL_W = 138;
-const HEADER_H = 138;
+const CELL = 22;
+const LABEL_W = 160;
+const HEADER_H = 160;
 
 const CLASS_ORDER = ['attack', 'tank', 'support', 'spell', 'utility'];
 
@@ -239,7 +239,7 @@ export default function ItemPairingHeatmap() {
                                 alignItems: 'flex-end',
                                 justifyContent: 'center',
                                 paddingBottom: 4,
-                                fontSize: 10,
+                                fontSize: 11,
                                 color: getClassColor(name),
                                 writingMode: 'vertical-rl',
                                 transform: 'rotate(180deg)',
@@ -260,7 +260,7 @@ export default function ItemPairingHeatmap() {
                                     alignItems: 'center',
                                     justifyContent: 'flex-end',
                                     paddingRight: 6,
-                                    fontSize: 10,
+                                    fontSize: 11,
                                     color: getClassColor(rowItem),
                                     whiteSpace: 'nowrap',
                                     overflow: 'hidden',
