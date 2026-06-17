@@ -3,9 +3,9 @@
 export interface TierStat {
     tier: number;
     rate: number;
-    rarity?: string;
-    clears?: number;
-    sims?: number;
+    rarity: string;
+    clears: number;
+    sims: number;
 }
 
 export interface CoEquipped {
@@ -23,7 +23,31 @@ export interface Item {
     total_clears?: number;
     total_sims?: number;
     tiers: TierStat[];
-    co_equipped: CoEquipped[];
+}
+
+export interface BuildItem {
+    name: string;
+    rarity: string;
+    tier: number;
+}
+
+export interface Build {
+    items: BuildItem[][];
+    clear_rate: number;
+    clears: number;
+    avg_tier: number;
+    avg_level: number;
+    max_tier: number;
+    min_tier: number;
+    death_waves: Record<string, number>;
+}
+
+export interface DeathWave {
+    wave: number;
+    reached: number;
+    deaths: number;
+    conditional: number;
+    share: number;
 }
 
 export interface Trial {
@@ -33,15 +57,21 @@ export interface Trial {
     avg_tier: number;
     total_clears: number;
     total_sims: number;
+    total_losses: number;
     unique_builds: number;
-    [key: string]: unknown;
+    num_waves: number;
+    max_tier: number;
+    min_tier: number;
+    death_waves: DeathWave[];
+    builds?: Build[];
 }
 
 export interface ClearRateData {
     items?: Item[];
     trials?: Trial[];
     items_by_trial?: Record<string, Item[]>;
-    [key: string]: unknown;
+    sims_per_build?: number;
+    trials_version?: string;
 }
 
 // Shape of the `state` object passed between pages via react-router navigation.

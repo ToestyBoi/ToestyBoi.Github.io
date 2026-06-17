@@ -13,10 +13,11 @@ import {
 } from "recharts";
 import type {BarShapeProps} from "recharts";
 import {useNavigate} from 'react-router-dom';
-import type {Trial} from "../types";
-import {useFileUpload} from "./HandleFileUpload.tsx";
-import {getRgbBarColor} from "../colors";
+import type {Item, Trial} from "../types";
+import {getRgbBarColor, RARITY_COLORS} from "../colors";
 import {useData} from "../context/DataContext";
+
+const RARITIES = ['Common', 'Uncommon', 'Rare', 'Epic'] as const;
 
 const isBossTrial = (id: number) => id % 5 === 0;
 
@@ -37,7 +38,14 @@ const computeExpectedRate = (trialId: number): number => {
     return Math.max(0, base - 0.40);
 };
 
-type EnrichedTrial = Trial & { expected_rate: number; deviation: number };
+type EnrichedTrial = Trial & {
+    expected_rate: number;
+    deviation: number;
+    avg_tier_Common?: number;
+    avg_tier_Uncommon?: number;
+    avg_tier_Rare?: number;
+    avg_tier_Epic?: number;
+};
 
 const renderTrialBar = ({x, y, width, height, payload}: BarShapeProps) => (
     <Rectangle x={x} y={y} width={width} height={height} fill={getRgbBarColor((payload as Trial).clear_rate)}/>
@@ -94,7 +102,14 @@ const CustomTooltip = ({active, payload}: CustomTooltipProps) => {
             <div style={{color: trial.deviation >= 0 ? "#4caf50" : "#e57373"}}>
                 Deviation: {trial.deviation >= 0 ? "+" : ""}{trial.deviation.toFixed(1)}pp
             </div>
-            <div>Avg tier: {(trial.avg_tier as number)?.toFixed(1)}</div>
+            {RARITIES.map(r => {
+                const v = trial[`avg_tier_${r}` as keyof EnrichedTrial] as number | undefined;
+                return v != null ? (
+                    <div key={r} style={{color: RARITY_COLORS[r]}}>
+                        {r} avg tier: {v.toFixed(2)}
+                    </div>
+                ) : null;
+            })}
             <div>Clears: {trial.total_clears.toLocaleString()} / {trial.total_sims.toLocaleString()} sims</div>
             <div style={{color: lowSample ? "#e57373" : "#888", marginTop: 2}}>
                 Players: {playerCount}{lowSample ? " ⚠ low sample" : ""}
@@ -139,16 +154,31 @@ const btnStyle = (active: boolean) => ({
 export default function AllTrialsChart() {
     const navigate = useNavigate();
     const {json, file_name} = useData();
-    const handleUpload = useFileUpload();
     const [showExpected, setShowExpected] = useState(true);
     const [showDeviation, setShowDeviation] = useState(false);
     const [showAvgTier, setShowAvgTier] = useState(true);
 
-    const trialData: EnrichedTrial[] = (json?.trials ?? []).map(t => ({
-        ...t,
-        expected_rate: computeExpectedRate(t.trial_id),
-        deviation: (t.clear_rate - computeExpectedRate(t.trial_id)) * 100,
-    }));
+    const trialData: EnrichedTrial[] = (json?.trials ?? []).map(t => {
+        const items = (json?.items_by_trial?.[String(t.trial_id)] ?? []) as Item[];
+        const accum: Record<string, { tierSimSum: number; simSum: number }> = {};
+        for (const item of items) {
+            for (const ts of item.tiers) {
+                if (!ts.rarity || !ts.sims) continue;
+                if (!accum[ts.rarity]) accum[ts.rarity] = {tierSimSum: 0, simSum: 0};
+                accum[ts.rarity].tierSimSum += ts.tier * ts.sims;
+                accum[ts.rarity].simSum += ts.sims;
+            }
+        }
+        return {
+            ...t,
+            expected_rate: computeExpectedRate(t.trial_id),
+            deviation: (t.clear_rate - computeExpectedRate(t.trial_id)) * 100,
+            avg_tier_Common: accum.Common?.simSum ? accum.Common.tierSimSum / accum.Common.simSum : undefined,
+            avg_tier_Uncommon: accum.Uncommon?.simSum ? accum.Uncommon.tierSimSum / accum.Uncommon.simSum : undefined,
+            avg_tier_Rare: accum.Rare?.simSum ? accum.Rare.tierSimSum / accum.Rare.simSum : undefined,
+            avg_tier_Epic: accum.Epic?.simSum ? accum.Epic.tierSimSum / accum.Epic.simSum : undefined,
+        };
+    });
     const maxTrialId = trialData.length > 0 ? Math.max(...trialData.map(t => t.trial_id)) : 0;
 
     const groupBands = [];
@@ -165,39 +195,18 @@ export default function AllTrialsChart() {
 
     return (
         <div style={{position: "relative", width: '100%'}}>
-            <div style={{display: 'flex', alignItems: 'center', gap: 8, padding: '4px 0'}}>
-                <input type="file" accept=".json,application/json" onChange={handleUpload}/>
-                <div style={{marginLeft: 'auto', display: 'flex', gap: 6}}>
-                    <button
-                        onClick={() => navigate('/BuildDiversity')}
-                        style={{fontSize: 12, padding: '3px 10px', cursor: 'pointer'}}
-                    >
-                        Build Diversity →
-                    </button>
-                    <button
-                        onClick={() => navigate('/ItemHeatmap')}
-                        style={{fontSize: 12, padding: '3px 10px', cursor: 'pointer'}}
-                    >
-                        Item Heatmap →
-                    </button>
-                    <button
-                        onClick={() => navigate('/ItemScatter')}
-                        style={{fontSize: 12, padding: '3px 10px', cursor: 'pointer'}}
-                    >
-                        Item Scatter →
-                    </button>
-                    <button
-                        onClick={() => navigate('/ItemTierScaling')}
-                        style={{fontSize: 12, padding: '3px 10px', cursor: 'pointer'}}
-                    >
-                        Item Tier Scaling →
-                    </button>
-                </div>
-            </div>
             <h2 style={{textAlign: 'center', marginBottom: 4, marginTop: 10}}>{file_name}</h2>
             <p style={{textAlign: 'center', margin: '0 0 6px', color: '#888', fontSize: 13}}>
                 ★ Boss trials (every 5th) · shaded bands group every 5 trials
-                {showAvgTier && <> · <span style={{color: '#9b59b6'}}>— avg player tier (right axis)</span></>}
+                {showAvgTier && (
+                    <> · avg tier by rarity (right axis):&nbsp;
+                        {RARITIES.map((r, i) => (
+                            <span key={r} style={{color: RARITY_COLORS[r]}}>
+                                {r}{i < RARITIES.length - 1 ? ', ' : ''}
+                            </span>
+                        ))}
+                    </>
+                )}
                 {showExpected && <> · <span style={{color: '#FFA500'}}>--- expected curve</span></>}
             </p>
             <div style={{textAlign: 'center', marginBottom: 8}}>
@@ -228,10 +237,9 @@ export default function AllTrialsChart() {
                     <YAxis
                         yAxisId="right"
                         orientation="right"
-                        domain={[0, 3]}
-                        tickCount={4}
-                        tickFormatter={(v) => `T${v}`}
-                        tick={{fill: '#9b59b6', fontSize: 11}}
+                        domain={[0, 'auto']}
+                        tickFormatter={(v) => `T${Math.round(v)}`}
+                        tick={{fill: '#888', fontSize: 11}}
                     />
                     <Tooltip content={<CustomTooltip/>}/>
                     <Bar
@@ -252,18 +260,20 @@ export default function AllTrialsChart() {
                             isAnimationActive={false}
                         />
                     )}
-                    {showAvgTier && (
+                    {showAvgTier && RARITIES.map(r => (
                         <Line
+                            key={r}
                             yAxisId="right"
-                            dataKey="avg_tier"
-                            name="Avg Tier"
-                            stroke="#9b59b6"
+                            dataKey={`avg_tier_${r}`}
+                            name={r}
+                            stroke={RARITY_COLORS[r]}
                             strokeWidth={2}
                             strokeDasharray="5 3"
                             dot={false}
                             isAnimationActive={false}
+                            connectNulls={false}
                         />
-                    )}
+                    ))}
                 </ComposedChart>
             </ResponsiveContainer>
             {showDeviation && (

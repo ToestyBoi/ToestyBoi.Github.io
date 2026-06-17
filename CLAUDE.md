@@ -33,7 +33,7 @@ React + TypeScript + Vite SPA deployed to GitHub Pages via `.github/workflows/de
 
 ### Routing
 
-`HashRouter` (required for GitHub Pages) is set up in `src/main.tsx`. Routes are declared in `src/App.tsx`:
+`HashRouter` (required for GitHub Pages) is set up in `src/main.tsx`. Routes are declared in `src/App.tsx`. A persistent `NavBar` (`src/components/NavBar.tsx`) is rendered on every page for navigation between views.
 
 | Route | Page | Purpose |
 | --- | --- | --- |
@@ -41,10 +41,15 @@ React + TypeScript + Vite SPA deployed to GitHub Pages via `.github/workflows/de
 | `/AllTrialsChart` | `AllTrialsChart` | Bar chart of clear rate per trial; click a bar to drill into it |
 | `/TrialChart` | `TrialChart` | Bar chart of item win rates within a single trial; prev/next navigation between trials; click an item bar to drill into it |
 | `/SingleItemTrials` | `SingleItemTrials` | Composed chart showing a single item's win rate by rarity across all trials, overlaid with overall trial clear rate as a dot line |
+| `/ItemScatter` | `ItemScatterPlot` | Scatter plot of all items by delta (X) vs total_sims (Y); surfaces reliably OP/weak items; click to drill into item |
+| `/ItemTierScaling` | `ItemTierScaling` | Line chart of a single item's win rate by tier, one line per rarity; shows how an item scales as it tiers up |
+| `/ItemHeatmap` | `ItemHeatmap` | Item × trial heatmap (win rate as color); filterable by rarity; click cell → trial, click label → item detail |
+| `/ItemPairing` | `ItemPairingHeatmap` | Heatmap of how frequently pairs of items appear together in builds |
+| `/BuildDiversity` | `BuildDiversityChart` | Build diversity chart showing unique build distribution across trials |
 
 ### Data flow
 
-There is no global store. The user uploads a JSON file on `Home` (`src/Pages/HandleFileUpload.tsx` parses it into a `ClearRateData` object), which is then passed forward through every navigation as `react-router` `location.state`. Each page reads its needed fields from `location.state` (typed as `NavState` in `src/types.ts`) and re-passes the full `json` blob plus any new context to the next route. The full drill-down chain is:
+The uploaded JSON is stored in a React context (`src/context/DataContext.tsx`, `DataProvider` / `useData()`). The user uploads a JSON file on `Home` (`src/Pages/HandleFileUpload.tsx` parses it into a `ClearRateData` object and calls `setJson`). All pages read `json` from `useData()` directly — the full dataset is never passed through `location.state`. Page-specific navigation parameters (e.g. which trial or item to show) are passed as `react-router` `location.state` typed as `NavState`. The primary drill-down chain is:
 
 ```
 Home → AllTrialsChart → TrialChart → SingleItemTrials
@@ -52,11 +57,14 @@ Home → AllTrialsChart → TrialChart → SingleItemTrials
 
 ### Data shapes (`src/types.ts`)
 
-- `ClearRateData` — top-level export: `trials` (array of `Trial`), `items` (array of `Item`), `items_by_trial` (map of trial ID → `Item[]`)
-- `Trial` — `trial_id`, `clear_rate`, `avg_level`, `avg_tier`, `total_clears`, `total_sims`, `unique_builds`
-- `Item` — `name`, `win_rate`, `overall_rate`, `delta`, `total_clears`, `total_sims`, `tiers` (`TierStat[]`)
+- `ClearRateData` — top-level export: `trials` (array of `Trial`), `items` (array of `Item`), `items_by_trial` (map of trial ID → `Item[]`), `sims_per_build`, `trials_version`
+- `Trial` — `trial_id`, `clear_rate`, `avg_level`, `avg_tier`, `total_clears`, `total_sims`, `total_losses`, `unique_builds`, `num_waves`, `max_tier`, `min_tier`, `death_waves` (`DeathWave[]`), `builds?` (`Build[]`)
+- `DeathWave` — `wave`, `reached`, `deaths`, `conditional`, `share`
+- `Build` — `items` (`BuildItem[][]`, one inner array per character slot), `clear_rate`, `clears`, `avg_tier`, `avg_level`, `max_tier`, `min_tier`, `death_waves`
+- `BuildItem` — `name`, `rarity`, `tier`
+- `Item` — `name`, `win_rate`, `overall_rate?`, `delta?`, `total_clears?`, `total_sims?`, `tiers` (`TierStat[]`)
 - `TierStat` — per-tier aggregate stats for an item: `tier`, `rate`, `rarity`, `clears`, `sims`
-- `NavState` — the shape of `location.state` passed between pages
+- `NavState` — page-specific navigation params passed via `location.state`: `trial_id?`, `item_name?`
 
 ### Charts & colors (`src/colors.ts`)
 
