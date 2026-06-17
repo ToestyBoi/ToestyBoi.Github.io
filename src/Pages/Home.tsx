@@ -7,6 +7,7 @@ const CHARTS = [
     { label: 'Item Heatmap', path: '/ItemHeatmap', desc: 'Item win rates across trials as a heatmap' },
     { label: 'Item Scatter', path: '/ItemScatter', desc: 'Item win rate vs. trial difficulty scatter plot' },
     { label: 'Item Tier Scaling', path: '/ItemTierScaling', desc: 'How item win rates scale with tier and rarity' },
+    { label: 'Item Pairing', path: '/ItemPairing', desc: 'How often items are paired together in builds' },
     { label: 'Build Diversity', path: '/BuildDiversity', desc: 'Variety of builds used across trials' },
 ];
 
