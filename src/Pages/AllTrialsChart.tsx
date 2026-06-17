@@ -14,7 +14,6 @@ import {
 import type {BarShapeProps} from "recharts";
 import {useNavigate} from 'react-router-dom';
 import type {Item, Trial} from "../types";
-import {useFileUpload} from "./HandleFileUpload.tsx";
 import {getRgbBarColor, RARITY_COLORS} from "../colors";
 import {useData} from "../context/DataContext";
 
@@ -155,7 +154,6 @@ const btnStyle = (active: boolean) => ({
 export default function AllTrialsChart() {
     const navigate = useNavigate();
     const {json, file_name} = useData();
-    const handleUpload = useFileUpload();
     const [showExpected, setShowExpected] = useState(true);
     const [showDeviation, setShowDeviation] = useState(false);
     const [showAvgTier, setShowAvgTier] = useState(true);
@@ -197,41 +195,6 @@ export default function AllTrialsChart() {
 
     return (
         <div style={{position: "relative", width: '100%'}}>
-            <div style={{display: 'flex', alignItems: 'center', gap: 8, padding: '4px 0'}}>
-                <input type="file" accept=".json,application/json" onChange={handleUpload}/>
-                <div style={{marginLeft: 'auto', display: 'flex', gap: 6}}>
-                    <button
-                        onClick={() => navigate('/BuildDiversity')}
-                        style={{fontSize: 12, padding: '3px 10px', cursor: 'pointer'}}
-                    >
-                        Build Diversity →
-                    </button>
-                    <button
-                        onClick={() => navigate('/ItemHeatmap')}
-                        style={{fontSize: 12, padding: '3px 10px', cursor: 'pointer'}}
-                    >
-                        Item Heatmap →
-                    </button>
-                    <button
-                        onClick={() => navigate('/ItemScatter')}
-                        style={{fontSize: 12, padding: '3px 10px', cursor: 'pointer'}}
-                    >
-                        Item Scatter →
-                    </button>
-                    <button
-                        onClick={() => navigate('/ItemTierScaling')}
-                        style={{fontSize: 12, padding: '3px 10px', cursor: 'pointer'}}
-                    >
-                        Item Tier Scaling →
-                    </button>
-                    <button
-                        onClick={() => navigate('/ItemPairing')}
-                        style={{fontSize: 12, padding: '3px 10px', cursor: 'pointer'}}
-                    >
-                        Item Pairing →
-                    </button>
-                </div>
-            </div>
             <h2 style={{textAlign: 'center', marginBottom: 4, marginTop: 10}}>{file_name}</h2>
             <p style={{textAlign: 'center', margin: '0 0 6px', color: '#888', fontSize: 13}}>
                 ★ Boss trials (every 5th) · shaded bands group every 5 trials

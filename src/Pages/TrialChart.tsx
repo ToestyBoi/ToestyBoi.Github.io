@@ -126,13 +126,17 @@ export default function TrialChart() {
 
     return (
         <div style={{width: '100%'}}>
-            <button onClick={() => navigate('/AllTrialsChart')}>Back</button>
-            <button onClick={() => prevTrial && goToTrial(prevTrial.trial_id)} disabled={!prevTrial} style={{marginLeft: 8}}>
-                Previous
-            </button>
-            <button onClick={() => nextTrial && goToTrial(nextTrial.trial_id)} disabled={!nextTrial} style={{marginLeft: 8}}>
-                Next
-            </button>
+            <div style={{display: 'flex', alignItems: 'center', gap: 8, padding: '6px 0 10px'}}>
+                <button onClick={() => navigate('/AllTrialsChart')}>← Back</button>
+            </div>
+            <div style={{display: 'flex', justifyContent: 'center', gap: 8, marginBottom: 10}}>
+                <button onClick={() => prevTrial && goToTrial(prevTrial.trial_id)} disabled={!prevTrial}>
+                    ← Previous
+                </button>
+                <button onClick={() => nextTrial && goToTrial(nextTrial.trial_id)} disabled={!nextTrial}>
+                    Next →
+                </button>
+            </div>
             <h2 style={{textAlign: 'center', marginBottom: 10, marginTop: 10}}>
                 {file_name} — Trial {trial_id}
             </h2>
