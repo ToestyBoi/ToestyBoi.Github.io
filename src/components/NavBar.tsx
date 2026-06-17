@@ -24,6 +24,8 @@ export default function NavBar() {
         crumbs.push({label: 'Item Scatter', onClick: () => {}});
     } else if (location.pathname === '/ItemHeatmap') {
         crumbs.push({label: 'Item Heatmap', onClick: () => {}});
+    } else if (location.pathname === '/ItemPairing') {
+        crumbs.push({label: 'Item Pairing', onClick: () => {}});
     } else if (location.pathname === '/BuildDiversity') {
         crumbs.push({label: 'Build Diversity', onClick: () => {}});
     } else if (location.pathname === '/ItemTierScaling') {

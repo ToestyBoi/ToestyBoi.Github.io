@@ -224,6 +224,12 @@ export default function AllTrialsChart() {
                     >
                         Item Tier Scaling →
                     </button>
+                    <button
+                        onClick={() => navigate('/ItemPairing')}
+                        style={{fontSize: 12, padding: '3px 10px', cursor: 'pointer'}}
+                    >
+                        Item Pairing →
+                    </button>
                 </div>
             </div>
             <h2 style={{textAlign: 'center', marginBottom: 4, marginTop: 10}}>{file_name}</h2>
