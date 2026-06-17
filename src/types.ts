@@ -26,6 +26,20 @@ export interface Item {
     co_equipped: CoEquipped[];
 }
 
+export interface BuildItem {
+    name: string;
+    rarity: string;
+    tier: number;
+}
+
+export interface Build {
+    items: BuildItem[][];
+    clear_rate: number;
+    clears: number;
+    avg_tier: number;
+    avg_level: number;
+}
+
 export interface Trial {
     trial_id: number;
     clear_rate: number;
@@ -34,6 +48,7 @@ export interface Trial {
     total_clears: number;
     total_sims: number;
     unique_builds: number;
+    builds?: Build[];
     [key: string]: unknown;
 }
 
