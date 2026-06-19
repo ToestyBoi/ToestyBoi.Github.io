@@ -1,3 +1,4 @@
+import {useState} from 'react';
 import {CartesianGrid, ReferenceLine, ResponsiveContainer, Scatter, ScatterChart, Tooltip, XAxis, YAxis} from "recharts";
 import {useNavigate} from 'react-router-dom';
 import type {Item} from '../types';
@@ -39,8 +40,23 @@ const ScatterTooltip = ({active, payload}: ScatterTooltipProps) => {
 export default function ItemScatterPlot() {
     const navigate = useNavigate();
     const {json} = useData();
+    const [selectedTrial, setSelectedTrial] = useState<number | null>(null);
 
-    const items: Item[] = json?.items ?? [];
+    const trials = json?.trials ?? [];
+    const trialIds = trials.map(t => t.trial_id).sort((a, b) => a - b);
+
+    const items: Item[] = selectedTrial != null
+        ? (json?.items_by_trial?.[String(selectedTrial)] ?? [])
+        : (json?.items ?? []);
+
+    const avgWinRate: number | null = selectedTrial != null
+        ? ((trials.find(t => t.trial_id === selectedTrial)?.clear_rate ?? null) !== null
+            ? (trials.find(t => t.trial_id === selectedTrial)!.clear_rate * 100)
+            : null)
+        : (() => {
+            const visible = items.filter(i => i.delta != null && i.total_sims != null);
+            return visible.length > 0 ? visible.reduce((s, i) => s + i.win_rate, 0) / visible.length : null;
+        })();
 
     const classBuckets: Record<string, ScatterPoint[]> = Object.fromEntries(
         Object.keys(CLASS_COLORS).map(cls => [cls, [] as ScatterPoint[]])
@@ -75,6 +91,26 @@ export default function ItemScatterPlot() {
             <p style={{textAlign: 'center', margin: '0 0 8px', color: '#888', fontSize: 13}}>
                 X: delta vs trial avg · Y: total sims (data reliability) · top-right = reliably OP · top-left = reliably weak · click to drill in
             </p>
+            <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', gap: 12, marginBottom: 8, flexWrap: 'wrap'}}>
+                <label htmlFor="trial-select" style={{fontSize: 13, color: '#555'}}>Trial:</label>
+                <select
+                    id="trial-select"
+                    value={selectedTrial ?? ''}
+                    onChange={e => setSelectedTrial(e.target.value === '' ? null : Number(e.target.value))}
+                    style={{fontSize: 13, padding: '2px 6px', borderRadius: 4, border: '1px solid #ccc'}}
+                >
+                    <option value="">All Trials</option>
+                    {trialIds.map(id => (
+                        <option key={id} value={id}>Trial {id}</option>
+                    ))}
+                </select>
+                {avgWinRate != null && (
+                    <span style={{fontSize: 13, color: '#555'}}>
+                        {selectedTrial != null ? 'Trial clear rate' : 'Avg item win rate'}:
+                        {' '}<strong>{avgWinRate.toFixed(1)}%</strong>
+                    </span>
+                )}
+            </div>
             <div style={{display: 'flex', justifyContent: 'center', gap: 16, fontSize: 12, marginBottom: 8, flexWrap: 'wrap'}}>
                 {Object.entries(CLASS_COLORS).map(([cls, color]) => (
                     <span key={cls} style={{color}}>■ {cls.charAt(0).toUpperCase() + cls.slice(1)}</span>

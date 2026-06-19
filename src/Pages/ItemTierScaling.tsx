@@ -1,7 +1,7 @@
 import {useState} from 'react';
 import {useLocation, useNavigate} from 'react-router-dom';
 import {ComposedChart, Line, ReferenceLine, ResponsiveContainer, Tooltip, XAxis, YAxis} from 'recharts';
-import type {NavState} from '../types';
+import type {NavState, TierStat} from '../types';
 import {getRarityColor, RARITY_COLORS} from '../colors';
 import {useData} from '../context/DataContext';
 
@@ -26,15 +26,19 @@ const TierScalingTooltip = ({active, payload, rarities}: TooltipProps) => {
         <div style={{background: '#fff', border: '1px solid #ccc', padding: '8px 12px', fontSize: 13, borderRadius: 4}}>
             <div style={{fontWeight: 'bold', marginBottom: 4}}>Tier {row.tier}</div>
             {rarities.map(r => {
-                const rate = row[r];
-                const sims = row[r + '_sims'] ?? 0;
-                if (rate == null) return null;
+                const delta = row[r] as number | undefined;
+                const winRate = row[r + '_winrate'] as number | undefined;
+                const sims = (row[r + '_sims'] ?? 0) as number;
+                if (delta == null) return null;
                 const low = sims < LOW_SAMPLE_SIMS;
                 return (
                     <div key={r} style={{color: getRarityColor(r)}}>
-                        {r}: {rate.toFixed(1)}%
+                        {r}: {delta >= 0 ? '+' : ''}{delta.toFixed(1)}pp
+                        {winRate != null && (
+                            <span style={{color: '#888', marginLeft: 6, fontSize: 11}}>({winRate.toFixed(1)}% win)</span>
+                        )}
                         <span style={{color: low ? '#e57373' : '#888', marginLeft: 6, fontSize: 11}}>
-                            ({sims} sims{low ? ' ⚠' : ''})
+                            {sims} sims{low ? ' ⚠' : ''}
                         </span>
                     </div>
                 );
@@ -57,28 +61,55 @@ const makeActiveDot = (color: string) => (props: {cx?: number; cy?: number}) => 
     return <circle cx={cx} cy={cy} r={7} fill={color} stroke="white" strokeWidth={2}/>;
 };
 
+const isBoss = (id: number) => id % 5 === 0;
+
 export default function ItemTierScaling() {
     const navigate = useNavigate();
     const location = useLocation();
     const {json} = useData();
-    const {item_name: stateItemName, trial_id} = (location.state as NavState) || {};
+    const {item_name: stateItemName, trial_id: stateTrialId} = (location.state as NavState) || {};
 
     const allItems = (json?.items ?? []).slice().sort((a, b) => a.name.localeCompare(b.name));
     const [selectedName, setSelectedName] = useState<string>(stateItemName ?? allItems[0]?.name ?? '');
+    const [selectedTrialId, setSelectedTrialId] = useState<number | 'all'>(stateTrialId ?? 'all');
     const item_name = selectedName || stateItemName;
 
     const globalItem = json?.items?.find(i => i.name === item_name);
 
+    const allTrialIds = Object.keys(json?.items_by_trial ?? {}).map(Number).sort((a, b) => a - b);
+
+    const trialClearRateMap = new Map<number, number>();
+    for (const trial of (json?.trials ?? [])) {
+        trialClearRateMap.set(trial.trial_id, trial.clear_rate * 100);
+    }
+
+    let baselineClearRate: number;
+    let activeTiers: TierStat[];
+
+    if (selectedTrialId === 'all') {
+        const trials = json?.trials ?? [];
+        baselineClearRate = trials.length > 0
+            ? trials.reduce((sum, t) => sum + t.clear_rate * 100, 0) / trials.length
+            : 0;
+        activeTiers = globalItem?.tiers ?? [];
+    } else {
+        baselineClearRate = trialClearRateMap.get(selectedTrialId) ?? 0;
+        const trialItem = (json?.items_by_trial?.[String(selectedTrialId)] ?? []).find(i => i.name === item_name);
+        activeTiers = trialItem?.tiers ?? [];
+    }
+
     const tierMap = new Map<number, TierRow>();
     const rarities = new Set<string>();
 
-    for (const t of globalItem?.tiers ?? []) {
+    for (const t of activeTiers) {
         if (!t.rarity || !(t.sims ?? 0)) continue;
         rarities.add(t.rarity);
         const row = tierMap.get(t.tier) ?? {tier: t.tier};
         const clears = t.clears ?? 0;
         const sims = t.sims!;
-        row[t.rarity] = (clears / sims) * 100;
+        const winRate = (clears / sims) * 100;
+        row[t.rarity] = winRate - baselineClearRate;
+        row[t.rarity + '_winrate'] = winRate;
         row[t.rarity + '_sims'] = sims;
         tierMap.set(t.tier, row);
     }
@@ -94,16 +125,16 @@ export default function ItemTierScaling() {
         return iA - iB;
     });
 
-    const overallRate = globalItem?.overall_rate;
+    const overallDelta = globalItem?.delta;
 
     return (
         <div style={{width: '100%'}}>
             <div style={{display: 'flex', alignItems: 'center', gap: 8, padding: '6px 0 10px'}}>
-                {trial_id != null && (
-                    <button onClick={() => navigate('/SingleItemTrials', {state: {item_name, trial_id}})}>← Back</button>
+                {stateTrialId != null && (
+                    <button onClick={() => navigate('/SingleItemTrials', {state: {item_name, trial_id: stateTrialId}})}>← Back</button>
                 )}
             </div>
-            <div style={{display: 'flex', justifyContent: 'center', margin: '12px 0 4px'}}>
+            <div style={{display: 'flex', justifyContent: 'center', gap: 12, margin: '12px 0 4px'}}>
                 <select
                     value={selectedName}
                     onChange={e => setSelectedName(e.target.value)}
@@ -113,35 +144,47 @@ export default function ItemTierScaling() {
                         <option key={item.name} value={item.name}>{item.name}</option>
                     ))}
                 </select>
+                <select
+                    value={selectedTrialId === 'all' ? 'all' : String(selectedTrialId)}
+                    onChange={e => setSelectedTrialId(e.target.value === 'all' ? 'all' : Number(e.target.value))}
+                    style={{fontSize: 15, padding: '4px 8px'}}
+                >
+                    <option value="all">All Trials</option>
+                    {allTrialIds.map(id => (
+                        <option key={id} value={String(id)}>Trial {id}{isBoss(id) ? ' ★' : ''}</option>
+                    ))}
+                </select>
             </div>
             <h2 style={{textAlign: 'center', marginBottom: 4, marginTop: 6}}>{item_name} — Tier Scaling</h2>
-            {overallRate != null && (
-                <p style={{textAlign: 'center', margin: '0 0 4px', fontSize: 13, color: '#555'}}>
-                    Overall win rate: {overallRate.toFixed(1)}%
-                    {globalItem?.delta != null && (
-                        <span style={{color: globalItem.delta >= 0 ? '#4caf50' : '#e57373', marginLeft: 8}}>
-                            ({globalItem.delta >= 0 ? '+' : ''}{globalItem.delta.toFixed(1)}% vs trial avg)
-                        </span>
-                    )}
-                </p>
-            )}
+            <p style={{textAlign: 'center', margin: '0 0 4px', fontSize: 13, color: '#555'}}>
+                {selectedTrialId === 'all'
+                    ? `Baseline: avg trial clear rate (${baselineClearRate.toFixed(1)}%)`
+                    : `Baseline: Trial ${selectedTrialId} clear rate (${baselineClearRate.toFixed(1)}%)`}
+                {overallDelta != null && (
+                    <span style={{color: overallDelta >= 0 ? '#4caf50' : '#e57373', marginLeft: 8}}>
+                        · overall delta {overallDelta >= 0 ? '+' : ''}{overallDelta.toFixed(1)}pp
+                    </span>
+                )}
+            </p>
             <p style={{textAlign: 'center', margin: '0 0 12px', fontSize: 12, color: '#888'}}>
-                dot opacity ∝ sample size · dashed line = overall win rate
+                dot opacity ∝ sample size · dashed line = item's overall delta (all trials)
             </p>
             {chartData.length === 0 ? (
-                <p style={{textAlign: 'center', color: '#888', marginTop: 40}}>No tier/rarity data available for this item.</p>
+                <p style={{textAlign: 'center', color: '#888', marginTop: 40}}>
+                    No tier/rarity data available for this item{selectedTrialId !== 'all' ? ' in this trial' : ''}.
+                </p>
             ) : (
                 <ResponsiveContainer height={480}>
-                    <ComposedChart data={chartData} margin={{top: 10, right: 40, left: 20, bottom: 20}}>
+                    <ComposedChart data={chartData} margin={{top: 10, right: 80, left: 50, bottom: 20}}>
                         <XAxis
                             dataKey="tier"
                             tickFormatter={(v) => `T${v}`}
                             label={{value: 'Tier', position: 'insideBottom', offset: -10, fontSize: 12, fill: '#666'}}
                         />
                         <YAxis
-                            domain={[0, 100]}
-                            tickFormatter={(v) => `${v}%`}
-                            label={{value: 'Win Rate', angle: -90, position: 'insideLeft', offset: 10, fontSize: 12, fill: '#666'}}
+                            domain={[(min: number) => Math.min(min, 0) - 5, (max: number) => Math.max(max, 0) + 5]}
+                            tickFormatter={(v: number) => `${v >= 0 ? '+' : ''}${v.toFixed(1)}pp`}
+                            label={{value: 'Delta vs Trial Avg', angle: -90, position: 'insideLeft', offset: -30, fontSize: 12, fill: '#666'}}
                         />
                         <Tooltip content={(props) => (
                             <TierScalingTooltip
@@ -150,12 +193,18 @@ export default function ItemTierScaling() {
                                 rarities={sortedRarities}
                             />
                         )}/>
-                        {overallRate != null && (
+                        <ReferenceLine
+                            y={0}
+                            stroke="#aaa"
+                            strokeDasharray="4 3"
+                            label={{value: 'trial avg', position: 'right', fontSize: 11, fill: '#aaa'}}
+                        />
+                        {overallDelta != null && selectedTrialId === 'all' && (
                             <ReferenceLine
-                                y={overallRate}
+                                y={overallDelta}
                                 stroke="#999"
                                 strokeDasharray="4 3"
-                                label={{value: `Overall ${overallRate.toFixed(1)}%`, position: 'right', fontSize: 11, fill: '#999'}}
+                                label={{value: `overall ${overallDelta >= 0 ? '+' : ''}${overallDelta.toFixed(1)}pp`, position: 'right', fontSize: 11, fill: '#999'}}
                             />
                         )}
                         {sortedRarities.map(r => (
