@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useData } from '../context/DataContext';
-import { getClassColor, getRarityColor, getRgbBarColor, RARITY_COLORS } from '../colors';
+import { getClassColor, getRarityColor, RARITY_COLORS } from '../colors';
 import type { Item } from '../types';
 
 interface CellData {
     itemName: string;
     trialId: number;
+    delta: number;
     winRate: number;
     sims: number | undefined;
     hasData: boolean;
@@ -27,12 +28,31 @@ const HEADER_H = 54;
 
 const ALL_RARITIES = Object.keys(RARITY_COLORS);
 
-// Returns the win rate and sims for an item filtered to the selected rarities.
+// Maps a delta (pp vs trial avg) to a diverging red→gray→green color. Caps at ±40pp.
+function getDeltaColor(delta: number): string {
+    const CAP = 40;
+    const t = Math.min(1, Math.max(-1, delta / CAP));
+    if (t <= 0) {
+        const u = 1 + t; // 0=red, 1=neutral
+        return `rgb(220,${Math.round(50 + 170 * u)},${Math.round(50 + 170 * u)})`;
+    } else {
+        const u = t; // 0=neutral, 1=green
+        return `rgb(${Math.round(220 - 170 * u)},${Math.round(220 - 40 * u)},${Math.round(220 - 170 * u)})`;
+    }
+}
+
+// Returns the filtered win rate, delta vs trial avg, and sims for the selected rarities.
 // Returns null if the item has no data for those rarities.
-function computeCellRate(item: Item, selected: Set<string>): { rate: number; sims: number | undefined } | null {
+function computeCellData(
+    item: Item,
+    selected: Set<string>,
+    trialClearRate: number,
+): { rate: number; delta: number; sims: number | undefined } | null {
     if (selected.size === 0) return null;
+
     if (selected.size === ALL_RARITIES.length) {
-        return { rate: item.win_rate, sims: item.total_sims };
+        const delta = item.delta ?? (item.win_rate - trialClearRate);
+        return { rate: item.win_rate, delta, sims: item.total_sims };
     }
 
     const matching = item.tiers.filter(t => t.rarity && selected.has(t.rarity));
@@ -41,11 +61,16 @@ function computeCellRate(item: Item, selected: Set<string>): { rate: number; sim
     const totalSims = matching.reduce((sum, t) => sum + (t.sims ?? 0), 0);
     const totalClears = matching.reduce((sum, t) => sum + (t.clears ?? 0), 0);
 
+    let rate: number;
+    let sims: number | undefined;
     if (totalSims > 0) {
-        return { rate: (totalClears / totalSims) * 100, sims: totalSims };
+        rate = (totalClears / totalSims) * 100;
+        sims = totalSims;
+    } else {
+        rate = matching.reduce((s, t) => s + t.rate, 0) / matching.length;
+        sims = undefined;
     }
-    // No sims data — fall back to simple average of rates
-    return { rate: matching.reduce((s, t) => s + t.rate, 0) / matching.length, sims: undefined };
+    return { rate, delta: rate - trialClearRate, sims };
 }
 
 const btnStyle = (active: boolean, color?: string): React.CSSProperties => ({
@@ -70,9 +95,14 @@ export default function ItemHeatmap() {
 
     const trialIds = Object.keys(itemsByTrial).map(Number).sort((a, b) => a - b);
 
+    const trialClearRateMap = new Map<number, number>();
+    for (const trial of (json?.trials ?? [])) {
+        trialClearRateMap.set(trial.trial_id, trial.clear_rate * 100);
+    }
+
     const sortedItems = [...globalItems].sort((a, b) => {
-        const ra = a.overall_rate ?? a.win_rate;
-        const rb = b.overall_rate ?? b.win_rate;
+        const ra = a.delta ?? -Infinity;
+        const rb = b.delta ?? -Infinity;
         return rb - ra;
     });
 
@@ -121,7 +151,7 @@ export default function ItemHeatmap() {
         <div style={{ width: '100%', padding: '0 16px 24px' }}>
             <h2 style={{ textAlign: 'center', marginBottom: 4, marginTop: 10 }}>Item × Trial Heatmap</h2>
             <p style={{ textAlign: 'center', margin: '0 0 10px', color: '#888', fontSize: 13 }}>
-                Win rate per item per trial · sorted by overall win rate (top = highest) · dim = low sample (&lt;{LOW_SIMS} sims)
+                Delta vs trial avg per item per trial · sorted by overall delta (top = most OP) · dim = low sample (&lt;{LOW_SIMS} sims)
                 · click cell → trial · click name → item detail
             </p>
 
@@ -140,15 +170,15 @@ export default function ItemHeatmap() {
 
             {/* Color scale legend */}
             <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: 8, marginBottom: 14, fontSize: 12, color: '#666' }}>
-                <span>0%</span>
+                <span>−40pp</span>
                 <div style={{
                     width: 140,
                     height: 12,
-                    background: 'linear-gradient(to right, rgb(255,0,0), rgb(160,80,0), rgb(0,180,0))',
+                    background: 'linear-gradient(to right, rgb(220,50,50), rgb(220,220,220), rgb(50,180,50))',
                     borderRadius: 2,
                     border: '1px solid #ccc',
                 }} />
-                <span>100%</span>
+                <span>+40pp</span>
                 <span style={{ marginLeft: 16, color: '#444' }}>■</span>
                 <span style={{ color: '#444' }}>not in trial / no data for rarity</span>
             </div>
@@ -188,13 +218,13 @@ export default function ItemHeatmap() {
 
                     {/* Item rows */}
                     {sortedItems.map(item => {
-                        const overallRate = item.overall_rate ?? item.win_rate;
+                        const overallDelta = item.delta;
                         return (
                             <React.Fragment key={item.name}>
                                 {/* Row label */}
                                 <div
                                     onClick={() => handleLabelClick(item.name)}
-                                    title={`${item.name} — overall ${overallRate.toFixed(1)}%`}
+                                    title={overallDelta != null ? `${item.name} — overall delta ${overallDelta >= 0 ? '+' : ''}${overallDelta.toFixed(1)}pp` : item.name}
                                     style={{
                                         height: CELL_H,
                                         display: 'flex',
@@ -219,8 +249,10 @@ export default function ItemHeatmap() {
                                 {/* Trial cells */}
                                 {trialIds.map(trialId => {
                                     const trialItem = lookup.get(trialId)?.get(item.name);
-                                    const computed = trialItem ? computeCellRate(trialItem, selectedRarities) : null;
+                                    const trialClearRate = trialClearRateMap.get(trialId) ?? 0;
+                                    const computed = trialItem ? computeCellData(trialItem, selectedRarities, trialClearRate) : null;
                                     const hasData = computed !== null;
+                                    const delta = computed?.delta ?? 0;
                                     const winRate = computed?.rate ?? 0;
                                     const sims = computed?.sims;
                                     const lowSample = hasData && (sims ?? 999) < LOW_SIMS;
@@ -229,7 +261,7 @@ export default function ItemHeatmap() {
                                             key={trialId}
                                             style={{
                                                 height: CELL_H,
-                                                background: hasData ? getRgbBarColor(winRate / 100) : '#222',
+                                                background: hasData ? getDeltaColor(delta) : '#222',
                                                 cursor: hasData ? 'pointer' : 'default',
                                                 border: '1px solid rgba(0,0,0,0.2)',
                                                 boxSizing: 'border-box',
@@ -239,7 +271,7 @@ export default function ItemHeatmap() {
                                             onMouseEnter={(e) => setTooltip({
                                                 x: e.clientX + 14,
                                                 y: e.clientY + 14,
-                                                cell: { itemName: item.name, trialId, winRate, sims, hasData },
+                                                cell: { itemName: item.name, trialId, delta, winRate, sims, hasData },
                                             })}
                                             onMouseMove={onMove}
                                             onMouseLeave={() => setTooltip(null)}
@@ -276,7 +308,12 @@ export default function ItemHeatmap() {
                     </div>
                     {tooltip.cell.hasData ? (
                         <>
-                            <div>Win rate: {tooltip.cell.winRate.toFixed(1)}%</div>
+                            <div style={{ color: tooltip.cell.delta >= 0 ? '#4caf50' : '#e57373' }}>
+                                Delta: {tooltip.cell.delta >= 0 ? '+' : ''}{tooltip.cell.delta.toFixed(1)}pp vs trial avg
+                            </div>
+                            <div style={{ color: '#888', fontSize: 12, marginTop: 2 }}>
+                                Win rate: {tooltip.cell.winRate.toFixed(1)}%
+                            </div>
                             {tooltip.cell.sims != null && (
                                 <div style={{
                                     color: tooltip.cell.sims < LOW_SIMS ? '#e57373' : '#888',
