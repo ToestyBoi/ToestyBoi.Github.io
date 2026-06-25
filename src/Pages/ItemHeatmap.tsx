@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useData } from '../context/DataContext';
-import { getClassColor, getRarityColor, RARITY_COLORS } from '../colors';
+import { getClassColor, getRarityColor, RARITY_COLORS, CLASS_CATEGORIES } from '../colors';
 import type { Item } from '../types';
 
 interface CellData {
@@ -27,6 +27,12 @@ const LABEL_W = 172;
 const HEADER_H = 54;
 
 const ALL_RARITIES = Object.keys(RARITY_COLORS);
+
+const CLASS_ORDER = Object.keys(CLASS_CATEGORIES);
+
+function getItemClass(name: string): string {
+    return CLASS_ORDER.find(cls => CLASS_CATEGORIES[cls].includes(name)) ?? 'zzz';
+}
 
 // Maps a delta (pp vs trial avg) to a diverging red→gray→green color. Caps at ±40pp.
 function getDeltaColor(delta: number): string {
@@ -89,6 +95,7 @@ export default function ItemHeatmap() {
     const { json } = useData();
     const [tooltip, setTooltip] = useState<TooltipState | null>(null);
     const [selectedRarities, setSelectedRarities] = useState<Set<string>>(new Set(ALL_RARITIES));
+    const [sortMode, setSortMode] = useState<'delta' | 'class'>('delta');
 
     const itemsByTrial = json?.items_by_trial ?? {};
     const globalItems: Item[] = json?.items ?? [];
@@ -101,6 +108,12 @@ export default function ItemHeatmap() {
     }
 
     const sortedItems = [...globalItems].sort((a, b) => {
+        if (sortMode === 'class') {
+            const ca = CLASS_ORDER.indexOf(getItemClass(a.name));
+            const cb = CLASS_ORDER.indexOf(getItemClass(b.name));
+            if (ca !== cb) return ca - cb;
+            return a.name.localeCompare(b.name);
+        }
         const ra = a.delta ?? -Infinity;
         const rb = b.delta ?? -Infinity;
         return rb - ra;
@@ -154,6 +167,20 @@ export default function ItemHeatmap() {
                 Delta vs trial avg per item per trial · sorted by overall delta (top = most OP) · dim = low sample (&lt;{LOW_SIMS} sims)
                 · click cell → trial · click name → item detail
             </p>
+
+            {/* Sort mode */}
+            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: 6, marginBottom: 10 }}>
+                <span style={{ fontSize: 12, color: '#666' }}>Sort:</span>
+                {(['delta', 'class'] as const).map(mode => (
+                    <button
+                        key={mode}
+                        style={btnStyle(sortMode === mode)}
+                        onClick={() => setSortMode(mode)}
+                    >
+                        {mode === 'delta' ? 'By Delta' : 'By Class'}
+                    </button>
+                ))}
+            </div>
 
             {/* Rarity filter */}
             <div style={{ display: 'flex', justifyContent: 'center', gap: 6, marginBottom: 12 }}>
