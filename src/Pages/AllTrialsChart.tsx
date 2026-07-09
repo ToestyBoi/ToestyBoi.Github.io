@@ -25,17 +25,33 @@ const isBossTrial = (id: number) => id % 5 === 0;
 // trials 1-3 ~100%, 4-5 slightly harder, then groups of 5 with a decreasing
 // clear rate ending in a boss spike, recovering after each boss.
 const computeExpectedRate = (trialId: number): number => {
+    // Early trials are very easy
     if (trialId <= 3) return 1.0;
     if (trialId === 4) return 0.90;
-    const group = Math.floor((trialId - 1) / 5);
-    const posInGroup = ((trialId - 1) % 5) + 1;
-    if (group === 0) return 0.30; // trial 5, first boss
-    const isBoss = posInGroup === 5;
-    const recovery = Math.max(0.35, 0.82 - (group - 1) * 0.04);
-    const bossRate = Math.max(0.12, 0.56 - (group - 1) * 0.02);
-    const preBoss = bossRate + 0.12;
-    const base = isBoss ? bossRate : recovery - ((posInGroup - 1) / 3) * (recovery - preBoss);
-    return Math.max(0, base - 0.40);
+    if (trialId === 5) return 0.5;
+
+    // Trials are organized in groups of 5 (5, 10, 15, etc. are bosses)
+    const groupIndex = Math.floor((trialId - 1) / 5);
+    const positionInGroup = ((trialId - 1) % 5) + 1;
+    const isBossTrial = positionInGroup === 5;
+
+    // Difficulty increases with each group
+    const groupProgression = groupIndex - 1;
+
+    // Base rates before applying difficulty boost
+    // Both decay at the same rate to maintain consistent slope within each group
+    const progressionMultiplier = groupProgression * 0.02; // each group should be 2% wr harder than previous group
+    const recoveryRate = 0.60 - progressionMultiplier;
+    const bossRate = 0.45 - progressionMultiplier; // boss floor should be 15% wr lower than x1 or x6 floor
+
+    // Linearly interpolate from recovery to boss difficulty
+    const perFloorDecreaseRate = (positionInGroup - 1) * 0.02; // drop 2% wr per non-boss floor in a group
+    const expectedRate = isBossTrial
+        ? bossRate
+        : recoveryRate - perFloorDecreaseRate;
+
+    // Cap at 100%
+    return Math.min(1.0, Math.max(0, expectedRate));
 };
 
 type EnrichedTrial = Trial & {
