@@ -43,13 +43,13 @@ const computeExpectedRate = (trialId: number): number => {
     // Both decay at the same rate to maintain consistent slope within each group
     const progressionMultiplier = groupProgression * 0.02; // each group should be 2% wr harder than previous group
     const recoveryRate = 0.60 - progressionMultiplier;
-    const bossRate = 0.45 - progressionMultiplier; // boss floor should be 15% wr lower than x1 or x6 floor
+    const bossRate = 0.45 - progressionMultiplier; // boss trial should be 15% wr lower than x1 or x6 trial
 
     // Linearly interpolate from recovery to boss difficulty
-    const perFloorDecreaseRate = (positionInGroup - 1) * 0.02; // drop 2% wr per non-boss floor in a group
+    const perTrialDecreaseRate = (positionInGroup - 1) * 0.02; // drop 2% wr per non-boss trial in a group
     const expectedRate = isBossTrial
         ? bossRate
-        : recoveryRate - perFloorDecreaseRate;
+        : recoveryRate - perTrialDecreaseRate;
 
     // Cap at 100%
     return Math.min(1.0, Math.max(0, expectedRate));
