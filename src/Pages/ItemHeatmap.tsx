@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useData } from '../context/DataContext';
 import { getClassColor, getRarityColor, RARITY_COLORS, CLASS_CATEGORIES } from '../colors';
 import type { Item } from '../types';
+import { getTitleWithFilename } from '../utils/getTitleWithFilename';
 
 interface CellData {
     itemName: string;
@@ -92,7 +93,7 @@ const btnStyle = (active: boolean, color?: string): React.CSSProperties => ({
 
 export default function ItemHeatmap() {
     const navigate = useNavigate();
-    const { json } = useData();
+    const { json, file_name, getFilteredTrials } = useData();
     const [tooltip, setTooltip] = useState<TooltipState | null>(null);
     const [selectedRarities, setSelectedRarities] = useState<Set<string>>(new Set(ALL_RARITIES));
     const [sortMode, setSortMode] = useState<'delta' | 'class'>('delta');
@@ -100,10 +101,11 @@ export default function ItemHeatmap() {
     const itemsByTrial = json?.items_by_trial ?? {};
     const globalItems: Item[] = json?.items ?? [];
 
-    const trialIds = Object.keys(itemsByTrial).map(Number).sort((a, b) => a - b);
+    const filteredTrials = getFilteredTrials();
+    const trialIds = filteredTrials.map(t => t.trial_id);
 
     const trialClearRateMap = new Map<number, number>();
-    for (const trial of (json?.trials ?? [])) {
+    for (const trial of filteredTrials) {
         trialClearRateMap.set(trial.trial_id, trial.clear_rate * 100);
     }
 
@@ -162,7 +164,7 @@ export default function ItemHeatmap() {
 
     return (
         <div style={{ width: '100%', padding: '0 16px 24px' }}>
-            <h2 style={{ textAlign: 'center', marginBottom: 4, marginTop: 10 }}>Item × Trial Heatmap</h2>
+            <h2 style={{ textAlign: 'center', marginBottom: 4, marginTop: 10 }}>{getTitleWithFilename('Item × Trial Heatmap', file_name)}</h2>
             <p style={{ textAlign: 'center', margin: '0 0 10px', color: '#888', fontSize: 13 }}>
                 Delta vs trial avg per item per trial · sorted by overall delta (top = most OP) · dim = low sample (&lt;{LOW_SIMS} sims)
                 · click cell → trial · click name → item detail

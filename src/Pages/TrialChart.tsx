@@ -4,6 +4,7 @@ import type {BarShapeProps} from "recharts";
 import type {Item, NavState, TierStat, Trial} from "../types";
 import {CLASS_COLORS, ITEM_CATEGORY_COLORS, getClassColor, getItemCategoryColor} from "../colors";
 import {useData} from "../context/DataContext";
+import {getTitleWithFilename} from "../utils/getTitleWithFilename";
 
 interface XAxisTickProps {
     x?: number;
@@ -106,14 +107,14 @@ const ItemTooltip = ({active, payload}: ItemTooltipProps) => {
 export default function TrialChart() {
     const navigate = useNavigate();
     const location = useLocation();
-    const {json, file_name} = useData();
+    const {json, file_name, getFilteredTrials} = useData();
     const {trial_id} = (location.state as NavState) || {};
 
     const rawItems: Item[] = (trial_id != null && json?.items_by_trial?.[trial_id]) || [];
     const trialData = [...rawItems].sort((a, b) => b.win_rate - a.win_rate);
     const trialSummary: Trial | undefined = json?.trials?.find((t) => t.trial_id === trial_id);
 
-    const trials = json?.trials ?? [];
+    const trials = getFilteredTrials();
     const currentIndex = trials.findIndex((t) => t.trial_id === trial_id);
     const prevTrial = currentIndex > 0 ? trials[currentIndex - 1] : undefined;
     const nextTrial = currentIndex >= 0 && currentIndex < trials.length - 1 ? trials[currentIndex + 1] : undefined;
@@ -138,7 +139,7 @@ export default function TrialChart() {
                 </button>
             </div>
             <h2 style={{textAlign: 'center', marginBottom: 10, marginTop: 10}}>
-                {file_name} — Trial {trial_id}
+                {getTitleWithFilename(`Trial ${trial_id}`, file_name)}
             </h2>
             <h4 style={{textAlign: 'center', marginBottom: 4, marginTop: 4}}>
                 {trialSummary && `Clear Rate: ${(trialSummary.clear_rate * 100).toFixed(1)}%  ·  Clears: ${trialSummary.total_clears.toLocaleString()} / ${trialSummary.total_sims.toLocaleString()} sims  ·  Players: ${trialSummary.unique_builds}`}

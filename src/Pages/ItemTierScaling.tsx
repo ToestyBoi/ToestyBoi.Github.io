@@ -4,6 +4,7 @@ import {ComposedChart, Line, ReferenceLine, ResponsiveContainer, Tooltip, XAxis,
 import type {NavState, TierStat} from '../types';
 import {getRarityColor, RARITY_COLORS} from '../colors';
 import {useData} from '../context/DataContext';
+import {getTitleWithFilename} from '../utils/getTitleWithFilename';
 
 const RARITY_ORDER = Object.keys(RARITY_COLORS);
 const LOW_SAMPLE_SIMS = 200;
@@ -66,7 +67,7 @@ const isBoss = (id: number) => id % 5 === 0;
 export default function ItemTierScaling() {
     const navigate = useNavigate();
     const location = useLocation();
-    const {json} = useData();
+    const {json, file_name, getFilteredTrials} = useData();
     const {item_name: stateItemName, trial_id: stateTrialId} = (location.state as NavState) || {};
 
     const allItems = (json?.items ?? []).slice().sort((a, b) => a.name.localeCompare(b.name));
@@ -76,10 +77,11 @@ export default function ItemTierScaling() {
 
     const globalItem = json?.items?.find(i => i.name === item_name);
 
-    const allTrialIds = Object.keys(json?.items_by_trial ?? {}).map(Number).sort((a, b) => a - b);
+    const filteredTrials = getFilteredTrials();
+    const allTrialIds = Object.keys(json?.items_by_trial ?? {}).map(Number).filter(id => filteredTrials.some(t => t.trial_id === id)).sort((a, b) => a - b);
 
     const trialClearRateMap = new Map<number, number>();
-    for (const trial of (json?.trials ?? [])) {
+    for (const trial of filteredTrials) {
         trialClearRateMap.set(trial.trial_id, trial.clear_rate * 100);
     }
 
@@ -87,9 +89,8 @@ export default function ItemTierScaling() {
     let activeTiers: TierStat[];
 
     if (selectedTrialId === 'all') {
-        const trials = json?.trials ?? [];
-        baselineClearRate = trials.length > 0
-            ? trials.reduce((sum, t) => sum + t.clear_rate * 100, 0) / trials.length
+        baselineClearRate = filteredTrials.length > 0
+            ? filteredTrials.reduce((sum, t) => sum + t.clear_rate * 100, 0) / filteredTrials.length
             : 0;
         activeTiers = globalItem?.tiers ?? [];
     } else {
@@ -155,7 +156,7 @@ export default function ItemTierScaling() {
                     ))}
                 </select>
             </div>
-            <h2 style={{textAlign: 'center', marginBottom: 4, marginTop: 6}}>{item_name} — Tier Scaling</h2>
+            <h2 style={{textAlign: 'center', marginBottom: 4, marginTop: 6}}>{getTitleWithFilename(`${item_name} — Tier Scaling`, file_name)}</h2>
             <p style={{textAlign: 'center', margin: '0 0 4px', fontSize: 13, color: '#555'}}>
                 {selectedTrialId === 'all'
                     ? `Baseline: avg trial clear rate (${baselineClearRate.toFixed(1)}%)`

@@ -1,9 +1,10 @@
-import {useState} from 'react';
+import {useState, useMemo} from 'react';
 import {CartesianGrid, ReferenceLine, ResponsiveContainer, Scatter, ScatterChart, Tooltip, XAxis, YAxis} from "recharts";
 import {useNavigate} from 'react-router-dom';
 import type {Item} from '../types';
 import {CLASS_CATEGORIES, CLASS_COLORS, getClassColor} from '../colors';
 import {useData} from '../context/DataContext';
+import {getTitleWithFilename} from '../utils/getTitleWithFilename';
 
 interface ScatterPoint {
     x: number; // delta (overperformance vs trial average)
@@ -39,19 +40,56 @@ const ScatterTooltip = ({active, payload}: ScatterTooltipProps) => {
 
 export default function ItemScatterPlot() {
     const navigate = useNavigate();
-    const {json} = useData();
+    const {json, file_name, getFilteredTrials, minTrial, maxTrial} = useData();
     const [selectedTrial, setSelectedTrial] = useState<number | null>(null);
 
-    const trials = json?.trials ?? [];
-    const trialIds = trials.map(t => t.trial_id).sort((a, b) => a - b);
+    const filteredTrials = getFilteredTrials();
+    const trialIds = filteredTrials.map(t => t.trial_id);
 
-    const items: Item[] = selectedTrial != null
-        ? (json?.items_by_trial?.[String(selectedTrial)] ?? [])
-        : (json?.items ?? []);
+    const items: Item[] = useMemo(() => {
+        if (selectedTrial != null) {
+            return json?.items_by_trial?.[String(selectedTrial)] ?? [];
+        }
+        // When "All Trials" is selected, aggregate stats from filtered trials only.
+        // For each item, sum clears/sims across filtered trials to get overall win_rate.
+        // getFilteredTrials() is called here, but we omit it from deps because it's derived
+        // solely from minTrial and maxTrial, which are already in the dependency array.
+        const trials = getFilteredTrials();
+        const avgTrialClearRate = trials.length > 0
+            ? trials.reduce((sum, t) => sum + t.clear_rate * 100, 0) / trials.length
+            : 50;
+
+        const itemAggregates = new Map<string, {clears: number; sims: number}>();
+        for (const trial of trials) {
+            const trialItems = json?.items_by_trial?.[String(trial.trial_id)] ?? [];
+            for (const item of trialItems) {
+                const current = itemAggregates.get(item.name) ?? {clears: 0, sims: 0};
+                // Sum across tiers and rarities for this item in this trial
+                const trialClears = item.tiers.reduce((sum, t) => sum + (t.clears ?? 0), 0);
+                const trialSims = item.tiers.reduce((sum, t) => sum + (t.sims ?? 0), 0);
+                current.clears += trialClears;
+                current.sims += trialSims;
+                itemAggregates.set(item.name, current);
+            }
+        }
+
+        return Array.from(itemAggregates.entries()).map(([name, {clears, sims}]) => {
+            const win_rate = sims > 0 ? (clears / sims) * 100 : 0;
+            const delta = win_rate - avgTrialClearRate;
+            return {
+                name,
+                win_rate,
+                delta,
+                total_sims: sims,
+                tiers: [],
+            } as Item;
+        });
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [selectedTrial, json, minTrial, maxTrial]);
 
     const avgWinRate: number | null = selectedTrial != null
-        ? ((trials.find(t => t.trial_id === selectedTrial)?.clear_rate ?? null) !== null
-            ? (trials.find(t => t.trial_id === selectedTrial)!.clear_rate * 100)
+        ? ((filteredTrials.find(t => t.trial_id === selectedTrial)?.clear_rate ?? null) !== null
+            ? (filteredTrials.find(t => t.trial_id === selectedTrial)!.clear_rate * 100)
             : null)
         : (() => {
             const visible = items.filter(i => i.delta != null && i.total_sims != null);
@@ -87,7 +125,7 @@ export default function ItemScatterPlot() {
 
     return (
         <div style={{width: '100%'}}>
-            <h2 style={{textAlign: 'center', marginBottom: 4, marginTop: 10}}>Item Outlier Scatter</h2>
+            <h2 style={{textAlign: 'center', marginBottom: 4, marginTop: 10}}>{getTitleWithFilename('Item Outlier Scatter', file_name)}</h2>
             <p style={{textAlign: 'center', margin: '0 0 8px', color: '#888', fontSize: 13}}>
                 X: delta vs trial avg · Y: total sims (data reliability) · top-right = reliably OP · top-left = reliably weak · click to drill in
             </p>
