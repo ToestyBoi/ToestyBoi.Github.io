@@ -4,6 +4,7 @@ import type {BarShapeProps} from "recharts";
 import type {Item, NavState, TierStat, Trial} from "../types";
 import {CLASS_COLORS, ITEM_CATEGORY_COLORS, getClassColor, getItemCategoryColor} from "../colors";
 import {useData} from "../context/DataContext";
+import {getTitleWithFilename} from "../utils/getTitleWithFilename";
 
 interface XAxisTickProps {
     x?: number;
@@ -138,7 +139,7 @@ export default function TrialChart() {
                 </button>
             </div>
             <h2 style={{textAlign: 'center', marginBottom: 10, marginTop: 10}}>
-                {file_name} — Trial {trial_id}
+                {getTitleWithFilename(`Trial ${trial_id}`, file_name)}
             </h2>
             <h4 style={{textAlign: 'center', marginBottom: 4, marginTop: 4}}>
                 {trialSummary && `Clear Rate: ${(trialSummary.clear_rate * 100).toFixed(1)}%  ·  Clears: ${trialSummary.total_clears.toLocaleString()} / ${trialSummary.total_sims.toLocaleString()} sims  ·  Players: ${trialSummary.unique_builds}`}

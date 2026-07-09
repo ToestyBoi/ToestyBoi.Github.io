@@ -15,6 +15,7 @@ import {useNavigate} from 'react-router-dom';
 import type {Trial} from '../types';
 import {useData} from '../context/DataContext';
 import {getRgbBarColor} from '../colors';
+import {getTitleWithFilename} from '../utils/getTitleWithFilename';
 
 const isBossTrial = (id: number) => id % 5 === 0;
 
@@ -131,7 +132,7 @@ export default function BuildDiversityChart() {
 
     return (
         <div style={{position: 'relative', width: '100%'}}>
-            <h2 style={{textAlign: 'center', marginBottom: 4, marginTop: 10}}>{file_name}</h2>
+            <h2 style={{textAlign: 'center', marginBottom: 4, marginTop: 10}}>{getTitleWithFilename('Build Diversity', file_name)}</h2>
             <p style={{textAlign: 'center', margin: '0 0 6px', color: '#888', fontSize: 13}}>
                 Build Diversity vs. Difficulty · ★ Boss trials · shaded bands group every 5 trials
                 {' · '}<span style={{color: '#00bcd4'}}>

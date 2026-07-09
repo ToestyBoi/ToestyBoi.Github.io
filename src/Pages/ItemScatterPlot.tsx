@@ -4,6 +4,7 @@ import {useNavigate} from 'react-router-dom';
 import type {Item} from '../types';
 import {CLASS_CATEGORIES, CLASS_COLORS, getClassColor} from '../colors';
 import {useData} from '../context/DataContext';
+import {getTitleWithFilename} from '../utils/getTitleWithFilename';
 
 interface ScatterPoint {
     x: number; // delta (overperformance vs trial average)
@@ -39,7 +40,7 @@ const ScatterTooltip = ({active, payload}: ScatterTooltipProps) => {
 
 export default function ItemScatterPlot() {
     const navigate = useNavigate();
-    const {json} = useData();
+    const {json, file_name} = useData();
     const [selectedTrial, setSelectedTrial] = useState<number | null>(null);
 
     const trials = json?.trials ?? [];
@@ -87,7 +88,7 @@ export default function ItemScatterPlot() {
 
     return (
         <div style={{width: '100%'}}>
-            <h2 style={{textAlign: 'center', marginBottom: 4, marginTop: 10}}>Item Outlier Scatter</h2>
+            <h2 style={{textAlign: 'center', marginBottom: 4, marginTop: 10}}>{getTitleWithFilename('Item Outlier Scatter', file_name)}</h2>
             <p style={{textAlign: 'center', margin: '0 0 8px', color: '#888', fontSize: 13}}>
                 X: delta vs trial avg · Y: total sims (data reliability) · top-right = reliably OP · top-left = reliably weak · click to drill in
             </p>

@@ -4,6 +4,7 @@ import {ComposedChart, Line, ReferenceLine, ResponsiveContainer, Tooltip, XAxis,
 import type {NavState, TierStat} from '../types';
 import {getRarityColor, RARITY_COLORS} from '../colors';
 import {useData} from '../context/DataContext';
+import {getTitleWithFilename} from '../utils/getTitleWithFilename';
 
 const RARITY_ORDER = Object.keys(RARITY_COLORS);
 const LOW_SAMPLE_SIMS = 200;
@@ -66,7 +67,7 @@ const isBoss = (id: number) => id % 5 === 0;
 export default function ItemTierScaling() {
     const navigate = useNavigate();
     const location = useLocation();
-    const {json} = useData();
+    const {json, file_name} = useData();
     const {item_name: stateItemName, trial_id: stateTrialId} = (location.state as NavState) || {};
 
     const allItems = (json?.items ?? []).slice().sort((a, b) => a.name.localeCompare(b.name));
@@ -155,7 +156,7 @@ export default function ItemTierScaling() {
                     ))}
                 </select>
             </div>
-            <h2 style={{textAlign: 'center', marginBottom: 4, marginTop: 6}}>{item_name} — Tier Scaling</h2>
+            <h2 style={{textAlign: 'center', marginBottom: 4, marginTop: 6}}>{getTitleWithFilename(`${item_name} — Tier Scaling`, file_name)}</h2>
             <p style={{textAlign: 'center', margin: '0 0 4px', fontSize: 13, color: '#555'}}>
                 {selectedTrialId === 'all'
                     ? `Baseline: avg trial clear rate (${baselineClearRate.toFixed(1)}%)`

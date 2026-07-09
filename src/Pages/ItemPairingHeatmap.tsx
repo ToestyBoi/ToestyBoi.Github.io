@@ -2,6 +2,7 @@ import React, { useMemo, useState } from 'react';
 import { useData } from '../context/DataContext';
 import { CLASS_CATEGORIES, CLASS_COLORS, getClassColor } from '../colors';
 import type { Build } from '../types';
+import { getTitleWithFilename } from '../utils/getTitleWithFilename';
 
 type Mode = 'character' | 'team';
 type SortBy = 'class' | 'frequency';
@@ -134,7 +135,7 @@ const btnStyle = (active: boolean, color?: string): React.CSSProperties => ({
 });
 
 export default function ItemPairingHeatmap() {
-    const { json } = useData();
+    const { json, file_name } = useData();
     const [mode, setMode] = useState<Mode>('character');
     const [sortBy, setSortBy] = useState<SortBy>('class');
     const [tooltip, setTooltip] = useState<TooltipData | null>(null);
@@ -170,7 +171,7 @@ export default function ItemPairingHeatmap() {
 
     return (
         <div style={{ width: '100%', padding: '0 16px 24px' }}>
-            <h2 style={{ textAlign: 'center', marginBottom: 4, marginTop: 10 }}>Item Co-Occurrence Heatmap</h2>
+            <h2 style={{ textAlign: 'center', marginBottom: 4, marginTop: 10 }}>{getTitleWithFilename('Item Co-Occurrence Heatmap', file_name)}</h2>
             <p style={{ textAlign: 'center', margin: '0 0 10px', color: '#888', fontSize: 13 }}>
                 How often items are paired together · {totalBuilds.toLocaleString()} builds across all trials · hover for details
             </p>

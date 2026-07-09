@@ -16,6 +16,7 @@ import {useNavigate} from 'react-router-dom';
 import type {Item, Trial} from "../types";
 import {getRgbBarColor, RARITY_COLORS} from "../colors";
 import {useData} from "../context/DataContext";
+import {getTitleWithFilename} from "../utils/getTitleWithFilename";
 
 const RARITIES = ['Common', 'Uncommon', 'Rare', 'Epic'] as const;
 
@@ -211,7 +212,7 @@ export default function AllTrialsChart() {
 
     return (
         <div style={{position: "relative", width: '100%'}}>
-            <h2 style={{textAlign: 'center', marginBottom: 4, marginTop: 10}}>{file_name}</h2>
+            <h2 style={{textAlign: 'center', marginBottom: 4, marginTop: 10}}>{getTitleWithFilename('All Trials', file_name)}</h2>
             <p style={{textAlign: 'center', margin: '0 0 6px', color: '#888', fontSize: 13}}>
                 ★ Boss trials (every 5th) · shaded bands group every 5 trials
                 {showAvgTier && (
