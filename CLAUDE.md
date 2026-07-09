@@ -55,6 +55,10 @@ The uploaded JSON is stored in a React context (`src/context/DataContext.tsx`, `
 Home → AllTrialsChart → TrialChart → SingleItemTrials
 ```
 
+### Trial filtering
+
+Users can filter trials by a min/max range using the "Filter Trials" button in the NavBar (visible on all chart pages). The context (`DataContext`) stores `minTrial` and `maxTrial`, and provides `getFilteredTrials()` to retrieve filtered results. Each chart page uses `getFilteredTrials()` to only display trials within the selected range. Filter state persists across page navigation.
+
 ### Data shapes (`src/types.ts`)
 
 - `ClearRateData` — top-level export: `trials` (array of `Trial`), `items` (array of `Item`), `items_by_trial` (map of trial ID → `Item[]`), `sims_per_build`, `trials_version`
