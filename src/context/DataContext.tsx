@@ -36,7 +36,7 @@ export function DataProvider({children}: { children: ReactNode }) {
                 return true;
             });
         },
-        [json?.trials, minTrial, maxTrial]
+        [json, minTrial, maxTrial]
     );
 
     const getFilteredItemsByTrial = useMemo(
@@ -45,7 +45,7 @@ export function DataProvider({children}: { children: ReactNode }) {
             const items = json.items_by_trial[String(trialId)];
             return items || [];
         },
-        [json?.items_by_trial]
+        [json]
     );
 
     return (

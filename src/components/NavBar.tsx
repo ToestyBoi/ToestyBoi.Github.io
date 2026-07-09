@@ -43,12 +43,12 @@ export default function NavBar() {
     const menuRef = useRef<HTMLDivElement>(null);
     const filterRef = useRef<HTMLDivElement>(null);
 
-    useEffect(() => {
-        if (minTrial != null && maxTrial != null) {
-            setInputMin(String(minTrial));
-            setInputMax(String(maxTrial));
-        }
-    }, [minTrial, maxTrial]);
+    // Sync input values with context when filter dropdown opens
+    const handleFilterOpen = () => {
+        if (minTrial != null) setInputMin(String(minTrial));
+        if (maxTrial != null) setInputMax(String(maxTrial));
+        setFilterOpen(true);
+    };
 
     useEffect(() => {
         const handler = (e: MouseEvent) => {
@@ -59,9 +59,11 @@ export default function NavBar() {
                 setFilterOpen(false);
             }
         };
-        document.addEventListener('mousedown', handler);
-        return () => document.removeEventListener('mousedown', handler);
-    }, []);
+        if (menuOpen || filterOpen) {
+            document.addEventListener('mousedown', handler);
+            return () => document.removeEventListener('mousedown', handler);
+        }
+    }, [menuOpen, filterOpen]);
 
     const maxAvailableTrial = json?.trials ? Math.max(...json.trials.map(t => t.trial_id)) : 0;
 
@@ -105,7 +107,7 @@ export default function NavBar() {
             {location.pathname !== '/' && (
                 <div ref={filterRef} style={{position: 'relative'}}>
                     <button
-                        onClick={() => setFilterOpen(v => !v)}
+                        onClick={() => filterOpen ? setFilterOpen(false) : handleFilterOpen()}
                         style={{
                             ...filterButtonStyle,
                             fontWeight: (minTrial != null || maxTrial != null) ? 600 : 400,
