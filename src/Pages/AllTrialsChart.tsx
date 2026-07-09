@@ -173,7 +173,7 @@ export default function AllTrialsChart() {
     const {json, file_name} = useData();
     const [showExpected, setShowExpected] = useState(true);
     const [showDeviation, setShowDeviation] = useState(false);
-    const [showAvgTier, setShowAvgTier] = useState(true);
+    const [showAvgTier, setShowAvgTier] = useState(false);
 
     const trialData: EnrichedTrial[] = (json?.trials ?? []).map(t => {
         const items = (json?.items_by_trial?.[String(t.trial_id)] ?? []) as Item[];
