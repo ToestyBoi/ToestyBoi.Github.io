@@ -4,6 +4,7 @@ import {ComposedChart, Line, ResponsiveContainer, Tooltip, XAxis, YAxis} from "r
 import type {NavState} from "../types";
 import {getRarityColor, RARITY_COLORS} from "../colors";
 import {useData} from "../context/DataContext";
+import {getTitleWithFilename} from "../utils/getTitleWithFilename";
 
 interface TrialRow {
     trial: number;
@@ -90,10 +91,10 @@ const SingleItemTooltip = ({active, payload, series, viewMode, allRarities}: Sin
 export default function SingleItemTrials() {
     const navigate = useNavigate();
     const location = useLocation();
-    const {json} = useData();
+    const {json, file_name, getFilteredTrials} = useData();
     const {item_name, trial_id} = (location.state as NavState) || {};
 
-    const trials = json?.trials ?? [];
+    const trials = getFilteredTrials();
     const itemsByTrial = json?.items_by_trial ?? {};
     const globalItem = json?.items?.find(i => i.name === item_name);
 
@@ -205,7 +206,7 @@ export default function SingleItemTrials() {
                     Tier Scaling →
                 </button>
             </div>
-            <h2 style={{textAlign: 'center', marginBottom: 4, marginTop: 10}}>{item_name}</h2>
+            <h2 style={{textAlign: 'center', marginBottom: 4, marginTop: 10}}>{getTitleWithFilename(item_name ?? 'Item', file_name)}</h2>
             {globalItem && (
                 <p style={{textAlign: 'center', margin: '0 0 8px', fontSize: 13, color: '#555'}}>
                     Overall win rate: {globalItem.overall_rate?.toFixed(1)}%

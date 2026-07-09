@@ -16,6 +16,7 @@ import {useNavigate} from 'react-router-dom';
 import type {Item, Trial} from "../types";
 import {getRgbBarColor, RARITY_COLORS} from "../colors";
 import {useData} from "../context/DataContext";
+import {getTitleWithFilename} from "../utils/getTitleWithFilename";
 
 const RARITIES = ['Common', 'Uncommon', 'Rare', 'Epic'] as const;
 
@@ -42,13 +43,13 @@ const computeExpectedRate = (trialId: number): number => {
     // Both decay at the same rate to maintain consistent slope within each group
     const progressionMultiplier = groupProgression * 0.02; // each group should be 2% wr harder than previous group
     const recoveryRate = 0.60 - progressionMultiplier;
-    const bossRate = 0.45 - progressionMultiplier; // boss floor should be 15% wr lower than x1 or x6 floor
+    const bossRate = 0.45 - progressionMultiplier; // boss trial should be 15% wr lower than x1 or x6 trial
 
     // Linearly interpolate from recovery to boss difficulty
-    const perFloorDecreaseRate = (positionInGroup - 1) * 0.02; // drop 2% wr per non-boss floor in a group
+    const perTrialDecreaseRate = (positionInGroup - 1) * 0.02; // drop 2% wr per non-boss trial in a group
     const expectedRate = isBossTrial
         ? bossRate
-        : recoveryRate - perFloorDecreaseRate;
+        : recoveryRate - perTrialDecreaseRate;
 
     // Cap at 100%
     return Math.min(1.0, Math.max(0, expectedRate));
@@ -169,12 +170,12 @@ const btnStyle = (active: boolean) => ({
 
 export default function AllTrialsChart() {
     const navigate = useNavigate();
-    const {json, file_name} = useData();
+    const {json, file_name, getFilteredTrials} = useData();
     const [showExpected, setShowExpected] = useState(true);
     const [showDeviation, setShowDeviation] = useState(false);
-    const [showAvgTier, setShowAvgTier] = useState(true);
+    const [showAvgTier, setShowAvgTier] = useState(false);
 
-    const trialData: EnrichedTrial[] = (json?.trials ?? []).map(t => {
+    const trialData: EnrichedTrial[] = getFilteredTrials().map(t => {
         const items = (json?.items_by_trial?.[String(t.trial_id)] ?? []) as Item[];
         const accum: Record<string, { tierSimSum: number; simSum: number }> = {};
         for (const item of items) {
@@ -211,7 +212,7 @@ export default function AllTrialsChart() {
 
     return (
         <div style={{position: "relative", width: '100%'}}>
-            <h2 style={{textAlign: 'center', marginBottom: 4, marginTop: 10}}>{file_name}</h2>
+            <h2 style={{textAlign: 'center', marginBottom: 4, marginTop: 10}}>{getTitleWithFilename('All Trials', file_name)}</h2>
             <p style={{textAlign: 'center', margin: '0 0 6px', color: '#888', fontSize: 13}}>
                 ★ Boss trials (every 5th) · shaded bands group every 5 trials
                 {showAvgTier && (
