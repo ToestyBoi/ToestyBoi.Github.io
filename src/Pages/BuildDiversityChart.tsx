@@ -98,10 +98,10 @@ const btnStyle = (active: boolean) => ({
 
 export default function BuildDiversityChart() {
     const navigate = useNavigate();
-    const {json, file_name} = useData();
+    const {file_name, getFilteredTrials} = useData();
     const [showRaw, setShowRaw] = useState(false);
 
-    const trialData: EnrichedTrial[] = (json?.trials ?? []).map(t => {
+    const trialData: EnrichedTrial[] = getFilteredTrials().map(t => {
         const approx_players = Math.max(1, Math.round(t.total_sims / 100));
         const unique_builds = t.builds
             ? new Set(t.builds.map(b =>

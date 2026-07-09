@@ -93,7 +93,7 @@ const btnStyle = (active: boolean, color?: string): React.CSSProperties => ({
 
 export default function ItemHeatmap() {
     const navigate = useNavigate();
-    const { json, file_name } = useData();
+    const { json, file_name, getFilteredTrials } = useData();
     const [tooltip, setTooltip] = useState<TooltipState | null>(null);
     const [selectedRarities, setSelectedRarities] = useState<Set<string>>(new Set(ALL_RARITIES));
     const [sortMode, setSortMode] = useState<'delta' | 'class'>('delta');
@@ -101,10 +101,11 @@ export default function ItemHeatmap() {
     const itemsByTrial = json?.items_by_trial ?? {};
     const globalItems: Item[] = json?.items ?? [];
 
-    const trialIds = Object.keys(itemsByTrial).map(Number).sort((a, b) => a - b);
+    const filteredTrials = getFilteredTrials();
+    const trialIds = filteredTrials.map(t => t.trial_id);
 
     const trialClearRateMap = new Map<number, number>();
-    for (const trial of (json?.trials ?? [])) {
+    for (const trial of filteredTrials) {
         trialClearRateMap.set(trial.trial_id, trial.clear_rate * 100);
     }
 

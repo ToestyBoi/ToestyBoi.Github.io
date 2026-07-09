@@ -107,14 +107,14 @@ const ItemTooltip = ({active, payload}: ItemTooltipProps) => {
 export default function TrialChart() {
     const navigate = useNavigate();
     const location = useLocation();
-    const {json, file_name} = useData();
+    const {json, file_name, getFilteredTrials} = useData();
     const {trial_id} = (location.state as NavState) || {};
 
     const rawItems: Item[] = (trial_id != null && json?.items_by_trial?.[trial_id]) || [];
     const trialData = [...rawItems].sort((a, b) => b.win_rate - a.win_rate);
     const trialSummary: Trial | undefined = json?.trials?.find((t) => t.trial_id === trial_id);
 
-    const trials = json?.trials ?? [];
+    const trials = getFilteredTrials();
     const currentIndex = trials.findIndex((t) => t.trial_id === trial_id);
     const prevTrial = currentIndex > 0 ? trials[currentIndex - 1] : undefined;
     const nextTrial = currentIndex >= 0 && currentIndex < trials.length - 1 ? trials[currentIndex + 1] : undefined;

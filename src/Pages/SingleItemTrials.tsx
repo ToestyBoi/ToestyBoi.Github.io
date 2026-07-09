@@ -91,10 +91,10 @@ const SingleItemTooltip = ({active, payload, series, viewMode, allRarities}: Sin
 export default function SingleItemTrials() {
     const navigate = useNavigate();
     const location = useLocation();
-    const {json, file_name} = useData();
+    const {json, file_name, getFilteredTrials} = useData();
     const {item_name, trial_id} = (location.state as NavState) || {};
 
-    const trials = json?.trials ?? [];
+    const trials = getFilteredTrials();
     const itemsByTrial = json?.items_by_trial ?? {};
     const globalItem = json?.items?.find(i => i.name === item_name);
 

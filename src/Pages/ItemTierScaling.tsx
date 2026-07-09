@@ -67,7 +67,7 @@ const isBoss = (id: number) => id % 5 === 0;
 export default function ItemTierScaling() {
     const navigate = useNavigate();
     const location = useLocation();
-    const {json, file_name} = useData();
+    const {json, file_name, getFilteredTrials} = useData();
     const {item_name: stateItemName, trial_id: stateTrialId} = (location.state as NavState) || {};
 
     const allItems = (json?.items ?? []).slice().sort((a, b) => a.name.localeCompare(b.name));
@@ -77,10 +77,11 @@ export default function ItemTierScaling() {
 
     const globalItem = json?.items?.find(i => i.name === item_name);
 
-    const allTrialIds = Object.keys(json?.items_by_trial ?? {}).map(Number).sort((a, b) => a - b);
+    const filteredTrials = getFilteredTrials();
+    const allTrialIds = Object.keys(json?.items_by_trial ?? {}).map(Number).filter(id => filteredTrials.some(t => t.trial_id === id)).sort((a, b) => a - b);
 
     const trialClearRateMap = new Map<number, number>();
-    for (const trial of (json?.trials ?? [])) {
+    for (const trial of filteredTrials) {
         trialClearRateMap.set(trial.trial_id, trial.clear_rate * 100);
     }
 
@@ -88,9 +89,8 @@ export default function ItemTierScaling() {
     let activeTiers: TierStat[];
 
     if (selectedTrialId === 'all') {
-        const trials = json?.trials ?? [];
-        baselineClearRate = trials.length > 0
-            ? trials.reduce((sum, t) => sum + t.clear_rate * 100, 0) / trials.length
+        baselineClearRate = filteredTrials.length > 0
+            ? filteredTrials.reduce((sum, t) => sum + t.clear_rate * 100, 0) / filteredTrials.length
             : 0;
         activeTiers = globalItem?.tiers ?? [];
     } else {

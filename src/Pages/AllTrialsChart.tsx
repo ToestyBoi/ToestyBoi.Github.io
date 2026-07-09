@@ -170,12 +170,12 @@ const btnStyle = (active: boolean) => ({
 
 export default function AllTrialsChart() {
     const navigate = useNavigate();
-    const {json, file_name} = useData();
+    const {json, file_name, getFilteredTrials} = useData();
     const [showExpected, setShowExpected] = useState(true);
     const [showDeviation, setShowDeviation] = useState(false);
     const [showAvgTier, setShowAvgTier] = useState(false);
 
-    const trialData: EnrichedTrial[] = (json?.trials ?? []).map(t => {
+    const trialData: EnrichedTrial[] = getFilteredTrials().map(t => {
         const items = (json?.items_by_trial?.[String(t.trial_id)] ?? []) as Item[];
         const accum: Record<string, { tierSimSum: number; simSum: number }> = {};
         for (const item of items) {

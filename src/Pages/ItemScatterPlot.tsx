@@ -40,11 +40,11 @@ const ScatterTooltip = ({active, payload}: ScatterTooltipProps) => {
 
 export default function ItemScatterPlot() {
     const navigate = useNavigate();
-    const {json, file_name} = useData();
+    const {json, file_name, getFilteredTrials} = useData();
     const [selectedTrial, setSelectedTrial] = useState<number | null>(null);
 
-    const trials = json?.trials ?? [];
-    const trialIds = trials.map(t => t.trial_id).sort((a, b) => a - b);
+    const trials = getFilteredTrials();
+    const trialIds = trials.map(t => t.trial_id);
 
     const items: Item[] = selectedTrial != null
         ? (json?.items_by_trial?.[String(selectedTrial)] ?? [])

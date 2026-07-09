@@ -135,14 +135,14 @@ const btnStyle = (active: boolean, color?: string): React.CSSProperties => ({
 });
 
 export default function ItemPairingHeatmap() {
-    const { json, file_name } = useData();
+    const { file_name, getFilteredTrials } = useData();
     const [mode, setMode] = useState<Mode>('character');
     const [sortBy, setSortBy] = useState<SortBy>('class');
     const [tooltip, setTooltip] = useState<TooltipData | null>(null);
 
     const allBuilds: Build[] = useMemo(
-        () => (json?.trials ?? []).flatMap(t => t.builds ?? []),
-        [json]
+        () => getFilteredTrials().flatMap(t => t.builds ?? []),
+        [getFilteredTrials]
     );
 
     const { items, matrix, appearances, totalBuilds } = useMemo(
