@@ -64,6 +64,8 @@ type EnrichedTrial = Trial & {
     avg_tier_Epic?: number;
 };
 
+const PX_PER_TRIAL = 32;
+
 const renderTrialBar = ({x, y, width, height, payload}: BarShapeProps) => (
     <Rectangle x={x} y={y} width={width} height={height} fill={getRgbBarColor((payload as Trial).clear_rate)}/>
 );
@@ -197,6 +199,7 @@ export default function AllTrialsChart() {
         };
     });
     const maxTrialId = trialData.length > 0 ? Math.max(...trialData.map(t => t.trial_id)) : 0;
+    const chartWidth = trialData.length * PX_PER_TRIAL;
 
     const groupBands = [];
     for (let start = 1; start <= maxTrialId; start += 5) {
@@ -237,8 +240,10 @@ export default function AllTrialsChart() {
                     {showAvgTier ? 'Hide' : 'Show'} Avg Tier
                 </button>
             </div>
-            <ResponsiveContainer height={500}>
-                <ComposedChart data={trialData} margin={{top: 5, right: 50, left: 20, bottom: 100}}>
+            <div style={{overflowX: 'auto'}}>
+                <div style={{width: chartWidth, minWidth: '100%'}}>
+                    <ResponsiveContainer width="100%" height={500}>
+                        <ComposedChart data={trialData} margin={{top: 5, right: 50, left: 20, bottom: 100}}>
                     {groupBands.map(({x1, x2}) => (
                         <ReferenceArea key={x1} x1={x1} x2={x2} fill="#888" fillOpacity={0.08} stroke="none"/>
                     ))}
@@ -292,14 +297,18 @@ export default function AllTrialsChart() {
                         />
                     ))}
                 </ComposedChart>
-            </ResponsiveContainer>
+                    </ResponsiveContainer>
+                </div>
+            </div>
             {showDeviation && (
                 <>
                     <h3 style={{textAlign: 'center', margin: '16px 0 4px', fontSize: 14, color: '#555'}}>
                         Deviation from Expected (actual − expected)
                     </h3>
-                    <ResponsiveContainer height={400}>
-                        <ComposedChart data={trialData} margin={{top: 5, right: 50, left: 20, bottom: 60}}>
+                    <div style={{overflowX: 'auto'}}>
+                        <div style={{width: chartWidth, minWidth: '100%'}}>
+                            <ResponsiveContainer width="100%" height={400}>
+                                <ComposedChart data={trialData} margin={{top: 5, right: 50, left: 20, bottom: 60}}>
                             {groupBands.map(({x1, x2}) => (
                                 <ReferenceArea key={x1} x1={x1} x2={x2} fill="#888" fillOpacity={0.08} stroke="none"/>
                             ))}
@@ -320,7 +329,9 @@ export default function AllTrialsChart() {
                                 onClick={(data) => handleClick(data.payload)}
                             />
                         </ComposedChart>
-                    </ResponsiveContainer>
+                        </ResponsiveContainer>
+                        </div>
+                    </div>
                 </>
             )}
         </div>
