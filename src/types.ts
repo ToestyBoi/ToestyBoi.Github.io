@@ -8,13 +8,6 @@ export interface TierStat {
     sims: number;
 }
 
-export interface CoEquipped {
-    name: string;
-    rate: number;
-    clears?: number;
-    sims?: number;
-}
-
 export interface Item {
     name: string;
     win_rate: number;
@@ -40,6 +33,34 @@ export interface Build {
     max_tier: number;
     min_tier: number;
     death_waves: Record<string, number>;
+    attempts?: number;
+    party?: PartyMember[];
+    threads?: unknown;
+    total_level?: number;
+    wards?: unknown;
+}
+
+export interface AvgTierByRarity {
+    avg_tier: number;
+    count: number;
+    rarity: string;
+}
+
+export interface ClearCost {
+    avg_attempts: number;
+    avg_threads: number;
+    avg_wards: number;
+    builds: number;
+}
+
+export interface PartyMember {
+    dex: number;
+    hp: number;
+    int: number;
+    items: unknown[];
+    name: string;
+    soul: unknown;
+    str_: number;
 }
 
 export interface DeathWave {
@@ -55,6 +76,9 @@ export interface Trial {
     clear_rate: number;
     avg_level: number;
     avg_tier: number;
+    avg_tier_by_rarity?: AvgTierByRarity[];
+    avg_total_level?: number;
+    clear_cost?: ClearCost;
     total_clears: number;
     total_sims: number;
     total_losses: number;
