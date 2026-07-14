@@ -35,10 +35,9 @@ function getItemClass(name: string): string {
     return CLASS_ORDER.find(cls => CLASS_CATEGORIES[cls].includes(name)) ?? 'zzz';
 }
 
-// Maps a delta (pp vs trial avg) to a diverging red→gray→green color. Caps at ±40pp.
-function getDeltaColor(delta: number): string {
-    const CAP = 40;
-    const t = Math.min(1, Math.max(-1, delta / CAP));
+// Maps a delta (pp vs trial avg) to a diverging red→gray→green color.
+function getDeltaColor(delta: number, cap: number): string {
+    const t = Math.min(1, Math.max(-1, delta / cap));
     if (t <= 0) {
         const u = 1 + t; // 0=red, 1=neutral
         return `rgb(220,${Math.round(50 + 170 * u)},${Math.round(50 + 170 * u)})`;
@@ -108,6 +107,23 @@ export default function ItemHeatmap() {
     for (const trial of filteredTrials) {
         trialClearRateMap.set(trial.trial_id, trial.clear_rate * 100);
     }
+
+    // Calculate delta cap from filtered trials to scale colors appropriately
+    let minDelta = 0, maxDelta = 0;
+    for (const item of globalItems) {
+        for (const trial of filteredTrials) {
+            const trialItem = (itemsByTrial[String(trial.trial_id)] ?? []).find(i => i.name === item.name);
+            if (trialItem) {
+                const trialClearRate = trialClearRateMap.get(trial.trial_id) ?? 0;
+                const computed = computeCellData(trialItem, new Set(ALL_RARITIES), trialClearRate);
+                if (computed) {
+                    minDelta = Math.min(minDelta, computed.delta);
+                    maxDelta = Math.max(maxDelta, computed.delta);
+                }
+            }
+        }
+    }
+    const deltaCap = Math.max(Math.abs(minDelta), Math.abs(maxDelta));
 
     const sortedItems = [...globalItems].sort((a, b) => {
         if (sortMode === 'class') {
@@ -199,7 +215,7 @@ export default function ItemHeatmap() {
 
             {/* Color scale legend */}
             <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: 8, marginBottom: 14, fontSize: 12, color: '#666' }}>
-                <span>−40pp</span>
+                <span>−{deltaCap.toFixed(0)}pp</span>
                 <div style={{
                     width: 140,
                     height: 12,
@@ -207,7 +223,7 @@ export default function ItemHeatmap() {
                     borderRadius: 2,
                     border: '1px solid #ccc',
                 }} />
-                <span>+40pp</span>
+                <span>+{deltaCap.toFixed(0)}pp</span>
                 <span style={{ marginLeft: 16, color: '#444' }}>■</span>
                 <span style={{ color: '#444' }}>not in trial / no data for rarity</span>
             </div>
@@ -290,7 +306,7 @@ export default function ItemHeatmap() {
                                             key={trialId}
                                             style={{
                                                 height: CELL_H,
-                                                background: hasData ? getDeltaColor(delta) : '#222',
+                                                background: hasData ? getDeltaColor(delta, deltaCap) : '#222',
                                                 cursor: hasData ? 'pointer' : 'default',
                                                 border: '1px solid rgba(0,0,0,0.2)',
                                                 boxSizing: 'border-box',
