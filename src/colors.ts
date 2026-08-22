@@ -22,10 +22,13 @@ export const ITEM_CATEGORIES: Record<string, string[]> = {
         "Dragon Kris"
     ],
     aoe: [
-        "Reaver Halberd", "Cleaving Halberd",
+        "Reaver Halberd",
+        "Cleaving Halberd",
         "Void Scythe",
         "Tidal Band",
-        "Arcane Bolt"
+        "Arcane Bolt",
+        "Storm Hammer",
+        "Crackling Embers"
     ],
 };
 
@@ -42,8 +45,10 @@ export const CLASS_CATEGORIES: Record<string, string[]> = {
         "Berserker's Gauntlet",
         "Crescendo Blades",
         "Demon Cat Idol",
+        "Diminuendo Sword",
         "Hydra Lance",
         "Reaver Halberd",
+        "Storm Hammer",
         "Titan's Axe",
         "Toxic Trident",
         "Umbra’s Piercer",
@@ -53,6 +58,7 @@ export const CLASS_CATEGORIES: Record<string, string[]> = {
         "Aegis Plate",
         "Basher Shield",
         "Chonk Whistle",
+        "Iron Thistle",
         "Mirror Cloak",
         "Noxious Scales",
         "Paladin's Helm",
@@ -65,20 +71,24 @@ export const CLASS_CATEGORIES: Record<string, string[]> = {
         "Herbal Mist",
         "Holy Pendant",
         "Loaf Cat Plush",
+        "Monsoon",
         "Oracle's Staff",
         "Verdant Wreath",
         "Void Nectar",
     ],
     spell: [
         "Arcane Bolt",
+        "Crackling Embers",
         "Deathmark Tome",
         "Dragon Kris",
         "Malignant Staff",
         "Mouse Charm",
         "Prism Barrier",
+        "Stick of Doom",
         "Supernova Pyre",
         "Tidal Band",
-        "Void Burst"
+        "Void Burst",
+        "Void Rime"
     ],
     utility: [
         "Assassin's Mark",
@@ -87,6 +97,7 @@ export const CLASS_CATEGORIES: Record<string, string[]> = {
         "Hex Doll",
         "Pompom of Pep",
         "Tempest Edge",
+        "Tiara of Bells",
         "Virulent Darts",
         "Void Caster",
         "Windrunner Boots"
