@@ -51,6 +51,7 @@ export const CLASS_CATEGORIES: Record<string, string[]> = {
         "Reaver Halberd",
         "Storm Hammer",
         "Titan's Axe",
+        "Throwing Axe",
         "Toxic Trident",
         "Umbra’s Piercer",
         "Void Scythe"

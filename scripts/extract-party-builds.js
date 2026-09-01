@@ -13,7 +13,7 @@ function formatSeason(rawSeason) {
 function main() {
     const partyNames = process.argv.slice(2).length > 0
         ? process.argv.slice(2)
-        : ['spooky6', 'spooky'];
+        : ['spooky6', 'spooky', 'fushinopanic', 'Fushi', 'bellevelynn', 'Bellevelynn', 'mnlily'];
     const outputPath = partyNames.length === 1 && partyNames[0].endsWith('.json')
         ? partyNames[0]
         : 'src/spooky-data/spooky-builds.json';
@@ -26,6 +26,7 @@ function main() {
 
     const allRecords = [];
     const seasonCounts = {};
+    const partyCounts = {};
 
     for (const file of files) {
         const match = file.match(/^clear-rates-all-(.+)\.json$/);
@@ -50,7 +51,8 @@ function main() {
             const builds = trial.builds || [];
             for (const build of builds) {
                 const players = build.players || [];
-                if (players.some(p => partyNames.includes(p))) {
+                const matchingPlayers = players.filter(p => partyNames.includes(p));
+                if (matchingPlayers.length > 0) {
                     allRecords.push({
                         season,
                         trial_id: trial.trial_id,
@@ -59,6 +61,9 @@ function main() {
                         items: build.items || [],
                     });
                     seasonCount++;
+                    matchingPlayers.forEach(p => {
+                        partyCounts[p] = (partyCounts[p] || 0) + 1;
+                    });
                 }
             }
         }
@@ -79,6 +84,17 @@ function main() {
     fs.writeFileSync(outputPath, JSON.stringify(allRecords, null, 2));
 
     console.log(`Extracted ${allRecords.length} builds featuring ${partyNames.length === 1 ? `party member "${partyNames[0]}"` : `party members: ${partyNames.join(', ')}`} to ${outputPath}\n`);
+
+    if (Object.keys(partyCounts).length > 0) {
+        console.log('Builds per party member:');
+        for (const name of partyNames) {
+            if (partyCounts[name]) {
+                console.log(`  ${name}: ${partyCounts[name]} builds`);
+            }
+        }
+        console.log('');
+    }
+
     for (const [season, count] of Object.entries(seasonCounts).sort()) {
         console.log(`  ${season}: ${count} builds`);
     }
