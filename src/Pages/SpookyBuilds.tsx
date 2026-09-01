@@ -56,7 +56,7 @@ const createStyles = () => ({
     seasonButton: (isSelected: boolean) => ({
         padding: '6px 14px',
         fontSize: 13,
-        border: isSelected ? '2px solid var(--accent)' : '1px solid var(--border)',
+        border: isSelected ? '2px solid #4caf50' : '1px solid var(--border)',
         borderRadius: 3,
         cursor: 'pointer' as const,
         backgroundColor: isSelected ? 'var(--bg-active)' : 'var(--bg)',

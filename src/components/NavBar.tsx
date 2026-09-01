@@ -10,7 +10,6 @@ const CHARTS = [
     {label: 'Item Scatter', path: '/ItemScatter'},
     {label: 'Item Tier Scaling', path: '/ItemTierScaling'},
     {label: 'Item Pairing', path: '/ItemPairing'},
-    {label: 'Spooky Builds', path: '/SpookyBuilds'},
 ];
 
 const inputStyle = {
@@ -104,8 +103,16 @@ export default function NavBar() {
             gap: 8,
         }}>
             <button onClick={() => navigate('/')} style={{marginRight: 4}}>Home</button>
+            <button
+                onClick={() => navigate('/SpookyBuilds')}
+                style={{
+                    fontWeight: location.pathname === '/SpookyBuilds' ? 600 : 400,
+                }}
+            >
+                Spooky Builds
+            </button>
 
-            {location.pathname !== '/' && (
+            {location.pathname !== '/' && location.pathname !== '/SpookyBuilds' && (
                 <div ref={filterRef} style={{position: 'relative'}}>
                     <button
                         onClick={() => filterOpen ? setFilterOpen(false) : handleFilterOpen()}
@@ -198,7 +205,7 @@ export default function NavBar() {
                 </div>
             )}
 
-            {location.pathname !== '/' && (
+            {location.pathname !== '/' && location.pathname !== '/SpookyBuilds' && (
                 <div ref={menuRef} style={{position: 'relative'}}>
                     <button
                         onClick={() => setMenuOpen(v => !v)}
