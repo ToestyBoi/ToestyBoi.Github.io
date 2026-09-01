@@ -2,6 +2,9 @@
   --text: #6b6375;
   --text-h: #08060d;
   --bg: #fff;
+  --bg-secondary: #f5f5f5;
+  --bg-active: #e8f5e9;
+  --bg-row-alt: rgba(0, 0, 0, 0.06);
   --border: #e5e4e7;
   --code-bg: #f4f3ec;
   --accent: #aa3bff;
@@ -35,6 +38,9 @@
     --text: #9ca3af;
     --text-h: #f3f4f6;
     --bg: #16171d;
+    --bg-secondary: #1f2028;
+    --bg-active: #1e3a2a;
+    --bg-row-alt: rgba(255, 255, 255, 0.06);
     --border: #2e303a;
     --code-bg: #1f2028;
     --accent: #c084fc;

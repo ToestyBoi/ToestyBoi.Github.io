@@ -25,3 +25,4 @@ dist-ssr
 
 .claude
 src/data
+src/spooky-data/clear-rates-*.json
