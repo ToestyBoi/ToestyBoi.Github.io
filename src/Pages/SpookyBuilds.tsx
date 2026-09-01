@@ -113,7 +113,6 @@ const createStyles = () => ({
 
     tableContainer: {
         overflowX: 'auto' as const,
-        maxHeight: 'calc(100vh - 400px)',
     } as React.CSSProperties,
 
     table: {
