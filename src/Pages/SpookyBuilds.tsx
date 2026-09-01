@@ -8,10 +8,238 @@ type SortDir = 'asc' | 'desc';
 
 const ALL_SEASONS = Array.from(new Set((spookyBuilds as PartyBuildRecord[]).map(b => b.season))).sort();
 
+// Stat colors for character stats display
+const STAT_COLORS = {
+    hp: '#e8a13c',
+    str: '#e94560',
+    dex: '#4ecca3',
+    int: '#4ea8de',
+} as const;
+
 const SortArrow = ({ col, sortColumn, sortDir }: { col: SortColumn; sortColumn: SortColumn; sortDir: SortDir }) => {
     if (sortColumn !== col) return null;
     return <span style={{marginLeft: 4}}>{sortDir === 'asc' ? '↑' : '↓'}</span>;
 };
+
+const createStyles = () => ({
+    container: {
+        padding: '16px',
+    } as React.CSSProperties,
+
+    header: {
+        fontSize: 20,
+        fontWeight: 600,
+        marginBottom: 16,
+    } as React.CSSProperties,
+
+    filterSection: {
+        marginBottom: 16,
+        padding: 16,
+        backgroundColor: 'var(--bg-secondary)',
+        borderRadius: 4,
+    } as React.CSSProperties,
+
+    filterLabel: {
+        fontSize: 14,
+        fontWeight: 600,
+        marginBottom: 8,
+        color: 'var(--text-h)',
+    } as React.CSSProperties,
+
+    seasonButtonsContainer: {
+        display: 'flex' as const,
+        gap: 6,
+        flexWrap: 'wrap' as const,
+        marginBottom: 16,
+    },
+
+    seasonButton: (isSelected: boolean) => ({
+        padding: '6px 14px',
+        fontSize: 13,
+        border: isSelected ? '2px solid var(--accent)' : '1px solid var(--border)',
+        borderRadius: 3,
+        cursor: 'pointer' as const,
+        backgroundColor: isSelected ? 'var(--bg-active)' : 'var(--bg)',
+        color: 'var(--text)',
+        fontWeight: isSelected ? 600 : 400,
+        transition: 'all 0.2s ease',
+    } as React.CSSProperties),
+
+    filterGrid: {
+        display: 'grid' as const,
+        gridTemplateColumns: 'repeat(2, 1fr)',
+        gap: 12,
+    },
+
+    filterFieldLabel: {
+        fontSize: 13,
+        fontWeight: 600,
+        display: 'block' as const,
+        marginBottom: 6,
+        color: 'var(--text-h)',
+    } as React.CSSProperties,
+
+    filterFieldInputs: {
+        display: 'flex' as const,
+        gap: 6,
+    },
+
+    input: {
+        width: 70,
+        padding: '6px 8px',
+        fontSize: 13,
+        border: '1px solid var(--border)',
+        borderRadius: 3,
+        backgroundColor: 'var(--bg)',
+        color: 'var(--text)',
+    } as React.CSSProperties,
+
+    inputFull: {
+        width: '100%',
+        padding: '6px 8px',
+        fontSize: 13,
+        border: '1px solid var(--border)',
+        borderRadius: 3,
+        backgroundColor: 'var(--bg)',
+        color: 'var(--text)',
+    } as React.CSSProperties,
+
+    emptyState: {
+        textAlign: 'center' as const,
+        marginTop: 60,
+        color: 'var(--text-h)',
+        fontSize: 15,
+    } as React.CSSProperties,
+
+    tableContainer: {
+        overflowX: 'auto' as const,
+        maxHeight: 'calc(100vh - 400px)',
+    } as React.CSSProperties,
+
+    table: {
+        width: '100%',
+        borderCollapse: 'collapse' as const,
+        fontSize: 15,
+        border: '1px solid var(--border)',
+        borderRadius: 4,
+    } as React.CSSProperties,
+
+    tableHead: {
+        position: 'sticky' as const,
+        top: 0,
+        zIndex: 10,
+    } as React.CSSProperties,
+
+    tableHeaderRow: {
+        backgroundColor: 'var(--bg-secondary)',
+        color: 'var(--text)',
+    } as React.CSSProperties,
+
+    tableHeaderCell: {
+        padding: '12px 16px',
+        textAlign: 'left' as const,
+        fontWeight: 600,
+        borderBottom: '1px solid var(--border)',
+        cursor: 'pointer',
+        userSelect: 'none' as const,
+        fontSize: 14,
+    } as React.CSSProperties,
+
+    tableCell: {
+        padding: '12px 16px',
+        borderBottom: '1px solid var(--border)',
+        fontSize: 13,
+        color: 'var(--text)',
+    } as React.CSSProperties,
+
+    tableRow: (isEven: boolean) => ({
+        backgroundColor: isEven ? 'transparent' : 'var(--bg-row-alt)',
+        color: 'var(--text)',
+    } as React.CSSProperties),
+
+    memberContainer: (isLastMember: boolean) => ({
+        padding: '12px 16px',
+        borderBottom: isLastMember ? 'none' : '1px solid var(--border)',
+        display: 'flex' as const,
+        flexDirection: 'column' as const,
+        gap: 8,
+    } as React.CSSProperties),
+
+    memberName: {
+        fontWeight: 600,
+        fontSize: 14,
+        textAlign: 'left' as const,
+    } as React.CSSProperties,
+
+    statsContainer: {
+        display: 'flex' as const,
+        gap: 16,
+        fontSize: 12,
+        color: 'var(--text-h)',
+    } as React.CSSProperties,
+
+    statItem: (color: string) => ({
+        color: color,
+    } as React.CSSProperties),
+
+    soulContainer: {
+        fontSize: 11,
+        textAlign: 'left' as const,
+    } as React.CSSProperties,
+
+    soulLabel: {
+        fontWeight: 500,
+    } as React.CSSProperties,
+
+    itemsContainer: {
+        display: 'flex' as const,
+        gap: 6,
+        flexWrap: 'wrap' as const,
+        alignItems: 'flex-start' as const,
+    },
+
+    itemBadge: (rarity: string) => ({
+        display: 'flex' as const,
+        flexDirection: 'column' as const,
+        alignItems: 'center' as const,
+        padding: '6px 8px',
+        color: '#fff',
+        borderRadius: 3,
+        fontSize: 12,
+        fontWeight: 500,
+        border: `3px solid ${rarity}`,
+        minWidth: 'fit-content',
+        textAlign: 'center' as const,
+    } as React.CSSProperties),
+
+    itemName: {
+        fontSize: 14,
+        lineHeight: 1.2,
+        fontWeight: 700,
+        color: '#000',
+    } as React.CSSProperties,
+
+    itemTier: {
+        fontSize: 12,
+        opacity: 0.9,
+        lineHeight: 1,
+        fontWeight: 700,
+        color: '#000',
+    } as React.CSSProperties,
+
+    noItems: {
+        fontSize: 12,
+        color: 'var(--text-h)',
+        fontStyle: 'italic',
+    } as React.CSSProperties,
+
+    noBuilds: {
+        textAlign: 'center' as const,
+        marginTop: 40,
+        color: 'var(--text-h)',
+        fontSize: 15,
+    } as React.CSSProperties,
+});
 
 export default function SpookyBuilds() {
     const [sortColumn, setSortColumn] = useState<SortColumn>('season');
@@ -84,63 +312,32 @@ export default function SpookyBuilds() {
         return rows;
     }, [sortColumn, sortDir, selectedSeasons, minTrial, maxTrial, buildFilter]);
 
-    const headerStyle = {
-        padding: '12px 16px',
-        textAlign: 'left' as const,
-        fontWeight: 600,
-        borderBottom: '1px solid var(--border)',
-        cursor: 'pointer',
-        userSelect: 'none' as const,
-        backgroundColor: '#333333',
-        color: '#ffffff',
-        fontSize: 14,
-    };
-
-    const cellStyle = {
-        padding: '12px 16px',
-        borderBottom: '1px solid var(--border)',
-        fontSize: 13,
-    };
-
-    const inputStyle: React.CSSProperties = {
-        width: 70,
-        padding: '6px 8px',
-        fontSize: 13,
-        border: '1px solid var(--border)',
-        borderRadius: 3,
-    };
+    const styles = createStyles();
 
     if (filtered.length === 0 && spookyBuilds.length === 0) {
         return (
-            <div style={{ textAlign: 'center', marginTop: 60, color: '#888', fontSize: 15 }}>
-                <h2>Spooky Builds</h2>
-                No data available — run the extraction script to populate spooky-builds.json.
+            <div style={styles.container}>
+                <h2 style={styles.header}>Spooky Builds</h2>
+                <div style={styles.emptyState}>
+                    No data available — run the extraction script to populate spooky-builds.json.
+                </div>
             </div>
         );
     }
 
     return (
-        <div style={{ padding: '16px' }}>
-            <h2>Spooky Builds</h2>
+        <div style={styles.container}>
+            <h2 style={styles.header}>Spooky Builds</h2>
 
-            <div style={{ marginBottom: 16, padding: 16, backgroundColor: 'rgba(0,0,0,0.02)', borderRadius: 4 }}>
+            <div style={styles.filterSection}>
                 <div style={{ marginBottom: 16 }}>
-                    <div style={{ fontSize: 14, fontWeight: 600, marginBottom: 8, color: 'var(--text-h)' }}>Season:</div>
-                    <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
+                    <div style={styles.filterLabel}>Season:</div>
+                    <div style={styles.seasonButtonsContainer}>
                         {ALL_SEASONS.map(season => (
                             <button
                                 key={season}
                                 onClick={() => toggleSeason(season)}
-                                style={{
-                                    padding: '6px 14px',
-                                    fontSize: 13,
-                                    border: selectedSeasons.has(season) ? '2px solid #4caf50' : '1px solid var(--border)',
-                                    borderRadius: 3,
-                                    cursor: 'pointer',
-                                    backgroundColor: selectedSeasons.has(season) ? '#e8f5e9' : 'var(--bg, #fff)',
-                                    color: 'var(--text)',
-                                    fontWeight: selectedSeasons.has(season) ? 600 : 400,
-                                }}
+                                style={styles.seasonButton(selectedSeasons.has(season))}
                             >
                                 {season}
                             </button>
@@ -148,19 +345,17 @@ export default function SpookyBuilds() {
                     </div>
                 </div>
 
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 12 }}>
+                <div style={styles.filterGrid}>
                     <div>
-                        <label style={{ fontSize: 13, fontWeight: 600, display: 'block', marginBottom: 6, color: 'var(--text-h)' }}>
-                            Trial
-                        </label>
-                        <div style={{ display: 'flex', gap: 6 }}>
+                        <label style={styles.filterFieldLabel}>Trial</label>
+                        <div style={styles.filterFieldInputs}>
                             <input
                                 type="number"
                                 min="1"
                                 value={minTrial}
                                 onChange={(e) => setMinTrial(e.target.value)}
                                 placeholder="Min"
-                                style={{...inputStyle, flex: 1}}
+                                style={{...styles.input, flex: 1}}
                             />
                             <input
                                 type="number"
@@ -168,118 +363,115 @@ export default function SpookyBuilds() {
                                 value={maxTrial}
                                 onChange={(e) => setMaxTrial(e.target.value)}
                                 placeholder="Max"
-                                style={{...inputStyle, flex: 1}}
+                                style={{...styles.input, flex: 1}}
                             />
                         </div>
                     </div>
 
                     <div>
-                        <label style={{ fontSize: 13, fontWeight: 600, display: 'block', marginBottom: 6, color: 'var(--text-h)' }}>
-                            Build Item (substring):
-                        </label>
+                        <label style={styles.filterFieldLabel}>Build Item (substring):</label>
                         <input
                             type="text"
                             value={buildFilter}
                             onChange={(e) => setBuildFilter(e.target.value)}
                             placeholder="e.g., 'Void', 'Arcane'"
-                            style={{...inputStyle, width: '100%'}}
+                            style={styles.inputFull}
                         />
                     </div>
                 </div>
             </div>
 
             {filtered.length === 0 ? (
-                <div style={{ textAlign: 'center', marginTop: 40, color: '#888', fontSize: 15 }}>
-                    No builds match the current filters.
-                </div>
+                <div style={styles.noBuilds}>No builds match the current filters.</div>
             ) : (
-                <div style={{ overflowX: 'auto', maxHeight: 'calc(100vh - 400px)' }}>
-                    <table style={{
-                        width: '100%',
-                        borderCollapse: 'collapse',
-                        fontSize: 15,
-                        border: '1px solid var(--border)',
-                        borderRadius: 4,
-                    }}>
-                        <thead style={{ position: 'sticky', top: 0, zIndex: 10 }}>
-                            <tr style={{ backgroundColor: '#333333', color: '#ffffff' }}>
-                                <th style={headerStyle} onClick={() => handleSort('season')}>
+                <div style={styles.tableContainer}>
+                    <table style={styles.table}>
+                        <thead style={styles.tableHead}>
+                            <tr style={styles.tableHeaderRow}>
+                                <th style={styles.tableHeaderCell} onClick={() => handleSort('season')}>
                                     Season <SortArrow col="season" sortColumn={sortColumn} sortDir={sortDir} />
                                 </th>
-                                <th style={headerStyle} onClick={() => handleSort('trial_id')}>
+                                <th style={styles.tableHeaderCell} onClick={() => handleSort('trial_id')}>
                                     Trial <SortArrow col="trial_id" sortColumn={sortColumn} sortDir={sortDir} />
                                 </th>
-                                <th style={headerStyle} onClick={() => handleSort('attempts')}>
+                                <th style={styles.tableHeaderCell} onClick={() => handleSort('attempts')}>
                                     Attempts <SortArrow col="attempts" sortColumn={sortColumn} sortDir={sortDir} />
                                 </th>
-                                <th style={headerStyle}>Party, Stats, Items & Souls</th>
+                                <th style={styles.tableHeaderCell}>Party, Stats, Items & Souls</th>
                             </tr>
                         </thead>
                         <tbody>
                             {filtered.map((row, idx) => (
-                                <tr key={idx} style={{ backgroundColor: idx % 2 === 0 ? 'transparent' : 'rgba(0,0,0,0.15)', color: 'var(--text)' }}>
-                                    <td style={cellStyle}>{row.season}</td>
-                                    <td style={cellStyle}>{row.trial_id}</td>
-                                    <td style={cellStyle}>{row.attempts ?? '—'}</td>
-                                    <td style={{...cellStyle, maxWidth: 700, overflowX: 'auto', padding: 0}}>
+                                <tr key={idx} style={styles.tableRow(idx % 2 === 0)}>
+                                    <td style={styles.tableCell}>{row.season}</td>
+                                    <td style={styles.tableCell}>{row.trial_id}</td>
+                                    <td style={styles.tableCell}>{row.attempts ?? '—'}</td>
+                                    <td style={{...styles.tableCell, maxWidth: 700, overflowX: 'auto', padding: 0}}>
                                         <div style={{ display: 'flex', flexDirection: 'column', gap: 0 }}>
                                             {(row.party || []).map((member, memberIdx) => (
-                                                <div key={memberIdx} style={{
-                                                    padding: '12px 16px',
-                                                    borderBottom: memberIdx < (row.party?.length ?? 1) - 1 ? '1px solid var(--border)' : 'none',
-                                                    display: 'flex',
-                                                    flexDirection: 'column',
-                                                    gap: 8,
-                                                }}>
-                                                    {/* Player name */}
-                                                    <div style={{ fontWeight: 600, fontSize: 14, textAlign: 'left' }}>
-                                                        {member.name}
+                                                <div key={memberIdx} style={styles.memberContainer(memberIdx === (row.party?.length ?? 1) - 1)}>
+                                                    <div style={styles.memberName}>{member.name}</div>
+
+                                                    <div style={styles.statsContainer}>
+                                                        <div>
+                                                            <span style={{...styles.statItem(STAT_COLORS.hp), fontWeight: 500}}>HP:</span>
+                                                            <span style={{...styles.statItem(STAT_COLORS.hp), fontWeight: 500}}> {member.hp}</span>
+                                                            {member.soul?.hp_bonus?.Flat && (
+                                                                <span style={styles.statItem(STAT_COLORS.hp)}>
+                                                                    {' '}({member.soul.hp_bonus.Flat > 0 ? '+' : ''}{member.soul.hp_bonus.Flat})
+                                                                </span>
+                                                            )}
+                                                        </div>
+                                                        <div>
+                                                            <span style={{...styles.statItem(STAT_COLORS.str), fontWeight: 500}}>STR:</span>
+                                                            <span style={{...styles.statItem(STAT_COLORS.str), fontWeight: 500}}> {member.str_}</span>
+                                                            {member.soul?.str_bonus?.Flat && (
+                                                                <span style={styles.statItem(STAT_COLORS.str)}>
+                                                                    {' '}({member.soul.str_bonus.Flat > 0 ? '+' : ''}{member.soul.str_bonus.Flat})
+                                                                </span>
+                                                            )}
+                                                        </div>
+                                                        <div>
+                                                            <span style={{...styles.statItem(STAT_COLORS.dex), fontWeight: 500}}>DEX:</span>
+                                                            <span style={{...styles.statItem(STAT_COLORS.dex), fontWeight: 500}}> {member.dex}</span>
+                                                            {member.soul?.dex_bonus?.Flat && (
+                                                                <span style={styles.statItem(STAT_COLORS.dex)}>
+                                                                    {' '}({member.soul.dex_bonus.Flat > 0 ? '+' : ''}{member.soul.dex_bonus.Flat})
+                                                                </span>
+                                                            )}
+                                                        </div>
+                                                        <div>
+                                                            <span style={{...styles.statItem(STAT_COLORS.int), fontWeight: 500}}>INT:</span>
+                                                            <span style={{...styles.statItem(STAT_COLORS.int), fontWeight: 500}}> {member.int}</span>
+                                                            {member.soul?.int_bonus?.Flat && (
+                                                                <span style={styles.statItem(STAT_COLORS.int)}>
+                                                                    {' '}({member.soul.int_bonus.Flat > 0 ? '+' : ''}{member.soul.int_bonus.Flat})
+                                                                </span>
+                                                            )}
+                                                        </div>
                                                     </div>
 
-                                                    {/* Player stats */}
-                                                    <div style={{ display: 'flex', gap: 16, fontSize: 12, color: 'var(--text-h, #666)' }}>
-                                                        <div><span style={{ color: '#e8a13c', fontWeight: 500 }}>HP:</span> <span style={{ color: '#e8a13c', fontWeight: 500 }}>{member.hp}</span>{member.soul?.hp_bonus?.Flat ? <span style={{ color: '#e8a13c' }}> ({member.soul.hp_bonus.Flat > 0 ? '+' : ''}{member.soul.hp_bonus.Flat})</span> : ''}</div>
-                                                        <div><span style={{ color: '#e94560', fontWeight: 500 }}>STR:</span> <span style={{ color: '#e94560', fontWeight: 500 }}>{member.str_}</span>{member.soul?.str_bonus?.Flat ? <span style={{ color: '#e94560' }}> ({member.soul.str_bonus.Flat > 0 ? '+' : ''}{member.soul.str_bonus.Flat})</span> : ''}</div>
-                                                        <div><span style={{ color: '#4ecca3', fontWeight: 500 }}>DEX:</span> <span style={{ color: '#4ecca3', fontWeight: 500 }}>{member.dex}</span>{member.soul?.dex_bonus?.Flat ? <span style={{ color: '#4ecca3' }}> ({member.soul.dex_bonus.Flat > 0 ? '+' : ''}{member.soul.dex_bonus.Flat})</span> : ''}</div>
-                                                        <div><span style={{ color: '#4ea8de', fontWeight: 500 }}>INT:</span> <span style={{ color: '#4ea8de', fontWeight: 500 }}>{member.int}</span>{member.soul?.int_bonus?.Flat ? <span style={{ color: '#4ea8de' }}> ({member.soul.int_bonus.Flat > 0 ? '+' : ''}{member.soul.int_bonus.Flat})</span> : ''}</div>
-                                                    </div>
-
-                                                    {/* Soul info on its own line */}
                                                     {member.soul && member.soul.skill_names && member.soul.skill_names.length > 0 && (
-                                                        <div style={{ fontSize: 11, textAlign: 'left' }}>
-                                                            <div style={{ fontWeight: 500, color: getRarityColor(member.soul.rarity) }}>
+                                                        <div style={styles.soulContainer}>
+                                                            <div style={{...styles.soulLabel, color: getRarityColor(member.soul.rarity)}}>
                                                                 Soul: {member.soul.skill_names.join(', ')}
                                                             </div>
                                                         </div>
                                                     )}
 
-                                                    {/* Player's items */}
-                                                    <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', alignItems: 'flex-start' }}>
+                                                    <div style={styles.itemsContainer}>
                                                         {(row.items[memberIdx] || []).map((item, itemIdx) => (
                                                             <div
                                                                 key={itemIdx}
-                                                                style={{
-                                                                    display: 'flex',
-                                                                    flexDirection: 'column',
-                                                                    alignItems: 'center',
-                                                                    padding: '6px 8px',
-                                                                    backgroundColor: getClassColor(item.name),
-                                                                    color: '#fff',
-                                                                    borderRadius: 3,
-                                                                    fontSize: 12,
-                                                                    fontWeight: 500,
-                                                                    border: `3px solid ${getRarityColor(item.rarity)}`,
-                                                                    minWidth: 'fit-content',
-                                                                    textAlign: 'center',
-                                                                }}
+                                                                style={{...styles.itemBadge(getRarityColor(item.rarity)), backgroundColor: getClassColor(item.name)}}
                                                                 title={`${item.name} - Tier ${item.tier}, ${item.rarity}`}
                                                             >
-                                                                <div style={{ fontSize: 14, lineHeight: 1.2, fontWeight: 700, color: '#000' }}>{item.name}</div>
-                                                                <div style={{ fontSize: 12, opacity: 0.9, lineHeight: 1, fontWeight: 700, color: '#000' }}>T{item.tier} {item.rarity}</div>
+                                                                <div style={styles.itemName}>{item.name}</div>
+                                                                <div style={styles.itemTier}>T{item.tier} {item.rarity}</div>
                                                             </div>
                                                         ))}
                                                         {(row.items[memberIdx]?.length ?? 0) === 0 && (
-                                                            <span style={{ fontSize: 12, color: 'var(--text-h, #999)', fontStyle: 'italic' }}>no items</span>
+                                                            <span style={styles.noItems}>no items</span>
                                                         )}
                                                     </div>
                                                 </div>
