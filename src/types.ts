@@ -54,13 +54,32 @@ export interface ClearCost {
     builds: number;
 }
 
+export interface SoulBonus {
+    Flat?: number;
+}
+
+export interface Soul {
+    archetype: string;
+    description: string;
+    dex_bonus: SoulBonus;
+    id: number;
+    int_bonus: SoulBonus;
+    locked: boolean;
+    name: string;
+    rarity: string;
+    skill_names: string[];
+    str_bonus: SoulBonus;
+    hp_bonus?: SoulBonus;
+    triggers: unknown[];
+}
+
 export interface PartyMember {
     dex: number;
     hp: number;
     int: number;
     items: unknown[];
     name: string;
-    soul: unknown;
+    soul?: Soul | null;
     str_: number;
 }
 

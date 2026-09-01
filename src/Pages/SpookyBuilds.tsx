@@ -12,10 +12,8 @@ export default function SpookyBuilds() {
     const [sortColumn, setSortColumn] = useState<SortColumn>('season');
     const [sortDir, setSortDir] = useState<SortDir>('desc');
     const [selectedSeasons, setSelectedSeasons] = useState<Set<string>>(new Set(ALL_SEASONS));
-    const [minLevel, setMinLevel] = useState<string>('');
-    const [maxLevel, setMaxLevel] = useState<string>('');
-    const [minAttempts, setMinAttempts] = useState<string>('');
-    const [maxAttempts, setMaxAttempts] = useState<string>('');
+    const [minTrial, setMinTrial] = useState<string>('');
+    const [maxTrial, setMaxTrial] = useState<string>('');
     const [buildFilter, setBuildFilter] = useState<string>('');
 
     const toggleSeason = (season: string) => {
@@ -44,22 +42,13 @@ export default function SpookyBuilds() {
             rows = rows.filter(r => selectedSeasons.has(r.season));
         }
 
-        if (minLevel) {
-            const min = parseInt(minLevel, 10);
-            if (!isNaN(min)) rows = rows.filter(r => r.avg_level >= min);
+        if (minTrial) {
+            const min = parseInt(minTrial, 10);
+            if (!isNaN(min)) rows = rows.filter(r => r.trial_id >= min);
         }
-        if (maxLevel) {
-            const max = parseInt(maxLevel, 10);
-            if (!isNaN(max)) rows = rows.filter(r => r.avg_level <= max);
-        }
-
-        if (minAttempts) {
-            const min = parseInt(minAttempts, 10);
-            if (!isNaN(min)) rows = rows.filter(r => (r.attempts ?? 0) >= min);
-        }
-        if (maxAttempts) {
-            const max = parseInt(maxAttempts, 10);
-            if (!isNaN(max)) rows = rows.filter(r => (r.attempts ?? 0) <= max);
+        if (maxTrial) {
+            const max = parseInt(maxTrial, 10);
+            if (!isNaN(max)) rows = rows.filter(r => r.trial_id <= max);
         }
 
         if (buildFilter) {
@@ -92,7 +81,7 @@ export default function SpookyBuilds() {
         });
 
         return rows;
-    }, [sortColumn, sortDir, selectedSeasons, minLevel, maxLevel, minAttempts, maxAttempts, buildFilter]);
+    }, [sortColumn, sortDir, selectedSeasons, minTrial, maxTrial, buildFilter]);
 
     const SortArrow = ({col}: {col: SortColumn}) => {
         if (sortColumn !== col) return null;
@@ -163,25 +152,25 @@ export default function SpookyBuilds() {
                     </div>
                 </div>
 
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 12 }}>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 12 }}>
                     <div>
                         <label style={{ fontSize: 13, fontWeight: 600, display: 'block', marginBottom: 6, color: 'var(--text-h)' }}>
-                            Avg Level
+                            Trial
                         </label>
                         <div style={{ display: 'flex', gap: 6 }}>
                             <input
                                 type="number"
-                                min="0"
-                                value={minLevel}
-                                onChange={(e) => setMinLevel(e.target.value)}
+                                min="1"
+                                value={minTrial}
+                                onChange={(e) => setMinTrial(e.target.value)}
                                 placeholder="Min"
                                 style={{...inputStyle as any, flex: 1}}
                             />
                             <input
                                 type="number"
-                                min="0"
-                                value={maxLevel}
-                                onChange={(e) => setMaxLevel(e.target.value)}
+                                min="1"
+                                value={maxTrial}
+                                onChange={(e) => setMaxTrial(e.target.value)}
                                 placeholder="Max"
                                 style={{...inputStyle as any, flex: 1}}
                             />
@@ -189,30 +178,6 @@ export default function SpookyBuilds() {
                     </div>
 
                     <div>
-                        <label style={{ fontSize: 13, fontWeight: 600, display: 'block', marginBottom: 6, color: 'var(--text-h)' }}>
-                            Attempts
-                        </label>
-                        <div style={{ display: 'flex', gap: 6 }}>
-                            <input
-                                type="number"
-                                min="0"
-                                value={minAttempts}
-                                onChange={(e) => setMinAttempts(e.target.value)}
-                                placeholder="Min"
-                                style={{...inputStyle as any, flex: 1}}
-                            />
-                            <input
-                                type="number"
-                                min="0"
-                                value={maxAttempts}
-                                onChange={(e) => setMaxAttempts(e.target.value)}
-                                placeholder="Max"
-                                style={{...inputStyle as any, flex: 1}}
-                            />
-                        </div>
-                    </div>
-
-                    <div style={{ gridColumn: 'span 2' }}>
                         <label style={{ fontSize: 13, fontWeight: 600, display: 'block', marginBottom: 6, color: 'var(--text-h)' }}>
                             Build Item (substring):
                         </label>
@@ -257,7 +222,7 @@ export default function SpookyBuilds() {
                                 <th style={headerStyle} onClick={() => handleSort('avg_tier')}>
                                     Avg Tier <SortArrow col="avg_tier" />
                                 </th>
-                                <th style={headerStyle}>Party, Stats & Items</th>
+                                <th style={headerStyle}>Party, Stats, Items & Souls</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -282,14 +247,21 @@ export default function SpookyBuilds() {
                                                     {/* Player info */}
                                                     <div style={{ fontSize: 13 }}>
                                                         <div style={{ fontWeight: 600, marginBottom: 8, fontSize: 14 }}>
-                                                            {member.name === 'Spooky' ? <strong style={{ color: '#4caf50' }}>{member.name}</strong> : member.name}
+                                                            {member.name}
                                                         </div>
-                                                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 6, fontSize: 12, color: 'var(--text-h, #666)' }}>
-                                                            <div>HP: {member.hp}</div>
-                                                            <div>STR: {member.str_}</div>
-                                                            <div>DEX: {member.dex}</div>
-                                                            <div>INT: {member.int}</div>
+                                                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 6, fontSize: 12, color: 'var(--text-h, #666)', marginBottom: 6 }}>
+                                                            <div><span style={{ color: '#e8a13c', fontWeight: 500 }}>HP:</span> <span style={{ color: '#e8a13c', fontWeight: 500 }}>{member.hp}</span>{member.soul?.hp_bonus?.Flat ? <span style={{ color: '#e8a13c' }}> ({member.soul.hp_bonus.Flat > 0 ? '+' : ''}{member.soul.hp_bonus.Flat})</span> : ''}</div>
+                                                            <div><span style={{ color: '#e94560', fontWeight: 500 }}>STR:</span> <span style={{ color: '#e94560', fontWeight: 500 }}>{member.str_}</span>{member.soul?.str_bonus?.Flat ? <span style={{ color: '#e94560' }}> ({member.soul.str_bonus.Flat > 0 ? '+' : ''}{member.soul.str_bonus.Flat})</span> : ''}</div>
+                                                            <div><span style={{ color: '#4ecca3', fontWeight: 500 }}>DEX:</span> <span style={{ color: '#4ecca3', fontWeight: 500 }}>{member.dex}</span>{member.soul?.dex_bonus?.Flat ? <span style={{ color: '#4ecca3' }}> ({member.soul.dex_bonus.Flat > 0 ? '+' : ''}{member.soul.dex_bonus.Flat})</span> : ''}</div>
+                                                            <div><span style={{ color: '#4ea8de', fontWeight: 500 }}>INT:</span> <span style={{ color: '#4ea8de', fontWeight: 500 }}>{member.int}</span>{member.soul?.int_bonus?.Flat ? <span style={{ color: '#4ea8de' }}> ({member.soul.int_bonus.Flat > 0 ? '+' : ''}{member.soul.int_bonus.Flat})</span> : ''}</div>
                                                         </div>
+                                                        {member.soul && member.soul.skill_names && member.soul.skill_names.length > 0 && (
+                                                            <div style={{ fontSize: 11, marginTop: 4, paddingTop: 4, borderTop: '1px solid rgba(0,0,0,0.1)' }}>
+                                                                <div style={{ fontWeight: 500, color: getRarityColor(member.soul.rarity), marginBottom: 2 }}>
+                                                                    Soul: {member.soul.skill_names.join(', ')}
+                                                                </div>
+                                                            </div>
+                                                        )}
                                                     </div>
 
                                                     {/* Player's items */}
@@ -307,14 +279,14 @@ export default function SpookyBuilds() {
                                                                     borderRadius: 3,
                                                                     fontSize: 12,
                                                                     fontWeight: 500,
-                                                                    border: `2px solid ${getRarityColor(item.rarity)}`,
+                                                                    border: `3px solid ${getRarityColor(item.rarity)}`,
                                                                     minWidth: 'fit-content',
                                                                     textAlign: 'center',
                                                                 }}
                                                                 title={`${item.name} - Tier ${item.tier}, ${item.rarity}`}
                                                             >
-                                                                <div style={{ fontSize: 11, lineHeight: 1.2, fontWeight: 600 }}>{item.name}</div>
-                                                                <div style={{ fontSize: 10, opacity: 0.9, lineHeight: 1 }}>T{item.tier} {item.rarity}</div>
+                                                                <div style={{ fontSize: 11, lineHeight: 1.2, fontWeight: 600, textShadow: '0 0 2px #000, 0 0 2px #000, 0 0 2px #000, 0 0 2px #000' }}>{item.name}</div>
+                                                                <div style={{ fontSize: 10, opacity: 0.9, lineHeight: 1, textShadow: '0 0 2px #000, 0 0 2px #000, 0 0 2px #000, 0 0 2px #000' }}>T{item.tier} {item.rarity}</div>
                                                             </div>
                                                         ))}
                                                         {(row.items[memberIdx]?.length ?? 0) === 0 && (
