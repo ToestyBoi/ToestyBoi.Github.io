@@ -60,6 +60,19 @@ body {
   margin: 0;
 }
 
+.ag-theme-quartz {
+  --ag-background-color: var(--bg);
+  --ag-foreground-color: var(--text);
+  --ag-header-background-color: var(--bg-secondary);
+  --ag-header-foreground-color: var(--text-h);
+  --ag-border-color: var(--border);
+  --ag-row-border-color: var(--border);
+  --ag-odd-row-background-color: var(--bg-row-alt);
+  --ag-row-hover-color: var(--bg-secondary);
+  --ag-selected-row-background-color: var(--bg-active);
+  --ag-font-family: inherit;
+}
+
 #root {
   width: 1126px;
   max-width: 100%;
