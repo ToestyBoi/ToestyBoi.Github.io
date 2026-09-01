@@ -6,6 +6,10 @@ import { fileURLToPath } from 'url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
+function formatSeason(rawSeason) {
+    return 'v' + rawSeason.split('').join('.');
+}
+
 function main() {
     const partyNames = process.argv.slice(2).length > 0
         ? process.argv.slice(2)
@@ -17,7 +21,7 @@ function main() {
     const dataDir = path.resolve(__dirname, '..', 'src', 'spooky-data');
     const files = fs
         .readdirSync(dataDir)
-        .filter(f => f.match(/^clear-rates-.*\.json$/))
+        .filter(f => f.match(/^clear-rates-all-.*\.json$/))
         .sort();
 
     const allRecords = [];
@@ -27,7 +31,7 @@ function main() {
         const match = file.match(/^clear-rates-all-(.+)\.json$/);
         if (!match) continue;
 
-        const season = match[1];
+        const season = formatSeason(match[1]);
         const filePath = path.resolve(dataDir, file);
 
         let data;
