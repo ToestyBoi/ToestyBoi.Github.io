@@ -113,7 +113,6 @@ const createStyles = () => ({
 
     tableContainer: {
         overflowX: 'auto' as const,
-        maxHeight: 'calc(100vh - 400px)',
     } as React.CSSProperties,
 
     table: {
@@ -271,7 +270,7 @@ export default function SpookyBuilds() {
     const filtered = useMemo(() => {
         let rows = (spookyBuilds as PartyBuildRecord[]).slice();
 
-        if (selectedSeasons.size > 0 && selectedSeasons.size < ALL_SEASONS.length) {
+        if (selectedSeasons.size < ALL_SEASONS.length) {
             rows = rows.filter(r => selectedSeasons.has(r.season));
         }
 
