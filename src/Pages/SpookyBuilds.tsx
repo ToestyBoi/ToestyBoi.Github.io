@@ -8,6 +8,11 @@ type SortDir = 'asc' | 'desc';
 
 const ALL_SEASONS = Array.from(new Set((spookyBuilds as PartyBuildRecord[]).map(b => b.season))).sort();
 
+const SortArrow = ({ col, sortColumn, sortDir }: { col: SortColumn; sortColumn: SortColumn; sortDir: SortDir }) => {
+    if (sortColumn !== col) return null;
+    return <span style={{marginLeft: 4}}>{sortDir === 'asc' ? '↑' : '↓'}</span>;
+};
+
 export default function SpookyBuilds() {
     const [sortColumn, setSortColumn] = useState<SortColumn>('season');
     const [sortDir, setSortDir] = useState<SortDir>('desc');
@@ -31,7 +36,7 @@ export default function SpookyBuilds() {
             setSortDir(sortDir === 'asc' ? 'desc' : 'asc');
         } else {
             setSortColumn(col);
-            setSortDir('asc');
+            setSortDir('desc');
         }
     };
 
@@ -79,11 +84,6 @@ export default function SpookyBuilds() {
         return rows;
     }, [sortColumn, sortDir, selectedSeasons, minTrial, maxTrial, buildFilter]);
 
-    const SortArrow = ({col}: {col: SortColumn}) => {
-        if (sortColumn !== col) return null;
-        return <span style={{marginLeft: 4}}>{sortDir === 'asc' ? '↑' : '↓'}</span>;
-    };
-
     const headerStyle = {
         padding: '12px 16px',
         textAlign: 'left' as const,
@@ -102,7 +102,7 @@ export default function SpookyBuilds() {
         fontSize: 13,
     };
 
-    const inputStyle = {
+    const inputStyle: React.CSSProperties = {
         width: 70,
         padding: '6px 8px',
         fontSize: 13,
@@ -160,7 +160,7 @@ export default function SpookyBuilds() {
                                 value={minTrial}
                                 onChange={(e) => setMinTrial(e.target.value)}
                                 placeholder="Min"
-                                style={{...inputStyle as any, flex: 1}}
+                                style={{...inputStyle, flex: 1}}
                             />
                             <input
                                 type="number"
@@ -168,7 +168,7 @@ export default function SpookyBuilds() {
                                 value={maxTrial}
                                 onChange={(e) => setMaxTrial(e.target.value)}
                                 placeholder="Max"
-                                style={{...inputStyle as any, flex: 1}}
+                                style={{...inputStyle, flex: 1}}
                             />
                         </div>
                     </div>
@@ -182,7 +182,7 @@ export default function SpookyBuilds() {
                             value={buildFilter}
                             onChange={(e) => setBuildFilter(e.target.value)}
                             placeholder="e.g., 'Void', 'Arcane'"
-                            style={{...inputStyle as any, width: '100%'}}
+                            style={{...inputStyle, width: '100%'}}
                         />
                     </div>
                 </div>
@@ -204,13 +204,13 @@ export default function SpookyBuilds() {
                         <thead style={{ position: 'sticky', top: 0, zIndex: 10 }}>
                             <tr style={{ backgroundColor: '#333333', color: '#ffffff' }}>
                                 <th style={headerStyle} onClick={() => handleSort('season')}>
-                                    Season <SortArrow col="season" />
+                                    Season <SortArrow col="season" sortColumn={sortColumn} sortDir={sortDir} />
                                 </th>
                                 <th style={headerStyle} onClick={() => handleSort('trial_id')}>
-                                    Trial <SortArrow col="trial_id" />
+                                    Trial <SortArrow col="trial_id" sortColumn={sortColumn} sortDir={sortDir} />
                                 </th>
                                 <th style={headerStyle} onClick={() => handleSort('attempts')}>
-                                    Attempts <SortArrow col="attempts" />
+                                    Attempts <SortArrow col="attempts" sortColumn={sortColumn} sortDir={sortDir} />
                                 </th>
                                 <th style={headerStyle}>Party, Stats, Items & Souls</th>
                             </tr>
