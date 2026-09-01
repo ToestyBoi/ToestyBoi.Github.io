@@ -67,7 +67,7 @@ export default function SpookyBuilds() {
             colId: 'attempts',
             valueGetter: params => params.data?.attempts ?? 0,
             filter: 'agNumberColumnFilter',
-            sortable: true,
+            sortable: false,
             width: 130,
         },
         {
