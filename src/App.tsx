@@ -8,6 +8,7 @@ import ItemTierScaling from './Pages/ItemTierScaling';
 import ItemHeatmap from './Pages/ItemHeatmap';
 import ItemPairingHeatmap from './Pages/ItemPairingHeatmap';
 import BuildDiversityChart from './Pages/BuildDiversityChart';
+import SpookyBuilds from './Pages/SpookyBuilds';
 import NavBar from './components/NavBar';
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
                 <Route path="/ItemHeatmap" element={<ItemHeatmap />} />
                 <Route path="/ItemPairing" element={<ItemPairingHeatmap />} />
                 <Route path="/BuildDiversity" element={<BuildDiversityChart />} />
+                <Route path="/SpookyBuilds" element={<SpookyBuilds />} />
             </Routes>
         </div>
     );

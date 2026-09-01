@@ -35,6 +35,7 @@ export interface Build {
     death_waves: Record<string, number>;
     attempts?: number;
     party?: PartyMember[];
+    players?: string[];
     threads?: unknown;
     total_level?: number;
     wards?: unknown;
@@ -96,6 +97,19 @@ export interface ClearRateData {
     items_by_trial?: Record<string, Item[]>;
     sims_per_build?: number;
     trials_version?: string;
+}
+
+export interface PartyBuildRecord {
+    season: string;
+    trial_id: number;
+    attempts?: number;
+    avg_level: number;
+    total_level?: number;
+    avg_tier: number;
+    max_tier: number;
+    min_tier: number;
+    party?: PartyMember[];
+    items: BuildItem[][];
 }
 
 // Shape of the `state` object passed between pages via react-router navigation.

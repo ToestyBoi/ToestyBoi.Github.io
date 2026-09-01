@@ -10,6 +10,7 @@ const CHARTS = [
     {label: 'Item Scatter', path: '/ItemScatter'},
     {label: 'Item Tier Scaling', path: '/ItemTierScaling'},
     {label: 'Item Pairing', path: '/ItemPairing'},
+    {label: 'Spooky Builds', path: '/SpookyBuilds'},
 ];
 
 const inputStyle = {
