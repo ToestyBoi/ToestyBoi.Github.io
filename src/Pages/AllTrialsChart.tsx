@@ -18,7 +18,7 @@ import {getRgbBarColor, RARITY_COLORS} from "../colors";
 import {useData} from "../context/DataContext";
 import {getTitleWithFilename} from "../utils/getTitleWithFilename";
 
-const RARITIES = ['Common', 'Uncommon', 'Rare', 'Epic'] as const;
+const RARITIES = ['Common', 'Uncommon', 'Rare', 'Epic', 'Mythic'] as const;
 
 const isBossTrial = (id: number) => id % 5 === 0;
 
@@ -62,6 +62,7 @@ type EnrichedTrial = Trial & {
     avg_tier_Uncommon?: number;
     avg_tier_Rare?: number;
     avg_tier_Epic?: number;
+    avg_tier_Mythic?: number;
 };
 
 const PX_PER_TRIAL = 32;
@@ -196,6 +197,7 @@ export default function AllTrialsChart() {
             avg_tier_Uncommon: accum.Uncommon?.simSum ? accum.Uncommon.tierSimSum / accum.Uncommon.simSum : undefined,
             avg_tier_Rare: accum.Rare?.simSum ? accum.Rare.tierSimSum / accum.Rare.simSum : undefined,
             avg_tier_Epic: accum.Epic?.simSum ? accum.Epic.tierSimSum / accum.Epic.simSum : undefined,
+            avg_tier_Mythic: accum.Mythic?.simSum ? accum.Mythic.tierSimSum / accum.Mythic.simSum : undefined,
         };
     });
     const maxTrialId = trialData.length > 0 ? Math.max(...trialData.map(t => t.trial_id)) : 0;

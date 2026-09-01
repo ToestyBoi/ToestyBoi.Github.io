@@ -53,7 +53,7 @@ const Legend = () => (
     </div>
 );
 
-const RARITY_SORT_ORDER = ['Common', 'Uncommon', 'Rare', 'Epic'];
+const RARITY_SORT_ORDER = ['Common', 'Uncommon', 'Rare', 'Epic', 'Mythic'];
 
 const sortTierStats = (tiers: TierStat[]) =>
     [...tiers].sort((a, b) => {
