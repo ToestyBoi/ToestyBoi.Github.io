@@ -274,8 +274,8 @@ export default function SpookyBuilds() {
                                                                 }}
                                                                 title={`${item.name} - Tier ${item.tier}, ${item.rarity}`}
                                                             >
-                                                                <div style={{ fontSize: 11, lineHeight: 1.2, fontWeight: 600, textShadow: '0 0 2px #000, 0 0 2px #000, 0 0 2px #000, 0 0 2px #000' }}>{item.name}</div>
-                                                                <div style={{ fontSize: 10, opacity: 0.9, lineHeight: 1, textShadow: '0 0 2px #000, 0 0 2px #000, 0 0 2px #000, 0 0 2px #000' }}>T{item.tier} {item.rarity}</div>
+                                                                <div style={{ fontSize: 14, lineHeight: 1.2, fontWeight: 700, color: '#000' }}>{item.name}</div>
+                                                                <div style={{ fontSize: 12, opacity: 0.9, lineHeight: 1, fontWeight: 700, color: '#000' }}>T{item.tier} {item.rarity}</div>
                                                             </div>
                                                         ))}
                                                         {(row.items[memberIdx]?.length ?? 0) === 0 && (
