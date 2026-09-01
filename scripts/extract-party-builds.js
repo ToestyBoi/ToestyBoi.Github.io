@@ -51,11 +51,6 @@ function main() {
                         season,
                         trial_id: trial.trial_id,
                         attempts: build.attempts,
-                        avg_level: build.avg_level,
-                        total_level: build.total_level,
-                        avg_tier: build.avg_tier,
-                        max_tier: build.max_tier,
-                        min_tier: build.min_tier,
                         party: build.party || [],
                         items: build.items || [],
                     });

@@ -3,7 +3,7 @@ import spookyBuilds from '../spooky-data/spooky-builds.json';
 import type { PartyBuildRecord } from '../types';
 import { getRarityColor, getClassColor } from '../colors';
 
-type SortColumn = 'season' | 'trial_id' | 'attempts' | 'avg_level' | 'avg_tier';
+type SortColumn = 'season' | 'trial_id' | 'attempts';
 type SortDir = 'asc' | 'desc';
 
 const ALL_SEASONS = Array.from(new Set((spookyBuilds as PartyBuildRecord[]).map(b => b.season))).sort();
@@ -72,10 +72,6 @@ export default function SpookyBuilds() {
                 cmp = a.trial_id - b.trial_id;
             } else if (sortColumn === 'attempts') {
                 cmp = (a.attempts ?? 0) - (b.attempts ?? 0);
-            } else if (sortColumn === 'avg_level') {
-                cmp = a.avg_level - b.avg_level;
-            } else if (sortColumn === 'avg_tier') {
-                cmp = a.avg_tier - b.avg_tier;
             }
             return sortDir === 'asc' ? cmp : -cmp;
         });
@@ -216,12 +212,6 @@ export default function SpookyBuilds() {
                                 <th style={headerStyle} onClick={() => handleSort('attempts')}>
                                     Attempts <SortArrow col="attempts" />
                                 </th>
-                                <th style={headerStyle} onClick={() => handleSort('avg_level')}>
-                                    Avg Level <SortArrow col="avg_level" />
-                                </th>
-                                <th style={headerStyle} onClick={() => handleSort('avg_tier')}>
-                                    Avg Tier <SortArrow col="avg_tier" />
-                                </th>
                                 <th style={headerStyle}>Party, Stats, Items & Souls</th>
                             </tr>
                         </thead>
@@ -231,38 +221,37 @@ export default function SpookyBuilds() {
                                     <td style={cellStyle}>{row.season}</td>
                                     <td style={cellStyle}>{row.trial_id}</td>
                                     <td style={cellStyle}>{row.attempts ?? '—'}</td>
-                                    <td style={cellStyle}>{row.avg_level}</td>
-                                    <td style={cellStyle}>{row.avg_tier.toFixed(2)}</td>
                                     <td style={{...cellStyle, maxWidth: 700, overflowX: 'auto', padding: 0}}>
                                         <div style={{ display: 'flex', flexDirection: 'column', gap: 0 }}>
                                             {(row.party || []).map((member, memberIdx) => (
                                                 <div key={memberIdx} style={{
                                                     padding: '12px 16px',
                                                     borderBottom: memberIdx < (row.party?.length ?? 1) - 1 ? '1px solid var(--border)' : 'none',
-                                                    display: 'grid',
-                                                    gridTemplateColumns: '140px 1fr',
-                                                    gap: 16,
-                                                    alignItems: 'start',
+                                                    display: 'flex',
+                                                    flexDirection: 'column',
+                                                    gap: 8,
                                                 }}>
-                                                    {/* Player info */}
-                                                    <div style={{ fontSize: 13 }}>
-                                                        <div style={{ fontWeight: 600, marginBottom: 8, fontSize: 14 }}>
-                                                            {member.name}
-                                                        </div>
-                                                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 6, fontSize: 12, color: 'var(--text-h, #666)', marginBottom: 6 }}>
-                                                            <div><span style={{ color: '#e8a13c', fontWeight: 500 }}>HP:</span> <span style={{ color: '#e8a13c', fontWeight: 500 }}>{member.hp}</span>{member.soul?.hp_bonus?.Flat ? <span style={{ color: '#e8a13c' }}> ({member.soul.hp_bonus.Flat > 0 ? '+' : ''}{member.soul.hp_bonus.Flat})</span> : ''}</div>
-                                                            <div><span style={{ color: '#e94560', fontWeight: 500 }}>STR:</span> <span style={{ color: '#e94560', fontWeight: 500 }}>{member.str_}</span>{member.soul?.str_bonus?.Flat ? <span style={{ color: '#e94560' }}> ({member.soul.str_bonus.Flat > 0 ? '+' : ''}{member.soul.str_bonus.Flat})</span> : ''}</div>
-                                                            <div><span style={{ color: '#4ecca3', fontWeight: 500 }}>DEX:</span> <span style={{ color: '#4ecca3', fontWeight: 500 }}>{member.dex}</span>{member.soul?.dex_bonus?.Flat ? <span style={{ color: '#4ecca3' }}> ({member.soul.dex_bonus.Flat > 0 ? '+' : ''}{member.soul.dex_bonus.Flat})</span> : ''}</div>
-                                                            <div><span style={{ color: '#4ea8de', fontWeight: 500 }}>INT:</span> <span style={{ color: '#4ea8de', fontWeight: 500 }}>{member.int}</span>{member.soul?.int_bonus?.Flat ? <span style={{ color: '#4ea8de' }}> ({member.soul.int_bonus.Flat > 0 ? '+' : ''}{member.soul.int_bonus.Flat})</span> : ''}</div>
-                                                        </div>
-                                                        {member.soul && member.soul.skill_names && member.soul.skill_names.length > 0 && (
-                                                            <div style={{ fontSize: 11, marginTop: 4, paddingTop: 4, borderTop: '1px solid rgba(0,0,0,0.1)' }}>
-                                                                <div style={{ fontWeight: 500, color: getRarityColor(member.soul.rarity), marginBottom: 2 }}>
-                                                                    Soul: {member.soul.skill_names.join(', ')}
-                                                                </div>
-                                                            </div>
-                                                        )}
+                                                    {/* Player name */}
+                                                    <div style={{ fontWeight: 600, fontSize: 14, textAlign: 'left' }}>
+                                                        {member.name}
                                                     </div>
+
+                                                    {/* Player stats */}
+                                                    <div style={{ display: 'flex', gap: 16, fontSize: 12, color: 'var(--text-h, #666)' }}>
+                                                        <div><span style={{ color: '#e8a13c', fontWeight: 500 }}>HP:</span> <span style={{ color: '#e8a13c', fontWeight: 500 }}>{member.hp}</span>{member.soul?.hp_bonus?.Flat ? <span style={{ color: '#e8a13c' }}> ({member.soul.hp_bonus.Flat > 0 ? '+' : ''}{member.soul.hp_bonus.Flat})</span> : ''}</div>
+                                                        <div><span style={{ color: '#e94560', fontWeight: 500 }}>STR:</span> <span style={{ color: '#e94560', fontWeight: 500 }}>{member.str_}</span>{member.soul?.str_bonus?.Flat ? <span style={{ color: '#e94560' }}> ({member.soul.str_bonus.Flat > 0 ? '+' : ''}{member.soul.str_bonus.Flat})</span> : ''}</div>
+                                                        <div><span style={{ color: '#4ecca3', fontWeight: 500 }}>DEX:</span> <span style={{ color: '#4ecca3', fontWeight: 500 }}>{member.dex}</span>{member.soul?.dex_bonus?.Flat ? <span style={{ color: '#4ecca3' }}> ({member.soul.dex_bonus.Flat > 0 ? '+' : ''}{member.soul.dex_bonus.Flat})</span> : ''}</div>
+                                                        <div><span style={{ color: '#4ea8de', fontWeight: 500 }}>INT:</span> <span style={{ color: '#4ea8de', fontWeight: 500 }}>{member.int}</span>{member.soul?.int_bonus?.Flat ? <span style={{ color: '#4ea8de' }}> ({member.soul.int_bonus.Flat > 0 ? '+' : ''}{member.soul.int_bonus.Flat})</span> : ''}</div>
+                                                    </div>
+
+                                                    {/* Soul info on its own line */}
+                                                    {member.soul && member.soul.skill_names && member.soul.skill_names.length > 0 && (
+                                                        <div style={{ fontSize: 11, textAlign: 'left' }}>
+                                                            <div style={{ fontWeight: 500, color: getRarityColor(member.soul.rarity) }}>
+                                                                Soul: {member.soul.skill_names.join(', ')}
+                                                            </div>
+                                                        </div>
+                                                    )}
 
                                                     {/* Player's items */}
                                                     <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', alignItems: 'flex-start' }}>

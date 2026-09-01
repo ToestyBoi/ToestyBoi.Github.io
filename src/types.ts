@@ -122,11 +122,6 @@ export interface PartyBuildRecord {
     season: string;
     trial_id: number;
     attempts?: number;
-    avg_level: number;
-    total_level?: number;
-    avg_tier: number;
-    max_tier: number;
-    min_tier: number;
     party?: PartyMember[];
     items: BuildItem[][];
 }

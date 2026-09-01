@@ -44,6 +44,7 @@ export const CLASS_CATEGORIES: Record<string, string[]> = {
     attack: [
         "Berserker's Gauntlet",
         "Crescendo Blades",
+        "Cleaving Halberd",
         "Demon Cat Idol",
         "Diminuendo Sword",
         "Hydra Lance",
@@ -75,18 +76,22 @@ export const CLASS_CATEGORIES: Record<string, string[]> = {
         "Oracle's Staff",
         "Verdant Wreath",
         "Void Nectar",
+        "Void Salve"
     ],
     spell: [
+        "Arcane Barrage",
         "Arcane Bolt",
         "Crackling Embers",
         "Deathmark Tome",
         "Dragon Kris",
         "Malignant Staff",
         "Mouse Charm",
+        "Neko Charm",
         "Prism Barrier",
         "Stick of Doom",
         "Supernova Pyre",
         "Tidal Band",
+        "Tidal Surge",
         "Void Burst",
         "Void Rime"
     ],
