@@ -48,14 +48,9 @@ export default function SpookyBuilds() {
             field: 'season',
             filter: SpookyBuildsSeasonFilter,
             filterParams: { values: ALL_SEASONS },
-            comparator: (valueA: string, valueB: string, nodeA, nodeB, isDescending) => {
-                const cmp = valueA.localeCompare(valueB);
-                if (cmp !== 0) return cmp;
-                const tie = (nodeA.data?.trial_id ?? 0) - (nodeB.data?.trial_id ?? 0);
-                return isDescending ? -tie : tie;
-            },
-            sortIndex: 0,
             sortable: true,
+            sort: 'desc',
+            sortIndex: 0,
             width: 160,
         },
         {
@@ -64,6 +59,7 @@ export default function SpookyBuilds() {
             filter: 'agNumberColumnFilter',
             sortable: true,
             sort: 'desc',
+            sortIndex: 1,
             width: 130,
         },
         {
