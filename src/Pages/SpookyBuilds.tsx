@@ -416,36 +416,36 @@ export default function SpookyBuilds() {
                                                         <div>
                                                             <span style={{...styles.statItem(STAT_COLORS.hp), fontWeight: 500}}>HP:</span>
                                                             <span style={{...styles.statItem(STAT_COLORS.hp), fontWeight: 500}}> {member.hp}</span>
-                                                            {member.soul?.hp_bonus?.Flat && (
+                                                            {member.soul?.hp_bonus?.Flat != null && member.soul.hp_bonus.Flat !== 0 && (
                                                                 <span style={styles.statItem(STAT_COLORS.hp)}>
-                                                                    {' '}({member.soul.hp_bonus.Flat > 0 ? '+' : ''}{member.soul.hp_bonus.Flat})
+                                                                    {' '}({member.soul.hp_bonus!.Flat > 0 ? '+' : ''}{member.soul.hp_bonus!.Flat})
                                                                 </span>
                                                             )}
                                                         </div>
                                                         <div>
                                                             <span style={{...styles.statItem(STAT_COLORS.str), fontWeight: 500}}>STR:</span>
                                                             <span style={{...styles.statItem(STAT_COLORS.str), fontWeight: 500}}> {member.str_}</span>
-                                                            {member.soul?.str_bonus?.Flat && (
+                                                            {member.soul?.str_bonus?.Flat != null && member.soul.str_bonus.Flat !== 0 && (
                                                                 <span style={styles.statItem(STAT_COLORS.str)}>
-                                                                    {' '}({member.soul.str_bonus.Flat > 0 ? '+' : ''}{member.soul.str_bonus.Flat})
+                                                                    {' '}({member.soul.str_bonus!.Flat > 0 ? '+' : ''}{member.soul.str_bonus!.Flat})
                                                                 </span>
                                                             )}
                                                         </div>
                                                         <div>
                                                             <span style={{...styles.statItem(STAT_COLORS.dex), fontWeight: 500}}>DEX:</span>
                                                             <span style={{...styles.statItem(STAT_COLORS.dex), fontWeight: 500}}> {member.dex}</span>
-                                                            {member.soul?.dex_bonus?.Flat && (
+                                                            {member.soul?.dex_bonus?.Flat != null && member.soul.dex_bonus.Flat !== 0 && (
                                                                 <span style={styles.statItem(STAT_COLORS.dex)}>
-                                                                    {' '}({member.soul.dex_bonus.Flat > 0 ? '+' : ''}{member.soul.dex_bonus.Flat})
+                                                                    {' '}({member.soul.dex_bonus!.Flat > 0 ? '+' : ''}{member.soul.dex_bonus!.Flat})
                                                                 </span>
                                                             )}
                                                         </div>
                                                         <div>
                                                             <span style={{...styles.statItem(STAT_COLORS.int), fontWeight: 500}}>INT:</span>
                                                             <span style={{...styles.statItem(STAT_COLORS.int), fontWeight: 500}}> {member.int}</span>
-                                                            {member.soul?.int_bonus?.Flat && (
+                                                            {member.soul?.int_bonus?.Flat != null && member.soul.int_bonus.Flat !== 0 && (
                                                                 <span style={styles.statItem(STAT_COLORS.int)}>
-                                                                    {' '}({member.soul.int_bonus.Flat > 0 ? '+' : ''}{member.soul.int_bonus.Flat})
+                                                                    {' '}({member.soul.int_bonus!.Flat > 0 ? '+' : ''}{member.soul.int_bonus!.Flat})
                                                                 </span>
                                                             )}
                                                         </div>
